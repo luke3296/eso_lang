@@ -1,0 +1,66 @@
+BNF - plain
+
+step 1 arithmatic
+
+<digit> ::= [0-9]
+<character> ::== [a-zA-Z] 
+<int> ::= <digit>|<int><digit>
+
+<arithmetic-expression> ::=   <int> + <int>
+			  |   <int> - <int>
+			  |   <int> * <int>
+			  |   <int> / <int>
+
+step 2 other stuff
+
+<string> ::= <character> <string>
+           | <character> <int>
+
+<statment> ::=  <assignment-statment>
+	     |  <if-statement>
+	     |  <while-statement>
+	     |  <for-statement>
+	      
+<statments> ::= <statment> <statment>
+
+
+<expression> ::=  <arithmetic-expression>
+	       |  <relational-expression>
+
+
+<relational-expression> ::=  <int> < <int>
+			  |  <int> > <int>
+			  |  <int> <= <int>
+			  |  <int> >= <int>
+			  |  <int> == <int>
+			  |  <int> => <int>
+			  |  <int> =< <int>
+			   
+<varible> ::= <charactecter> <string>
+            
+ 			  
+<assignment-statmen>  ::=   <varible> = <int>
+	                |   <varible> = <string>
+
+
+			
+<if-statement> ::= if( <condtional-expression> ) { <statements> }
+		 | }else if ( <condtional-expression> ){ <statment> }
+		 | } else { <statments> }
+		 
+<while-statement> ::= while(<relational-expression>){<statements>}
+	     
+<for-statement>   ::= for ( <assignment-statment> ; <condtional-expression> ; <statments> ) { <statements> }
+                       
+
+<function>  ::=  define <string> {<statements>}
+	      |      print( <string> )
+	    
+#program1
+<varible> = <string>
+<varible> = <int>
+while(<int> < <int>){if( <int> > <int> ) { print( <string> )}}
+#program2
+define <string> { print(<string>) }
+for( <varible> = <int> ; <varible> < <int> ; <varible> = <int> ) { <string> } 
+# where string would be the name of the function 

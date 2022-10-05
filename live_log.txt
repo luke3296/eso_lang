@@ -1,0 +1,12 @@
+created a small lexer for basic programming symbols 4/10/22
+added a gitignore from https://gist.github.com/kmorcinek/2710267 4/10/22
+created plain bnf 4/10/22
+added xunit with dotnet cli  5/10/22
+added fsharp proj with dotnet cli  5/10/22
+reference eso_lang.csproj to eso_lang_test.csproj  5/10/22
+reference eso_lang-fsharp.fsproj to eso_lang_test.csproj  5/10/22
+reference eso_lang-fsharp.fsproj to eso_lang.csproj  5/10/22
+
+
+
+ 
