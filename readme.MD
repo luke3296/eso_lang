@@ -5,21 +5,33 @@
               dotnet run
               dotnet test
 # to create this project structure
-mkdir eso_lang
+
+mkdir eso_lang  
+
 cd eso_lang
+
 dotnet new sln --name esoteric_language
+
 dotnet new console --name eso_lang
+
 dotnet new xunit --name eso_lang_test
+
 dotnet new --lang f# --name eso_lang-fsharp
+
 dotnet sln add ./eso_lang/eso_lang.csproj
+
 dotnet sln add ./eso_lang_tests/eso_lang_tests.csproj
+
 dotnet sln add ./eso_lang-fsharp/eso_lang-fsharp.fsproj
 
 ##the test csproj my reference the eso_lang csproj and eso_lang-fsharp fsproj so it can test them
+
 dotnet add ./eso_lang_tests/eso_lang_tests.csproj ./eso_lang-fsharp/eso_lang-fsharp.fsproj
+
 dotnet add ./eso_lang_tests/eso_lang_tests.csproj ./eso_lang/eso_lang.csproj
 
 ##the main eso_lang .csproj must refrence the f# .fsproj to use it
+
 dotnet add  ./eso_lang/eso_lang.csproj  ./eso_lang-fsharp/eso_lang-fsharp.fsproj
 
 # lexer to-do
