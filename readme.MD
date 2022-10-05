@@ -1,9 +1,14 @@
 # build instructions
  for windows : open the .sln in VS,  eso_lang/program.cs is where main is
+
  for linux : use dotnet cli ; cd into director ./eso_lang or ./eso_lang_test or eso_lang-fsharp
+
               dotnet build
+
               dotnet run
+
               dotnet test
+              
 # to create this project structure
 
 mkdir eso_lang  
