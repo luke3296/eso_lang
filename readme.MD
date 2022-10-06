@@ -8,7 +8,7 @@
               dotnet run
 
               dotnet test
-              
+
 # to create this project structure
 
 mkdir eso_lang  
@@ -44,18 +44,45 @@ turn the single character matches into multicharacter matches e.g replace '+' wi
 will edit the lexer once we decide token names.
 
 
-coaleses multiple multi character lexmems into the same token with if-else.
+coalesces multiple multi character lexemes into the same token with if-else.
 
-add tests to the Lexer
+make the Lexer regex based
+
+add tests for the Lexer
+
 #parser to-do
 
 write the bnf rules []
 
 write bnf that avoids left recursion
 
+refactor the token and symbol tables into a global struct / class of there own as they are shared
+
+make the symbol table an array of ints not strings
+
 parse Symbols and Tokens into a parse tree and AST
 
 #execution to-do
-execute the AST
-intermediate representations
-map to c#
+parse over the AST
+
+handle the productions
+
+make intermediate representations
+
+generate c# code
+
+compile c# code into executable
+
+#gui to do
+
+ensure its decoupled maybe add another c# project,  add it to the .sln and reference the main eso_lang project
+
+#general to do
+
+keep a live log each or together?
+
+create a list of function that need to be implement to
+- generate the tree based of production rules (in the parser)
+- handle the production rules (in the execution of the AST)
+
+organize these jobs so they can be implemented in sprints
