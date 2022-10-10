@@ -35,8 +35,8 @@ step 2 other stuff
 			  |  <int> == <int>
 			  |  <int> => <int>
 			  |  <int> =< <int
-				|  <int> !< <int>
-				|  <int> <> <int>
+			  |  <int> !< <int>
+			  |  <int> <> <int>
 
 
 <varible> ::= <charactecter> <string>
@@ -47,13 +47,13 @@ step 2 other stuff
 
 
 
-<if-statement> ::= if( <condtional-expression> ) { <statements> }
-		 | }else if ( <condtional-expression> ){ <statment> }
+<if-statement> ::= if( <relational-expression> ) { <statements> }
+		 | }else if ( <relational-expression> ){ <statment> }
 		 | } else { <statments> }
 
 <while-statement> ::= while(<relational-expression>){<statements>}
 
-<for-statement>   ::= for ( <assignment-statment> ; <condtional-expression> ; <statments> ) { <statements> }
+<for-statement>   ::= for ( <assignment-statment> ; <relational-expression> ; <statments> ) { <statements> }
 
 
 <function>  ::=  define <string> {<statements>}
