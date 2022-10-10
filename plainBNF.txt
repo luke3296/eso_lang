@@ -6,8 +6,8 @@ step 1 arithmatic
 <character> ::== [a-zA-Z]
 <int> ::= <digit>|<int><digit>
 
-<arithmetic-expression> ::=   <int> + <int>
-			  |   <int> - <int>
+<arithmetic-expression> ::=   <int> put with <int>
+			  |   <int> take from <int>
 			  |   <int> * <int>
 			  |   <int> / <int>
 
@@ -28,16 +28,16 @@ step 2 other stuff
 	       |  <relational-expression>
 
 
-<relational-expression> ::=  <int> be smaller than <int>
-			  |  <int> be bigger than <int>
-			  |  <int> be smaller or of a size to <int>
-			  |  <int> be bigger or of a size to <int>
-			  |  <int> be of a size to <int>
-			  |  <int> be of a size or bigger than <int>
-			  |  <int> be of a size or smaller than <int>
-				|  <int> be not bigger than <int>
-				|  <int> be not smaller than <int>
-				|  <int> be not of a size to <int>
+<relational-expression> ::=  <int> smaller than <int>
+			  |  <int> bigger than <int>
+			  |  <int> smaller or of a count with <int>
+			  |  <int> bigger or of a count with <int>
+			  |  <int> of a count with <int>
+			  |  <int> of a count or bigger than <int>
+			  |  <int> of a count or smaller than <int>
+				|  <int> not bigger than <int>
+				|  <int> not smaller than <int>
+				|  <int> not of a count with <int>
 
 
 <varible> ::= <charactecter> <string>
@@ -48,9 +48,9 @@ step 2 other stuff
 
 
 
-<if-statement> ::= Should the holde be full of <relational-expression> well sell it at <statements> then drink our rum!
-		 | or perhaps be full of <relational-expression> well sell it at <statement> then drink our rum!
-		 | should it not be full <statements> then drink our rum!
+<if-statement> ::= Should the holde be full of <variable> ; <relational-statement> bolt the hatch before <statements> then drink our rum!
+		 | Mayhaps it be full of <variable> ; <relational-expression> we bolt the hatch before <statement> then drink our rum!
+		 | Should <statements> then drink our rum!
 
 <while-statement> ::= When on watch with <relational-expression> keep an eye open and <statements> then drink our rum!
 
