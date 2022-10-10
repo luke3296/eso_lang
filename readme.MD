@@ -50,7 +50,7 @@ make the Lexer regex based
 
 add tests for the Lexer
 
-#parser to-do
+# parser to-do
 
 write the bnf rules []
 
@@ -62,7 +62,7 @@ make the symbol table an array of ints not strings
 
 parse Symbols and Tokens into a parse tree and AST
 
-#execution to-do
+# execution to-do
 parse over the AST
 
 handle the productions
@@ -73,11 +73,11 @@ generate c# code
 
 compile c# code into executable
 
-#gui to do
+# gui to do
 
 ensure its decoupled maybe add another c# project,  add it to the .sln and reference the main eso_lang project
 
-#general to do
+# general to do
 
 keep a live log each or together?
 
