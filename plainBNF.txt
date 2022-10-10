@@ -28,15 +28,16 @@ step 2 other stuff
 	       |  <relational-expression>
 
 
-<relational-expression> ::=  <int> < <int>
-			  |  <int> > <int>
-			  |  <int> <= <int>
-			  |  <int> >= <int>
-			  |  <int> == <int>
-			  |  <int> => <int>
-			  |  <int> =< <int
-				|  <int> !< <int>
-				|  <int> <> <int>
+<relational-expression> ::=  <int> be smaller than <int>
+			  |  <int> be bigger than <int>
+			  |  <int> be smaller or of a size to <int>
+			  |  <int> be bigger or of a size to <int>
+			  |  <int> be of a size to <int>
+			  |  <int> be of a size or bigger than <int>
+			  |  <int> be of a size or smaller than <int>
+				|  <int> be not bigger than <int>
+				|  <int> be not smaller than <int>
+				|  <int> be not of a size to <int>
 
 
 <varible> ::= <charactecter> <string>
