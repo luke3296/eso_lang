@@ -42,18 +42,18 @@ step 2 other stuff
 <varible> ::= <charactecter> <string>
 
 
-<assignment-statmen>  ::=   <varible> = <int>
+<assignment-statement>  ::=   <varible> = <int>
 	                |   <varible> = <string>
 
 
 
-<if-statement> ::= Should the holde be full of <condtional-expression> well sell it at <statements> then drink our rum!
-		 | or perhaps be full of <condtional-expression> well sell it at <statment> then drink our rum!
-		 | should it not be full <statments> then drink our rum!
+<if-statement> ::= Should the holde be full of <relational-expression> well sell it at <statements> then drink our rum!
+		 | or perhaps be full of <relational-expression> well sell it at <statement> then drink our rum!
+		 | should it not be full <statements> then drink our rum!
 
 <while-statement> ::= When on watch with <relational-expression> keep an eye open and <statements> then drink our rum!
 
-<for-statement>   ::= On each day that <assignment-statment> ; <condtional-expression> ; <statments> ye shall be sure to <statements> then drink our rum!
+<for-statement>   ::= On each day that <assignment-statement> ; <relational-expression> ; <statements> ye shall be sure to <statements> then drink our rum!
 
 
 <function>  ::=  define <string> {<statements>}
