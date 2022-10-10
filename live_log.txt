@@ -6,7 +6,7 @@ added fsharp proj with dotnet cli  5/10/22
 reference eso_lang.csproj to eso_lang_test.csproj  5/10/22
 reference eso_lang-fsharp.fsproj to eso_lang_test.csproj  5/10/22
 reference eso_lang-fsharp.fsproj to eso_lang.csproj  5/10/22
-
+added sailor jargon bnf branch 10/10/22
 
 
  
