@@ -47,9 +47,9 @@ step 2 other stuff
 
 
 
-<if-statement> ::= if( <condtional-expression> ) { <statements> }
-		 | }else if ( <condtional-expression> ){ <statment> }
-		 | } else { <statments> }
+<if-statement> ::= Should the holde be full of <condtional-expression> well sell it at <statements> then drink our rum!
+		 | or perhaps be full of <condtional-expression> well sell it at <statment> then drink our rum!
+		 | should it not be full <statments> then drink our rum!
 
 <while-statement> ::= while(<relational-expression>){<statements>}
 
