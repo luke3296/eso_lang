@@ -8,20 +8,20 @@ step 1 arithmatic
 
 <arithmetic-expression> ::=   <int> put with <int>
 			  |   <int> take from <int>
-			  |   <int> * <int>
-			  |   <int> / <int>
+			  |   <int> by count of <int>
+			  |   <int> by count per <int>
 
 step 2 other stuff
 
 <string> ::= <character> <string>
            | <character> <int>
 
-<statment> ::=  <assignment-statment>
+<statement> ::=  <assignment-statment>
 	     |  <if-statement>
 	     |  <while-statement>
 	     |  <for-statement>
 
-<statments> ::= <statment> <statment>
+<statements> ::= <statement> <statement>
 
 
 <expression> ::=  <arithmetic-expression>
@@ -48,9 +48,9 @@ step 2 other stuff
 
 
 
-<if-statement> ::= Should the holde be full of <variable> ; <relational-statement> bolt the hatch before <statements> then drink our rum!
-		 | Mayhaps it be full of <variable> ; <relational-expression> we bolt the hatch before <statement> then drink our rum!
-		 | Should <statements> then drink our rum!
+<if-statement> ::= Should the holde carry <variable> ; <relational-statement> ; <variable> make ready for <statements> then drink our rum!
+		 | Mayhaps it carry <variable> ; <relational-expression> ; <variable> make ready for <statement> then drink our rum!
+		 | Mayhaps <statements> then drink our rum!
 
 <while-statement> ::= When on watch with <relational-expression> keep an eye open and <statements> then drink our rum!
 
