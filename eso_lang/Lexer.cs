@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+// Regex tok1 = new Regex("Hello Sailor");
 
 namespace eso_lang
 {
+
     class Lexer
     {
         const int MAX_LEN = 32;
@@ -19,7 +22,6 @@ namespace eso_lang
             Symbols = new string[MAX_LEN];
             tmp = new char[MAX_LEN];
         }
-
         public enum TOKENS
         {
             T_PLUS = 1,
@@ -31,6 +33,7 @@ namespace eso_lang
             T_RPAR = 7,
             T_NR = 8
         }
+
 
         public int Lex(string s)
         {
@@ -102,7 +105,7 @@ namespace eso_lang
         {
             for (int i = 0; i < Tokens.Length; i++)
             {
-                
+
                 Console.Write(Tokens[i]);
                 Console.Write(" ");
                 Console.Write(Symbols[i]);
