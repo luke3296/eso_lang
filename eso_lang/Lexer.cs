@@ -15,7 +15,7 @@ namespace eso_lang
         public int[] Tokens;
         public string[] Symbols;
         char[] tmp;
-
+        List<Token> tokenRegexs;
         public Lexer()
         {
             Tokens = new int[MAX_LEN];
