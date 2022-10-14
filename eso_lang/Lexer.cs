@@ -21,6 +21,14 @@ namespace eso_lang
             Tokens = new int[MAX_LEN];
             Symbols = new string[MAX_LEN];
             tmp = new char[MAX_LEN];
+
+	    tokenRegexs = new List<Token>();
+
+            tokenRegexs.Add(new Token(1, "symbol", "ya scally wag"));
+            tokenRegexs.Add(new Token(2, "symbol", "some text"));
+            tokenRegexs.Add(new Token(3, "symbol", "might contain"));
+            tokenRegexs.Add(new Token(4, "a token", "might"));
+            tokenRegexs.Add(new Token(5, "a token", "hello"));
         }
         public enum TOKENS
         {
