@@ -35,72 +35,29 @@ namespace eso_lang
         }
 
 
-        public int Lex(string s)
+        public List<Token> Lex(string source)
         {
-            int tok_i = 0;
-            for (; tok_i < s.Length; ++tok_i)
+            List<Token> tokens = new List<Token>();
+            List<char> fragment = new List<char>();
+            List<string> tokenSymbols = new List<string>();
+            for (int i = 0; i < source.Length; i++)
             {
-                if (s[tok_i] == '\n') break;
-                switch (s[tok_i])
+                fragment.Add((source[i]));
+                foreach (Token t in tokenRegexs)
                 {
-                    case ' ':
-                        break;
-                    case '+':
-                        Tokens[tok_i++] = (int)TOKENS.T_PLUS;
-                        break;
-                    case '-':
-                        Tokens[tok_i++] = (int)TOKENS.T_MINUS;
-                        break;
-                    case '*':
-                        Tokens[tok_i++] = (int)TOKENS.T_MULTIPLY;
-                        break;
-                    case '/':
-                        Tokens[tok_i++] = (int)TOKENS.T_DIVIDE;
-                        break;
-                    case '(':
-                        Tokens[tok_i++] = (int)TOKENS.T_LPAR;
-                        break;
-                    case ')':
-                        Tokens[tok_i++] = (int)TOKENS.T_RPAR;
-                        break;
-                    default: //entered a number or varible name
-                        if (Char.IsDigit(s[tok_i]))
-                        {
-                            int i = 0;
-                            while (Char.IsDigit(s[tok_i]))
-                            {
-
-                                tmp[i++] = s[tok_i];
-                                ++tok_i;
-                            }
-                            tmp[i] = '\0';
-                            Tokens[tok_i] = (int)TOKENS.T_NR;
-                            Symbols[tok_i++] = new string(tmp);
-                            tok_i--;
-                        }
-                        else if (Char.IsLetter(s[tok_i]))
-                        {
-                            int i = 0;
-                            while (Char.IsLetter(s[tok_i]))
-                            {
-                                tmp[i++] = s[tok_i];
-                                ++tok_i;
-                            }
-                            tmp[i] = '\0';
-                            Tokens[tok_i] = (int)TOKENS.T_IDENT;
-                            Symbols[tok_i++] = new string(tmp);
-                            tok_i--;
-                        }
-                        else
-                        {
-                            Console.WriteLine("illegal token entered {0}", s[tok_i]);
-                        }
-                        break;
+                    Console.WriteLine("lookin for mathch in fragent: " + string.Join("", fragment));
+                    if (t.match(string.Join("", fragment)))
+                    {
+                        Console.WriteLine("matched with: " + t.Name);
+                        tokens.Add(new Token(t.Id, t.Name, t.RE));
+                        tokenSymbols.Add(string.Join("", fragment));
+                        fragment.Clear();
+                    }
                 }
             }
+            return tokens;
+	}
 
-            return 0;
-        }
         public void printTables()
         {
             for (int i = 0; i < Tokens.Length; i++)
