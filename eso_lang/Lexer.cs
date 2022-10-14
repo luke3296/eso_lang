@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 namespace eso_lang
 {
 
-    class Lexer
+    public class Lexer
     {
         const int MAX_LEN = 32;
         public int[] Tokens;

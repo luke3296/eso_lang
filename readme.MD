@@ -47,8 +47,18 @@ will edit the lexer once we decide token names.
 coalesces multiple multi character lexemes into the same token with if-else.
 
 make the Lexer regex based
+- a note about ambigious tokens, if we have two tokens there one is a subset of the other we should
+check them in decreasing length order e.g
+"I think there for i am"  is token 1
+"I think there"           is token 2
+A regex may inccorectly match string 1 onto token 2 and vis vesa. to get around this we will check in decreasing order of lenght. so we check for regex 1 firth then 2. we also need to cleanly account for the edges of the tokens in the regex. We will also need a look ahead of out longest tonken length in the lexer. when we encounter the casae "I think there" we must look ahead some extra characters to see if its a token 1 or a token 2
 
 add tests for the Lexer
+
+the lexer must get the end index after a group has been matched and ubstract this from tok_i so no tokens are misses
+
+some tokens such as numbers and indentiferes neede't be fully defined in the bnf as when they are matched they are put in the symbol table as is, there is no further processing they just need to be used during the excution pass.
+
 
 # parser to-do
 

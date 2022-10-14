@@ -6,7 +6,6 @@ step 1 arithmatic
 <character> ::== [a-zA-Z]
 <int> ::= <digit>|<int><digit>
 
-
 <arithmetic-expression> ::=   <int> + <int>
 			  |   <int> - <int>
 			  |   <int> * <int>
@@ -29,33 +28,32 @@ step 2 other stuff
 	       |  <relational-expression>
 
 
-<relational-expression> ::=  <varible> < <varible>
-			                     |  <varible> > <varible>
-			                     |  <varible> <= <varible>
-		                       |  <varible> >= <varible>
-			  								 	 |  <varible> == <varible>
-			  								 	 |  <varible> => <varible>
-			  								   |  <varible> =< <varible>
-			  								   |  <varible> !< <varible>
-			  								   |  <varible> <> <varible>
+<relational-expression> ::=  <int> < <int>
+			  |  <int> > <int>
+			  |  <int> <= <int>
+			  |  <int> >= <int>
+			  |  <int> == <int>
+			  |  <int> => <int>
+			  |  <int> =< <int
+				|  <int> !< <int>
+				|  <int> <> <int>
 
 
 <varible> ::= <charactecter> <string>
-						| <character> <int>
 
 
 <assignment-statmen>  ::=   <varible> = <int>
-	                			|   <varible> = <string>
+	                |   <varible> = <string>
 
 
 
-<if-statement> ::= if( <relational-expression> ) { <statements> }
-		 | }else if ( <relational-expression> ){ <statment> }
+<if-statement> ::= if( <condtional-expression> ) { <statements> }
+		 | }else if ( <condtional-expression> ){ <statment> }
 		 | } else { <statments> }
 
 <while-statement> ::= while(<relational-expression>){<statements>}
 
-<for-statement>   ::= for ( <assignment-statment> ; <relational-expression> ; <statments> ) { <statements> }
+<for-statement>   ::= for ( <assignment-statment> ; <condtional-expression> ; <statments> ) { <statements> }
 
 
 <function>  ::=  define <string> {<statements>}
