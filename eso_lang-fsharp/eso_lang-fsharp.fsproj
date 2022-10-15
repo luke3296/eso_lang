@@ -1,10 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>eso_lang_fsharp</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+  <Reference Include="eso_lang">
+    <HintPath>".\..\eso_lang\bin\Debug\net6.0\eso_lang.dll"</HintPath>
+  </Reference>
+</ItemGroup>
 
   <ItemGroup>
     <Compile Include="Program.fs" />

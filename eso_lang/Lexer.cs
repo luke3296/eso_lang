@@ -67,11 +67,11 @@ namespace eso_lang
                 fragment.Add((source[i]));
                 foreach (Token t in tokenRegexs)
                 {
-                    Console.WriteLine("lookin for mathch in fragent: " + string.Join("", fragment));
+                    //Console.WriteLine("lookin for mathch in fragent: " + string.Join("", fragment));
                     var match = t.match_str(string.Join("", fragment));
                     if (match != "")
                     {
-                        Console.WriteLine("matched with: " + t.name);
+                        Console.WriteLine("matched with: " + match);
                         tokens.Add(new Token(t.id, t.name, t.tokenRE));
                         tokenSymbols.Add(match);
                         fragment.Clear();

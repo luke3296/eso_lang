@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eso_lang", "eso_lang\eso_la
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eso_lang_tests", "eso_lang_tests\eso_lang_tests.csproj", "{2B17C937-F7DA-4F25-9F0D-06809ACF7F12}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eso_lang-fsharp", "eso_lang-fsharp\eso_lang-fsharp.fsproj", "{F683F773-9849-4F68-8573-82622E679D09}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "eso_lang-fsharp", "eso_lang-fsharp\eso_lang-fsharp.fsproj", "{25625375-7CBC-4863-A726-DC9598969F86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +27,10 @@ Global
 		{F683F773-9849-4F68-8573-82622E679D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F683F773-9849-4F68-8573-82622E679D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F683F773-9849-4F68-8573-82622E679D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25625375-7CBC-4863-A726-DC9598969F86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25625375-7CBC-4863-A726-DC9598969F86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25625375-7CBC-4863-A726-DC9598969F86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25625375-7CBC-4863-A726-DC9598969F86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
