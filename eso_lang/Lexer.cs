@@ -23,12 +23,26 @@ namespace eso_lang
             tmp = new char[MAX_LEN];
 
 	    tokenRegexs = new List<Token>();
+            
+            tokenRegexs.Add(new Token(1, "Int", @"Naught\s", 0));
+            tokenRegexs.Add(new Token(1, "Int", @"Boots\s", 1));
+            tokenRegexs.Add(new Token(1, "Int", @"Goats\s", 2));
+            tokenRegexs.Add(new Token(1, "Int", @"Powder\s", 3));
+            tokenRegexs.Add(new Token(1, "Int", @"Rum\s",   4));
+            tokenRegexs.Add(new Token(1, "Int", @"Meats\s", 5));
+            tokenRegexs.Add(new Token(1, "Int", @"Wines\s", 6));
+            tokenRegexs.Add(new Token(1, "Int", @"Cloth\s", 7));
+            tokenRegexs.Add(new Token(1, "Int", @"Ropes\s",8));
+            tokenRegexs.Add(new Token(1, "Int", @"Food\s", 9));
+            tokenRegexs.Add(new Token(2, "Addition-Operator", @"Put\swith\s"));
+            tokenRegexs.Add(new Token(3, "Subtraction-Operator", @"Take\sfrom\s"));
+            tokenRegexs.Add(new Token(4, "Division-Operator", @"By\scount\sof\s"));
+            tokenRegexs.Add(new Token(5, "Multiplication-Operator", @"By\scount\sper\s"));
+            tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Let\sthe\s"));
+            tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Have\s"));
+            tokenRegexs.Add(new Token(7 , "Lable", @"_[a-zA-Z]*\s"));
+             // any sting of letters and numbers starting with lowercase letter
 
-            tokenRegexs.Add(new Token(1, "symbol", "ya scally wag"));
-            tokenRegexs.Add(new Token(2, "symbol", "some text"));
-            tokenRegexs.Add(new Token(3, "symbol", "might contain"));
-            tokenRegexs.Add(new Token(4, "a token", "might"));
-            tokenRegexs.Add(new Token(5, "a token", "hello"));
         }
         public enum TOKENS
         {
@@ -54,11 +68,12 @@ namespace eso_lang
                 foreach (Token t in tokenRegexs)
                 {
                     Console.WriteLine("lookin for mathch in fragent: " + string.Join("", fragment));
-                    if (t.match(string.Join("", fragment)))
+                    var match = t.match_str(string.Join("", fragment));
+                    if (match != "")
                     {
-                        Console.WriteLine("matched with: " + t.Name);
-                        tokens.Add(new Token(t.Id, t.Name, t.RE));
-                        tokenSymbols.Add(string.Join("", fragment));
+                        Console.WriteLine("matched with: " + t.name);
+                        tokens.Add(new Token(t.id, t.name, t.tokenRE));
+                        tokenSymbols.Add(match);
                         fragment.Clear();
                     }
                 }

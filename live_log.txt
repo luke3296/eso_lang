@@ -7,6 +7,8 @@ reference eso_lang.csproj to eso_lang_test.csproj  5/10/22
 reference eso_lang-fsharp.fsproj to eso_lang_test.csproj  5/10/22
 reference eso_lang-fsharp.fsproj to eso_lang.csproj  5/10/22
 added sailor jargon bnf branch 10/10/22
+made a Token class 14/10/22
+refactored Lexer.Lex to use regex 14/10/22
 
 
  
