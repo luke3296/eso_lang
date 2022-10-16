@@ -11,6 +11,10 @@
     let add x y =
         x + y
 
+    let printTokenList (tokList : List<Token>) = 
+        for item in tokList do
+            printfn "%s" item.name
+
     let printFromFsharp str =
         printfn "%s\n" str
 //    let Parse tokens : Token =
