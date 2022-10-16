@@ -1,5 +1,6 @@
 using System;
 namespace eso_lang;
+using  eso_lang_classes;
 
 class Program {
        public static void Main(string[] args) {
@@ -20,7 +21,8 @@ class Program {
             Console.Write(tok.name);
             types.Add(tok.name);
         }
-        FsharpInterop.Parse(types);
+         FsharpInterop.printToken(tokens[0]);
+        //FsharpInterop.Parse(tokens);
     }
 
 }

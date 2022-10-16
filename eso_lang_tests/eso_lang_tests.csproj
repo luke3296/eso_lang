@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eso_lang-classes\eso_lang-classes.csproj" />
     <ProjectReference Include="..\eso_lang\eso_lang.csproj" />
     <ProjectReference Include="..\eso_lang-fsharp\eso_lang-fsharp.fsproj" />
   </ItemGroup>

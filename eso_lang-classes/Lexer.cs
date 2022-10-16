@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using eso_lang_classes;
 // Regex tok1 = new Regex("Hello Sailor");
 
-namespace eso_lang
+namespace eso_lang_classes
 {
 
     public class Lexer
@@ -22,17 +23,17 @@ namespace eso_lang
             Symbols = new string[MAX_LEN];
             tmp = new char[MAX_LEN];
 
-	    tokenRegexs = new List<Token>();
-            
+            tokenRegexs = new List<Token>();
+
             tokenRegexs.Add(new Token(1, "Int", @"Naught\s", 0));
             tokenRegexs.Add(new Token(1, "Int", @"Boots\s", 1));
             tokenRegexs.Add(new Token(1, "Int", @"Goats\s", 2));
             tokenRegexs.Add(new Token(1, "Int", @"Powder\s", 3));
-            tokenRegexs.Add(new Token(1, "Int", @"Rum\s",   4));
+            tokenRegexs.Add(new Token(1, "Int", @"Rum\s", 4));
             tokenRegexs.Add(new Token(1, "Int", @"Meats\s", 5));
             tokenRegexs.Add(new Token(1, "Int", @"Wines\s", 6));
             tokenRegexs.Add(new Token(1, "Int", @"Cloth\s", 7));
-            tokenRegexs.Add(new Token(1, "Int", @"Ropes\s",8));
+            tokenRegexs.Add(new Token(1, "Int", @"Ropes\s", 8));
             tokenRegexs.Add(new Token(1, "Int", @"Food\s", 9));
             tokenRegexs.Add(new Token(2, "Addition-Operator", @"Put\swith\s"));
             tokenRegexs.Add(new Token(3, "Subtraction-Operator", @"Take\sfrom\s"));
@@ -40,8 +41,8 @@ namespace eso_lang
             tokenRegexs.Add(new Token(5, "Multiplication-Operator", @"By\scount\sper\s"));
             tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Let\sthe\s"));
             tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Have\s"));
-            tokenRegexs.Add(new Token(7 , "Lable", @"_[a-zA-Z]*\s"));
-             // any sting of letters and numbers starting with lowercase letter
+            tokenRegexs.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
+            // any sting of letters and numbers starting with lowercase letter
 
         }
         public enum TOKENS
@@ -79,7 +80,7 @@ namespace eso_lang
                 }
             }
             return tokens;
-	}
+        }
 
         public void printTables()
         {

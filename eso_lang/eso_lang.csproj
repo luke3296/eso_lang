@@ -1,7 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\eso_lang-classes\eso_lang-classes.csproj" />
     <ProjectReference Include="..\eso_lang-fsharp\eso_lang-fsharp.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="eso_lang-fsharp">
+      <HintPath>..\eso_lang-fsharp\bin\Debug\net6.0\eso_lang-fsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core">
+      <HintPath>..\eso_lang-fsharp\bin\Debug\net6.0\FSharp.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <PropertyGroup>
