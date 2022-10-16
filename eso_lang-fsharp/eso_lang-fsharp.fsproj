@@ -7,14 +7,14 @@
     <RootNamespace>eso_lang_fsharp</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-  <Reference Include="eso_lang">
-    <HintPath>".\..\eso_lang\bin\Debug\net6.0\eso_lang.dll"</HintPath>
-  </Reference>
-</ItemGroup>
+
 
   <ItemGroup>
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eso_lang-classes\eso_lang-classes.csproj" />
   </ItemGroup>
 
 </Project>
