@@ -2,11 +2,8 @@ using System;
 namespace eso_lang;
 using  eso_lang_classes;
 
-class Program {
-	
 
-	
-        public enum TOKENSPASCAL
+     public enum TOKENSPASCAL
         {
             T_PLUS = 1,
             T_MINUS = 2,
@@ -18,29 +15,24 @@ class Program {
             T_NR = 8,
             T_ASSIGN = 9
         }
-	
-       public static void Main(string[] args) {
-	       
-	tokenRegexsPascal = new List<Token>();
 
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 0));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 1));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 2));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 3));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 4));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 5));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 6));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 7));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 8));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 9));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_PLUS, "Addition-Operator", @"+\s"));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"-\s"));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
-            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
-            tokenRegexsPascal.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
+class Program {
+
+        public static List<Token> tokenRegexsPascal;
+
+        public static void Main(string[] args) {
+	    
+	        tokenRegexsPascal = new List<Token>();
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"+\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"-\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Lable", @"_[a-zA-Z]*\s"));
             // any sting of letters and numbers starting with lowercase letter
+
+
 	       
         Console.WriteLine(FsharpInterop.add(5, 5));
         FsharpInterop.printFromFsharp("hello f#");
