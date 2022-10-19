@@ -4,25 +4,24 @@ using  eso_lang_classes;
 
 class Program {
 	
-	tokenRegexs = new List<Token>();
+	tokenRegexsPascal = new List<Token>();
 
-            tokenRegexs.Add(new Token(1, "Int", @"Naught\s", 0));
-            tokenRegexs.Add(new Token(1, "Int", @"Boots\s", 1));
-            tokenRegexs.Add(new Token(1, "Int", @"Goats\s", 2));
-            tokenRegexs.Add(new Token(1, "Int", @"Powder\s", 3));
-            tokenRegexs.Add(new Token(1, "Int", @"Rum\s", 4));
-            tokenRegexs.Add(new Token(1, "Int", @"Meats\s", 5));
-            tokenRegexs.Add(new Token(1, "Int", @"Wines\s", 6));
-            tokenRegexs.Add(new Token(1, "Int", @"Cloth\s", 7));
-            tokenRegexs.Add(new Token(1, "Int", @"Ropes\s", 8));
-            tokenRegexs.Add(new Token(1, "Int", @"Food\s", 9));
-            tokenRegexs.Add(new Token(2, "Addition-Operator", @"Put\swith\s"));
-            tokenRegexs.Add(new Token(3, "Subtraction-Operator", @"Take\sfrom\s"));
-            tokenRegexs.Add(new Token(4, "Division-Operator", @"By\scount\sof\s"));
-            tokenRegexs.Add(new Token(5, "Multiplication-Operator", @"By\scount\sper\s"));
-            tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Let\sthe\s"));
-            tokenRegexs.Add(new Token(6, "Asignment-Operator", @"Have\s"));
-            tokenRegexs.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
+            tokenRegexsPascal.Add(new Token(1, "Int", 0));
+            tokenRegexsPascal.Add(new Token(1, "Int", 1));
+            tokenRegexsPascal.Add(new Token(1, "Int", 2));
+            tokenRegexsPascal.Add(new Token(1, "Int", 3));
+            tokenRegexsPascal.Add(new Token(1, "Int", 4));
+            tokenRegexsPascal.Add(new Token(1, "Int", 5));
+            tokenRegexsPascal.Add(new Token(1, "Int", 6));
+            tokenRegexsPascal.Add(new Token(1, "Int", 7));
+            tokenRegexsPascal.Add(new Token(1, "Int", 8));
+            tokenRegexsPascal.Add(new Token(1, "Int", 9));
+            tokenRegexsPascal.Add(new Token(2, "Addition-Operator", @"+\s"));
+            tokenRegexsPascal.Add(new Token(3, "Subtraction-Operator", @"-\s"));
+            tokenRegexsPascal.Add(new Token(4, "Division-Operator", @"/\s"));
+            tokenRegexsPascal.Add(new Token(5, "Multiplication-Operator", @"*\s"));
+            tokenRegexsPascal.Add(new Token(6, "Asignment-Operator", @":=\s"));
+            tokenRegexsPascal.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
             // any sting of letters and numbers starting with lowercase letter
 	
         public enum TOKENS
