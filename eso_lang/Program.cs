@@ -6,25 +6,26 @@ class Program {
 	
 	tokenRegexsPascal = new List<Token>();
 
-            tokenRegexsPascal.Add(new Token(1, "Int", 0));
-            tokenRegexsPascal.Add(new Token(1, "Int", 1));
-            tokenRegexsPascal.Add(new Token(1, "Int", 2));
-            tokenRegexsPascal.Add(new Token(1, "Int", 3));
-            tokenRegexsPascal.Add(new Token(1, "Int", 4));
-            tokenRegexsPascal.Add(new Token(1, "Int", 5));
-            tokenRegexsPascal.Add(new Token(1, "Int", 6));
-            tokenRegexsPascal.Add(new Token(1, "Int", 7));
-            tokenRegexsPascal.Add(new Token(1, "Int", 8));
-            tokenRegexsPascal.Add(new Token(1, "Int", 9));
-            tokenRegexsPascal.Add(new Token(2, "Addition-Operator", @"+\s"));
-            tokenRegexsPascal.Add(new Token(3, "Subtraction-Operator", @"-\s"));
-            tokenRegexsPascal.Add(new Token(4, "Division-Operator", @"/\s"));
-            tokenRegexsPascal.Add(new Token(5, "Multiplication-Operator", @"*\s"));
-            tokenRegexsPascal.Add(new Token(6, "Asignment-Operator", @":=\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 0));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 1));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 2));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 3));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 4));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 5));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 6));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 7));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 8));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 9));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_PLUS, "Addition-Operator", @"+\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"-\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
+            tokensRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokenRegexsPascal.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
             // any sting of letters and numbers starting with lowercase letter
 	
-        public enum TOKENS
+        public enum TOKENSPASCAL
         {
             T_PLUS = 1,
             T_MINUS = 2,
@@ -34,6 +35,7 @@ class Program {
             T_LPAR = 6,
             T_RPAR = 7,
             T_NR = 8
+            T_ASSIGN = 9
         }
 	
        public static void Main(string[] args) {
