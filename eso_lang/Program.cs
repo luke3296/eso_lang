@@ -34,7 +34,7 @@ class Program {
             T_IDENT = 5,
             T_LPAR = 6,
             T_RPAR = 7,
-            T_NR = 8
+            T_NR = 8,
             T_ASSIGN = 9
         }
 	
