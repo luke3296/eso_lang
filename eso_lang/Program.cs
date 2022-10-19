@@ -4,6 +4,23 @@ using  eso_lang_classes;
 
 class Program {
 	
+
+	
+        public enum TOKENSPASCAL
+        {
+            T_PLUS = 1,
+            T_MINUS = 2,
+            T_DIVIDE = 3,
+            T_MULTIPLY = 4,
+            T_IDENT = 5,
+            T_LPAR = 6,
+            T_RPAR = 7,
+            T_NR = 8,
+            T_ASSIGN = 9
+        }
+	
+       public static void Main(string[] args) {
+	       
 	tokenRegexsPascal = new List<Token>();
 
             tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_NR, "Int", 0));
@@ -24,21 +41,7 @@ class Program {
             tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokenRegexsPascal.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
             // any sting of letters and numbers starting with lowercase letter
-	
-        public enum TOKENSPASCAL
-        {
-            T_PLUS = 1,
-            T_MINUS = 2,
-            T_DIVIDE = 3,
-            T_MULTIPLY = 4,
-            T_IDENT = 5,
-            T_LPAR = 6,
-            T_RPAR = 7,
-            T_NR = 8,
-            T_ASSIGN = 9
-        }
-	
-       public static void Main(string[] args) {
+	       
         Console.WriteLine(FsharpInterop.add(5, 5));
         FsharpInterop.printFromFsharp("hello f#");
 	    Lexer l1 = new Lexer();
