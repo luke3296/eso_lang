@@ -21,7 +21,7 @@ class Program {
             tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
             tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
             tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
-            tokensRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
+            tokenRegexsPascal.Add(new Token(TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokenRegexsPascal.Add(new Token(7, "Lable", @"_[a-zA-Z]*\s"));
             // any sting of letters and numbers starting with lowercase letter
 	
