@@ -38,10 +38,10 @@ class Program {
 	    
 	        tokenRegexsPascal = new List<Token>();
 
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"\+\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"\-\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"+\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"-\s"));
             tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"\*\s"));
+            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
             tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
             tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Lable", @"_[a-zA-Z]*\s"));
