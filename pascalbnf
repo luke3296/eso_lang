@@ -1,7 +1,7 @@
 ## pascal bnf
 
 <Program> ::= Program <id> ( <id>  ) ; <block> .
-					| Program <id> ( <id> , <id> ) ; <block> .
+	    | Program <id> ( <id> , <id> ) ; <block> .
 
 		
 <id> ::= letter letter
