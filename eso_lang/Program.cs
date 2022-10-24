@@ -23,7 +23,8 @@ using  eso_lang_classes;
 	    T_GTHANE = 16,
 	    T_LTHANE = 17,
 	    T_INTDIV = 18,
-	    T_INTMOD = 19
+	    T_INTMOD = 19,
+	    T_PERIOD = 20
         }
 
   public enum TOKENSESO
@@ -69,6 +70,7 @@ class Program {
 	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANE, "Less-or-Equal-Operator", @"<=\s"));
 	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"div\s"));
 	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"."));
             // any sting of letters and numbers starting with lowercase letter
 
             tokenRegexsEso = new List<Token>();
