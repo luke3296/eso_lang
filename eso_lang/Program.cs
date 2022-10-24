@@ -13,7 +13,17 @@ using  eso_lang_classes;
             T_LPAR = 6,
             T_RPAR = 7,
             T_NR = 8,
-            T_ASSIGN = 9
+            T_ASSIGN = 9,
+	    T_BEGIN = 10,
+	    T_END = 11,
+	    T_PROGRAM = 12,
+	    T_SCOLON = 13,
+	    T_GTHAN = 14,
+	    T_LTHAN = 15,
+	    T_GTHANE = 16,
+	    T_LTHANE = 17,
+	    T_INTDIV = 18,
+	    T_INTMOD = 19
         }
 
   public enum TOKENSESO
