@@ -1,0 +1,45 @@
+## pascal bnf
+
+<Program> ::= Program <id> ( <id>  ) ; <block> .
+					| Program <id> ( <id> , <id> ) ; <block> .
+
+		
+<id> ::= letter letter
+	| letter digit
+	| letter <id>
+
+<unsinged_interger> ::= digit
+	             | digit <interger>
+
+<block> ::= begin <statment> end
+
+<statement> ::= begin <statment> end
+		| if <expression> then <statement> 
+		| if <expression> then <statement> else <statement>
+		| while <expression> do <statement>
+						
+<expression> ::= <simple_expression>
+		| <simple_expression> > <simple_expression>
+		| <simple_expression> < <simple_expression>
+		| <simple_expression> <= <simple_expression>
+		| <simple_expression> >= <simple_expression>
+		
+<simple_expression> ::= + <term>
+		      |	- <term>
+		      | + <term> - <term>
+		      | + <term> + <term>
+		      | - <term> + <term>
+		      | - <term> - <term>
+<term> ::= <factor>
+	 | <factor> * <factor>
+	 | <factor> / <factor>
+	 | <factor> div <factor>
+	 | <factor> mod <factor>
+	 
+<factor>::= <unsigned_constant>
+	  | (  <expression> )
+	  
+<unsigned_constant> ::= <unsinged_number>
+<unsinged_number> ::= <unsinged_interger>
+
+
