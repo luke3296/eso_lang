@@ -36,15 +36,29 @@ class Program {
 
         public static void Main(string[] args) {
 	    
-	        tokenRegexsPascal = new List<Token>();
+	        tokensRegexPascal = new List<Token>();
 
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"+\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"-\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"*\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
-            tokenRegexsPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Lable", @"_[a-zA-Z]*\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"\+\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_MINUS, "Subtraction-Operator", @"\-\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DIVIDE, "Division-Operator", @"/\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "Multiplication-Operator", @"\*\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_SLEFT, "Shift-Left-Operator", @"<<\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_SRIGHT, "Shift-Right-Operator", @">>\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @":=\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Lable", @"[a-zA-Z]*\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"("));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @")"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_BEGIN, "Begin", @"Begin\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_END, "End", @"End\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PROGRAM, "Program", @"Program\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "Greater-Than-Operator", @">\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "Less-Than-Operator", @"<\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHANE, "Greater-or-Equal-Operator", @">=\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANE, "Less-or-Equal-Operator", @"<=\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"div\s"));
+	    tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod\s"));
             // any sting of letters and numbers starting with lowercase letter
 
             tokenRegexsEso = new List<Token>();
