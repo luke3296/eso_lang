@@ -1,45 +1,98 @@
 ## pascal bnf
 
 <Program> ::= Program <id> ( <id>  ) ; <block> .
-	    | Program <id> ( <id> , <id> ) ; <block> .
+					| Program <id> ( <id> , <id> ) ; <block> .
 
 		
-<id> ::= letter letter
-	| letter digit
-	| letter <id>
+<id> ::= <letter> <letter_p>
+<letter_p> ::= <letter><letter_p>
+               | <digit><digit_P>
+               | <empty>
+<digit_p> ::=  <digit><digit_P>
+               |<empty>
 
-<unsinged_interger> ::= digit
-	             | digit <interger>
+<unsigned_integer> ::= <digit>
+	               | <unsigned_integer_p>
+<unsigned_integer_p>  ::= <digit><unsigned_integer_p>
+                          |<empty>
+<variable_access> = <variable_identifier>[<expression><variable_access_p>]
+                    |.<field_identifier>
+                    
+<variable_access_p> ::= . <expression>
+                        |. <expression><variable_access_p>
+                      
 
-<block> ::= begin <statment> end
+<block> ::= begin <statement> end
 
-<statement> ::= begin <statment> end
-		| if <expression> then <statement> 
-		| if <expression> then <statement> else <statement>
-		| while <expression> do <statement>
+<statement> ::= begin <statement> <statement_p>
+                |<procedure identifier> <procedure identifier_p> 
+		|if <expression> then <statement> else <statement>
+		|while <expression> do <statement>
+                |repeat <statement><statement_p> until <exppression>
+                |for <variable identifier> := <expression><downto_p>
+                |<variable access> := <expression>
+                |<function identifier> := <expression>
+
+<statement_p> ::=; <statement>
+               
+<procedure_identifier_p> ::= (<expression>)
+                             |(<procedure>)
+                             |(<function identifier>)
+                             |(, <expression><procedure identifier_p>)
+                             |(, <procedure><procedure identifier_p>)
+                             |(, <function identifier><procedure identifier_p>)
+                             |<empty>
+<procedure_heading> ::= <procedure><identifier><procedure_heading_p>
+<procedure_heading_p> ::= <formal_parameter_list>
+                          |<empty>
+<downto_P> ::= downto <expression> do <statement>
+               |to <expression> do <statement>
+<statement_p> ::= ; <statement>
+                  |; <statement_p>
+                  |<empty>
 						
-<expression> ::= <simple_expression>
-		| <simple_expression> > <simple_expression>
-		| <simple_expression> < <simple_expression>
-		| <simple_expression> <= <simple_expression>
-		| <simple_expression> >= <simple_expression>
+<expression> ::= <simple_expression><expression_p>
 		
-<simple_expression> ::= + <term>
-		      |	- <term>
-		      | + <term> - <term>
-		      | + <term> + <term>
-		      | - <term> + <term>
-		      | - <term> - <term>
-<term> ::= <factor>
-	 | <factor> * <factor>
-	 | <factor> / <factor>
-	 | <factor> div <factor>
-	 | <factor> mod <factor>
+<expression_p ::= > <simple_expression>
+		| < <simple_expression>
+		| <= <simple_expression>
+		| >= <simple_expression>
+                 
+		
+<simple_expression> ::= <simple_expression_p>
+
+
+<simple_expression_p> ::= <term><simple_expression_p>
+                      | or <simple_expression_p>
+                      | + <simple_expression_p>
+                      | - <simple_expression_p>
+                      | <empty>
+		      
+
+<term> ::=<factor><term_p>
+<term_p> ::= <factor>
+	 | * <factor>
+	 | / <factor>
+	 | div <factor>
+	 | mod <factor>
+         | <empty>
+
 	 
 <factor>::= <unsigned_constant>
 	  | (  <expression> )
 	  
-<unsigned_constant> ::= <unsinged_number>
-<unsinged_number> ::= <unsinged_interger>
+<unsigned_constant> ::= <unsigned_number>
+                        |<constant_identifier>
+                        |'<character>'
+<constant> ::=+<constant_identifier>
+              |-<constant_identifier>
+              |-<unsigned_number>
+              |+<unsigned_number>
+                       
+<unsigned_number> ::= <unsigned_integer><unsigned_number_P>
+<unsigned_number_P> ::= .<digit><unsigned_number_P>
+                        |<empty>
+
+
 
 
