@@ -1,0 +1,21 @@
+program do_nothing; begin end. = <program>                # use <Program> expansion
+program do_nothing; begin end. = program <id> ; <block> . # cancel head
+do_nothing; begin end. = <id> ; <block> .                 # use <id> expansion
+do_nothing; begin end. = <letter> <id> ; <block> .        # use <letter> expansion
+do_nothing; begin end. = d <id> ; <block> .               # cancel head
+o_nothing; begin end. =  <id> ; <block> .                 # use <id> expansion
+o_nothing; begin end. =  <letter> <id> ; <block> .        # use <letter> expansion
+o_nothing; begin end. =  o <id> ; <block> .               # cancel head
+         .                                                      . 
+         .                                                      .
+         .                                                      .                                                                                                       g; begin end. =  <id> ; <block> .                       # use <id> expansion 
+g; begin end. =  <letter>; <block> .                    # use <letter> expansion
+g; begin end. =  g; <block> .                           #cancel head
+; begin end.  =  ; <block> .                            #cancel head
+begin end.    =   <block> .                             #use <block> expansion
+begin end .   = begin <statement_list> end .            # cancel head
+      end .   =  <statement_list> end .                 # use <statment_list> expansion
+      end .   =   end .	                                #cancel head
+           .  =   .	                                #cancel head
+              =                                         #nothing left parsed sucsessfully
+

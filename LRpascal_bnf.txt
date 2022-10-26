@@ -1,0 +1,79 @@
+<Program>               ::= program <id> ; <block> .
+
+<Digit>                 ::= 0|1|2|3|4|5|6|7|8|9
+
+<Letter>                ::= a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
+
+<all_chars_accept_'>    ::= a|b|c...
+
+<Character_string>      ::= <all_chars_accept_'> <Character_string>
+
+<letter_or_digit>       ::= <letter> | <digit>
+
+<Unsigned_Constant>     ::= <Unsigned_number>
+<Unsigned_Constant>     ::= <Constant_Identifier> 
+<Unsigned_Constant>     ::= <Character_string>
+
+<Unsinged_number>       ::= <Unsinged_interger>
+
+<Unsinged_interger>     ::= <digit><Unsinged_interger>
+
+<Contestant_Identifier> ::= <id>
+
+<Variable_Identifier>   ::= <id>
+
+
+<factor>                ::= <Unsigned_Constant>
+<factor>                ::= ( <Expression> )
+<factor>                ::= <Variable>
+	   
+<Variable>              ::= <Variable_identifier>
+
+<id>                    ::= <letter>
+<id>                    ::= <letter> <letter_or_digit>
+<id>                    ::= <letter> <id>
+
+<id_list>               ::= <id>,<id_list> | empty
+
+
+<term>                  ::= <term> <factor'>
+<factor'>               ::= / <term> <factor'>
+<factor'>               ::= * <term> <factor'>
+<factor'>               ::= div <term> <factor'>
+<factor'>               ::= mod <term> <factor'>
+<factor'>               ::= empty
+
+<Simple_Expression>     ::= <term> <Simple_Expression'>
+		      
+<Simple_Expression'>    ::= + <term> <Simple_Expression'> 
+<Simple_Expression'>    ::= - <term> <Simple_Expression'> 
+<Simple_Expression'>    ::= empty 
+
+<Expression>            ::= <Simple_Expression> <Expression'>
+           
+<Expression'>           ::= = <Simple_Expression> <Expression'> 
+<Expression'>           ::= < <Simple_Expression> <Expression'> 
+<Expression'>           ::= > <Simple_Expression> <Expression'> 
+<Expression'>           ::= <> <Simple_Expression> <Expression'> 
+<Expression'>           ::= <= <Simple_Expression> <Expression'> 
+<Expression'>           ::= >= <Simple_Expression> <Expression'> 
+<Expression'>           ::= empty
+
+<Expression_list>       ::= <Expression> , <Expression-list> | empty
+
+<write_parameter_list>   ::= ( <Expression_list> ) 
+
+<statement_list>        ::= <statement> ; <statement_list> 
+<statement_list>        ::= empty
+
+<block>                 ::= begin <statement_list> end
+
+		   
+<statement>             ::= <Variable> := <Expression>
+<statement>             ::=  if <Expression> then <Statement>
+<statement>             ::=  if <Expression> then <Statement> else <Statement>
+<statement>             ::= begin <statement_list> ; end
+<statement>             ::= while <Expression> do <statement>
+<statement>             ::= write ( <write_parameter_list> ) ;
+
+
