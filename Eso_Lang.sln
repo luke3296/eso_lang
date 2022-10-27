@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32929.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eso_Lang", "Eso_Lang\Eso_Lang.csproj", "{521779FD-9554-4B03-BFC5-EBDB833569A4}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpLib", "FSharpLib\FSharpLib.fsproj", "{D157E6F5-0F01-43A4-95B8-8679A1F58039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1E453096-F9C6-4D06-8E7F-2E6EA6046A68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{521779FD-9554-4B03-BFC5-EBDB833569A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521779FD-9554-4B03-BFC5-EBDB833569A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521779FD-9554-4B03-BFC5-EBDB833569A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521779FD-9554-4B03-BFC5-EBDB833569A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D157E6F5-0F01-43A4-95B8-8679A1F58039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D157E6F5-0F01-43A4-95B8-8679A1F58039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D157E6F5-0F01-43A4-95B8-8679A1F58039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D157E6F5-0F01-43A4-95B8-8679A1F58039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E453096-F9C6-4D06-8E7F-2E6EA6046A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E453096-F9C6-4D06-8E7F-2E6EA6046A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E453096-F9C6-4D06-8E7F-2E6EA6046A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E453096-F9C6-4D06-8E7F-2E6EA6046A68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BDEBCA2-B818-4563-9184-DF7E25EEBF05}
+	EndGlobalSection
+EndGlobal
