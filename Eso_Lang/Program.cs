@@ -17,16 +17,26 @@ namespace Eso_Lang
         {
 
             tokensRegexPascal = new List<Token>();
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PROGRAM, "Program", @"program\s"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PROGRAM, "Program", @"program"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_BEGIN, "Begin", @"begin"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_END, "End", @"end"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"."));
+           // tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "write Line", @"writeline"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentL", @"\(\*"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentR", @"\*\)"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHANE, "Greater-or-Equal-Operator", @">="));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANE, "Less-or-Equal-Operator", @"<="));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"div"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod"));
+
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "COMMA", @"\,"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
+
             //checked last
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Indetifier", @"[a-zA-Z]+"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Indetifier", @"\b[a-zA-Z]\b"));
             // ^ don't change    v can change
             /*
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PLUS, "Addition-Operator", @"\+\s"));
@@ -39,10 +49,7 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "Greater-Than-Operator", @">\s"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "Less-Than-Operator", @"<\s"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHANE, "Greater-or-Equal-Operator", @">=\s"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANE, "Less-or-Equal-Operator", @"<=\s"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"div\s"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod\s"));
+
             */
             // any sting of letters and numbers starting with lowercase letter
 
@@ -75,15 +82,25 @@ namespace Eso_Lang
             string eso_lang_test_string = " Meats Put with Goats ";
 
             List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            List<Token> pascal_tokens = Pascal_lexer.Lex(pascal_test_string);
+            List<Token> pascal_tokens = Pascal_lexer.LexPascal(pascal_test_string);
+            
 
-
-            Console.WriteLine("found matches: " + eso_tokens.Count);
-            foreach (Token tok in eso_tokens)
+            foreach (Token tok in pascal_tokens)
             {
 
-                Console.WriteLine(tok.name, tok.id);
+                Console.Write(tok.name + " ");
             }
+
+
+            Console.WriteLine("attempting to parse");
+            Pascal_Parser p = new Pascal_Parser(pascal_tokens);
+            int passed=p.Parse();
+            if (passed == 0) {
+                Console.WriteLine("parsed sucsessfully");
+            }
+            /*
+            Console.WriteLine("found matches: " + eso_tokens.Count);
+
             // List<string> types = new List<string>();
             // foreach(Token tok in tokens){
             //     Console.Write(tok.name);
@@ -91,12 +108,6 @@ namespace Eso_Lang
             // }
 
 
-
-            Pascal_Parser p = new Pascal_Parser(pascal_tokens);
-            int passed=p.Parse();
-            if (passed == 0) {
-                Console.WriteLine("parsed sucsessfully");
-            }
 
             Pascal2c_Code_Gen pascal2c = new Pascal2c_Code_Gen(pascal_tokens);
             string c_str = pascal2c.generate();
@@ -110,7 +121,7 @@ namespace Eso_Lang
             Console.WriteLine("Final result = {0:F1}", result);
 
             Console.Read();
-        }
-        
+            */
+        }        
     }
 }

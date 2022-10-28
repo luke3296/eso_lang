@@ -27,7 +27,12 @@ public enum TOKENSPASCAL
     T_INTMOD = 19,
     T_PERIOD = 20,
     T_SLEFT = 21,
-    T_SRIGHT = 22
+    T_SRIGHT = 22,
+    T_COMMA = 23,
+    T_BLOCK= 24,
+    T_APOSTROPHE= 25,
+    T_COMMENT = 26
+
 }
 
 public enum TOKENSESO

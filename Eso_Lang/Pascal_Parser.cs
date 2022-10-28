@@ -23,6 +23,12 @@ namespace Eso_Lang
             currentToken = 0;
             lookAhead = -1; // Initialise to non-existing token ID
             int ret = 1;
+            Console.Write("check the input\n");
+            foreach(Token tok in this.Tokens){
+                   Console.Write(tok.name + " ");
+             }
+            Console.Write("\n");
+
             ret = Program(Tokens[currentToken++]);
             return ret;
         }
@@ -58,43 +64,58 @@ namespace Eso_Lang
         private int Program(Token t) {
 
             if(t.id == (int)TOKENSPASCAL.T_PROGRAM){
+                Id(Tokens[currentToken++]);
+                if(t.id == (int)TOKENSPASCAL.T_SCOLON){
+                    Block(Tokens[currentToken++]);
+                }else if(t.id == (int)TOKENSPASCAL.T_LPAR){
+                    Id_List(Tokens[currentToken++]);
+                    if(t.id == (int)TOKENSPASCAL.T_RPAR){
+                        if(t.id == (int)TOKENSPASCAL.T_SCOLON){
+                            Block(Tokens[currentToken++]);
+                        }
+                    }
+                }
+            }
+
+            if(t.id == (int)TOKENSPASCAL.T_PERIOD){
+                return 1;
+
+            }else{
+                return 0;
+            }
+            /*
+            if(t.id == (int)TOKENSPASCAL.T_PROGRAM){
                 Console.WriteLine("got program");
                 Id(Tokens[currentToken++]);
             }else{
                 Console.WriteLine("no program found");
+                return 1;
             }
-
-
-            if(t.id == (int)TOKENSPASCAL.T_IDENT)
-            {
-                Console.WriteLine("got id");
-                Id(Tokens[currentToken++]);
-            }else{
-                Console.WriteLine("no id found");
-             }
-
 
             if (t.id == (int)TOKENSPASCAL.T_LPAR)
             {
                 Console.WriteLine("got lpar");
-                Id(Tokens[currentToken++]);
-              
+                Id_List(Tokens[currentToken++]);
+                if(t.id ==(int)TOKENSPASCAL.T_RPAR){
+                 Console.WriteLine("got rpar");
+                }
+            }else if(t.id == (int)TOKENSPASCAL.T_SCOLON){
+                Console.WriteLine("got spar");
+            }else{
+                return 1;
             }
+            
 
-            if (t.id == (int)TOKENSPASCAL.T_RPAR)
+            if (t.id == (int)TOKENSPASCAL.T_BLOCK)
             {
-
-            }
-
-            if (t.id == (int)TOKENSPASCAL.T_SCOLON)
-            {
-                Console.WriteLine("got ;");
-                Id(Tokens[currentToken++]);
+                Console.WriteLine("got block");
+                Block(Tokens[currentToken++]);
             }
             else
             {
-                Console.WriteLine("no ; found");
+                Console.WriteLine("no block found");
             }
+
 
             if(t.id == (int)TOKENSPASCAL.T_PERIOD)
             {
@@ -102,21 +123,41 @@ namespace Eso_Lang
                 Id(Tokens[currentToken++]);
             }else{
                 Console.WriteLine("no . found ");
+                return 1;
             }
-
+*/
             return 0;
 
         }
 
         private void Id(Token t) { 
-            if (t.id == (int)TOKENSPASCAL.T_PROGRAM) 
+            if (t.id == (int)TOKENSPASCAL.T_IDENT) 
             {
                 Console.WriteLine("got id");
                 Id(Tokens[currentToken++]);
             }
         }
-        private void Block(Token t) {  }
+        private void Block(Token t) { 
+             if(t.id == (int)TOKENSPASCAL.T_BEGIN){
+                Statement_list(Tokens[currentToken++]);
+                if(t.id == (int)TOKENSPASCAL.T_END){
 
+                }else{
+                    Console.WriteLine("no end seen after block");
+                }
+             }
+         }
+
+        private void Id_List(Token t){
+            if(t.id == (int)TOKENSPASCAL.T_IDENT){
+                Id(Tokens[currentToken++]);
+                if(t.id == (int)TOKENSPASCAL.T_COMMA){
+                    Id_List(Tokens[currentToken++]);
+                }else{
+                Id(Tokens[currentToken++]);
+                }
+            }
+        }
 
         private void Statement_list(Token t) { }
         private void Statement(Token t) {  }
