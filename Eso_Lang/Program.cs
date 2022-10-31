@@ -94,7 +94,7 @@ namespace Eso_Lang
             string eso_lang_test_string = " Meats Put with Goats ";
 
             List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            List<Token> pascal_tokens = Pascal_lexer.LexPascal(pascal_test_string);
+            List<Token> pascal_tokens = Pascal_lexer.LexPascal(pascal_test_string_2);
             
 
             foreach (Token tok in pascal_tokens)
