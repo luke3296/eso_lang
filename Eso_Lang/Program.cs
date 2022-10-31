@@ -29,14 +29,14 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANE, "Less-or-Equal-Operator", @"<="));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"div"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_THEN, "THEN", @"then"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ELSE, "ElSE", @"else"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"while"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"do"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_REPEAT, "REPEAT", @"repeat"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_THEN, "THEN", @"then"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ELSE, "ElSE", @"else"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"while"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"do"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_REPEAT, "REPEAT", @"repeat"));
+      //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
             
             
             
