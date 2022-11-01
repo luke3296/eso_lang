@@ -169,6 +169,18 @@ namespace Eso_Lang
                 Console.WriteLine("not a number");
             }
         }
+        private void Expression(Token t) 
+        {  
+           if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+            {
+                term(Tokens[currentToken]);
+                Simple_Expression(Tokens[currentToken++]);
+            }
+            else
+            {
+                Console.WriteLine("not a number");
+            }
+        }
         private void factor_p(Token t) { 
         }
         private void factor_p() {
