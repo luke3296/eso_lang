@@ -202,11 +202,32 @@ namespace Eso_Lang
        }
        
 
-        private void factor_p(Token t) { 
+        private void factor_p(Token t) 
+        {
+             private void factor_p(Token t){
+            if(t.id == (int)TOKENSPASCAL.T_DIVIDE) 
+            {
+                term(Tokens[currentToken++]);
+                factor_P(Tokens[currentToken++]);
+            }
+            if(t.id == (int)TOKENSPASCAL.T_MULTIPLY) 
+            {
+                term(Tokens[currentToken++]);
+                factor_P(Tokens[currentToken++]);
+            }
+            if(t.id == (int)TOKENSPASCAL.T_INTDIV) 
+            {
+                term(Tokens[currentToken++]);
+                factor_P(Tokens[currentToken++]);
+            }
+            if(t.id == (int)TOKENSPASCAL.T_INTMOD) 
+            {
+                term(Tokens[currentToken++]);
+                factor_P(Tokens[currentToken++]);
+            }
         }
-        private void factor_p() {
         }
-
+        
         private void Statement_list(Token t) { }
         private void Statement(Token t) {  }
 
