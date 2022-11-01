@@ -35,8 +35,15 @@ public enum TOKENSPASCAL
     T_DIGIT = 27,
     T_WRITELINE = 28,
     T_Another_statement = 29,
-    T_COLON,
-    T_STRING = 30
+    T_COLON  = 30,
+    T_STRING = 30,
+    T_VAR = 31,
+    T_CONST = 32,
+    T_IF = 33,
+    T_ELSE = 34,
+    T_THEN = 35,
+    T_GTHANEQ = 36,
+    T_LTHANEQ = 37
 
 
 }

@@ -56,7 +56,7 @@ namespace Eso_Lang
                     }
                 }
             }
-            Console.WriteLine("the next token should be . and the final token in the list");
+            Console.WriteLine("the next token should be . and the final token in the list. the next token is " + tokens[currentToken]);
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_PERIOD)
             {
                 return 0;

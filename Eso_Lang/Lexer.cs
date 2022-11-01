@@ -242,6 +242,18 @@ namespace Eso_Lang
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Semi-Colon", @";"));
                                 break;
+                            case "<":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "LESS-THAN", @"\<"));
+                                break;
+                            case ">":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "GREATER-THAN", @"\>"));
+                                break;
+                            case "<=":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_LTHANEQ, "LESS-THAN-EQ", @"\<="));
+                                break;
+                            case ">=":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_GTHANEQ, "GREATER-THAN-EQ", @"\>="));
+                                break;
                             default:
                                 Console.WriteLine("can't match " + fragment_str);
                                 if(letter.IsMatch(fragment_str)){
