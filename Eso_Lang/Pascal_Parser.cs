@@ -174,13 +174,33 @@ namespace Eso_Lang
            if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
-                Simple_Expression(Tokens[currentToken++]);
+                Expression_P(Tokens[currentToken++]);
             }
             else
             {
                 Console.WriteLine("not a number");
             }
         }
+        private void Simple_Expression(Token t){
+        if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+            {
+                term(Tokens[currentToken]);
+                Simple_Expression_P(Tokens[currentToken++]);
+            }
+       }
+       private void simple_expression_p(Token t){
+        if(t.id == (int)TOKENSPASCAL.T_PLUS) 
+            {
+                term(Tokens[currentToken++]);
+                Simple_Expression_P(Tokens[currentToken++]);
+            }
+        if(t.id == (int)TOKENSPASCAL.T_MINUS)
+            {
+                term(Tokens[currentToken++]);
+                Simple_Expression_P(Tokens[currentToken++]);
+            }
+       }
+
         private void factor_p(Token t) { 
         }
         private void factor_p() {
