@@ -226,8 +226,19 @@ namespace Eso_Lang
         }
         
         
-        private void Statement_list(Token t) { }
-        private void Statement(Token t) {  }
+           private void statement(Token t){
+            if(t.id == (int)TOKENSPASCAL.T_IF) 
+            {
+                
+                Expression(Tokens[currentToken++]);
+                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_THEN) 
+                {
+                   Expression(Tokens[currentToken++])
+                }
+
+            }
+        }
+        
 
         
         private void Expression_p(Token t) {  }
