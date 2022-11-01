@@ -160,15 +160,18 @@ namespace Eso_Lang
         }
         private void term(Token t)
         {
-            if (t.id == (int)TOKENSPASCAL.T_DIGIT) 
+            if (t.id == (int)TOKENSPASCAL.T_DIGIT)
             {
-                factor_p(Tokens[currentToken++])
+                factor_p(Tokens[currentToken++]);
             }
             else
             {
                 Console.WriteLine("not a number");
             }
-               
+        }
+        private void factor_p(Token t) { 
+        }
+        private void factor_p() {
         }
 
         private void Statement_list(Token t) { }

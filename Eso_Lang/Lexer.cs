@@ -191,9 +191,42 @@ namespace Eso_Lang
                         Console.WriteLine("looking for symbols in block:"+ fragment_str);
                         switch (fragment_str.Trim())
                         {
+                            case ":":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_COLON, "COLON", @":"));
+                                break;
                             case "('":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "'"));
+                                // read characters untill next '
+                                fragment.Clear();
+                                currentChar--;
+
+                                Console.WriteLine("index is " + currentChar + " char at index is " + source[currentChar] + " the source length is" + source.Length);
+
+                                while (c != '\'')
+                                {
+                                    Console.WriteLine("index is " + currentChar + " char at index is " + source[currentChar]);
+
+                                    //Console.WriteLine("looking for ' in  ");
+                                    if (currentChar < source.Length)
+                                    {
+                                        c = source[currentChar++];
+                                        fragment.Add(c);
+                                    }
+                                    else
+                                    {
+                                        //fragment.Add(c);
+                                        Console.WriteLine("reached end of file while looking for a closing '");
+                                        break;
+                                    }
+                                }
+                                if (fragment.Count != 0)
+                                {
+                                    tokens.Add(new Token((int)TOKENSPASCAL.T_STRING, "character String", @"[a-zA-Z\s]"));
+                                }
+
+
+                                Console.WriteLine("character string was " + string.Join("", fragment));
                                 break;
                             case "')":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "'"));
@@ -203,7 +236,7 @@ namespace Eso_Lang
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
                                 break;
                             case "(":
-                                tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "LPAR", @"\("));
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
                                 break;
                             case ");":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));

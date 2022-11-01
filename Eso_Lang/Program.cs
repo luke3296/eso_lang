@@ -90,23 +90,29 @@ namespace Eso_Lang
             Lexer Pascal_lexer = new Lexer(tokensRegexPascal);
       
             string pascal_test_string = "program donothing; begin end.";
-            string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
+            string pascal_test_string_2 = "program writealine(output); begin writeline('Hello World') end.";
+
             string eso_lang_test_string = " Meats Put with Goats ";
 
             List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            List<Token> pascal_tokens = Pascal_lexer.LexPascal(pascal_test_string_2);
-            
+            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string);
 
-            foreach (Token tok in pascal_tokens)
+            List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
+   
+
+            List<int> pascal_ints = new List<int>();
+            foreach (Token tok in pascal_tokens_2)
             {
-
                 Console.Write(tok.name + " ");
+                pascal_ints.Add(tok.id);
             }
 
-
             Console.WriteLine("attempting to parse");
-            Pascal_Parser p = new Pascal_Parser(pascal_tokens);
-            int passed=p.Parse();
+            Pascal_Parser_test p1 = new Pascal_Parser_test(pascal_ints);
+            
+
+           // Pascal_Parser p = new Pascal_Parser(pascal_tokens);
+            int passed=p1.Parse();
             if (passed == 0) {
                 Console.WriteLine("parsed sucsessfully");
             }

@@ -31,7 +31,13 @@ public enum TOKENSPASCAL
     T_COMMA = 23,
     T_BLOCK= 24,
     T_APOSTROPHE= 25,
-    T_COMMENT = 26
+    T_COMMENT = 26,
+    T_DIGIT = 27,
+    T_WRITELINE = 28,
+    T_Another_statement = 29,
+    T_COLON,
+    T_STRING = 30
+
 
 }
 
