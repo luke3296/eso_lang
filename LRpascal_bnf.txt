@@ -70,7 +70,7 @@
 <block>                 ::= begin <statement_list> end
 
 		   
-<statement>             ::= <Variable> := <Expression>
+<statement>             ::= <Variable> = <Expression>
 <statement>             ::=  if <Expression> then <Statement>
 <statement>             ::=  if <Expression> then <Statement> else <Statement>
 <statement>             ::= begin <statement_list> ; end
