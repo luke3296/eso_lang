@@ -182,7 +182,7 @@ namespace Eso_Lang
             }
         }
         private void Simple_Expression(Token t){
-        if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+         if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
