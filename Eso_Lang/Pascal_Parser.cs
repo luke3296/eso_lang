@@ -174,7 +174,7 @@ namespace Eso_Lang
            if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
-                Expression_P(Tokens[currentToken++]);
+                simple_expression_p(Tokens[currentToken++]);
             }
             else
             {
@@ -200,10 +200,7 @@ namespace Eso_Lang
                 Simple_Expression_P(Tokens[currentToken++]);
             }
        }
-        private void Expression_p(Token t) 
-        {  
-        
-        }
+       
 
         private void factor_p(Token t) { 
         }
