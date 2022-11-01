@@ -226,7 +226,7 @@ namespace Eso_Lang
         }
         
         
-           private void statement(Token t){
+          private void statement(Token t){
             if(t.id == (int)TOKENSPASCAL.T_IF) 
             {
                 
@@ -235,8 +235,56 @@ namespace Eso_Lang
                 {
                    Expression(Tokens[currentToken++])
                 }
+                else{
+                    Console.WriteLine("Error, if statement is incomplete")
+                }
 
             }
+            else if(t.id == (int)TOKENSPASCAL.T_WHILE) 
+            {
+                
+                Expression(Tokens[currentToken++]);
+                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_DO) 
+                {
+                   Expression(Tokens[currentToken++]);
+                }
+                else{
+                    Console.WriteLine("Error, while statement is incomplete")
+                }
+
+            }
+            else if(t.id == (int)TOKENSPASCAL.T_BEGIN){
+                statement_list(Tokens[currentToken++]);
+                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_DO) 
+                {
+                   Expression(Tokens[currentToken++]);
+                }
+                else if((Tokens[currentToken++] != (int)TOKENSPASCAL.T_SCOLON or Tokens[currentToken++] != (int)TOKENSPASCAL.T_END)){
+                    Console.WriteLine("Error, begin statement is incomplete")
+                }
+            }
+            else if(t.id == (int)TOKENSPASCAL.T_VAR){
+                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_ASSIGN) 
+                {
+                   Expression(Tokens[currentToken++]);
+                }
+                else {
+                    Console.WriteLine("Error, assigning is incomplete")
+                }
+            }
+            else if(t.id == (int)TOKENSPASCAL.T_WRITE){
+                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_LPAR) 
+                {
+                   write_parameter_list(Tokens[currentToken++]);
+                   if ((Tokens[currentToken++] != (int)TOKENSPASCAL.T_RPAR) or (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
+                      Console.WriteLine("Error, list incomplete") 
+                   }
+                }
+                else {
+                    Console.WriteLine("Error, statement is incomplete")
+                }
+            }
+
         }
         
 
