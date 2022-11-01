@@ -200,6 +200,10 @@ namespace Eso_Lang
                 Simple_Expression_P(Tokens[currentToken++]);
             }
        }
+        private void Expression_p(Token t) 
+        {  
+        
+        }
 
         private void factor_p(Token t) { 
         }
@@ -209,7 +213,7 @@ namespace Eso_Lang
         private void Statement_list(Token t) { }
         private void Statement(Token t) {  }
 
-        private void Expression(Token t) {  }
+        
         private void Expression_p(Token t) {  }
 
     }
