@@ -8,9 +8,11 @@ namespace Eso_Lang
     class Pascal_Parser_test
     {
         List<int> tokens;
-        public Pascal_Parser_test(List<int> toks)
+        List<Token> Tokens;
+        public Pascal_Parser_test(List<int> toks, List<Token> tokes)
         {
             this.tokens = toks;
+            this.Tokens = tokes;
         }
         public int Parse()
         {
@@ -24,7 +26,7 @@ namespace Eso_Lang
 
         int Program(int currentToken)
         {
-            Console.WriteLine("Program() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Program() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_PROGRAM)
             {
                 currentToken = Id(++currentToken);
@@ -72,7 +74,7 @@ namespace Eso_Lang
 
         int Id(int currentToken)
         {
-            Console.WriteLine("Id() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Id() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
             {
                 currentToken = currentToken + 1;
@@ -83,7 +85,7 @@ namespace Eso_Lang
 
         private int Id_List(int currentToken)
         {
-            Console.WriteLine("Id_List() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Id_List() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
             {
@@ -103,7 +105,7 @@ namespace Eso_Lang
 
         int Block(int currentToken)
         {
-            Console.WriteLine("Block() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Block() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_BEGIN)
             {
@@ -119,7 +121,7 @@ namespace Eso_Lang
 
         int Statement(int currentToken)
         {
-            Console.WriteLine("Statement() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Statement() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_WRITELINE)
             {
@@ -148,7 +150,18 @@ namespace Eso_Lang
 
                 }
             }
-            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_Another_statement)
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IF)
+            {
+                Console.WriteLine("Statement() found an IF at index " + currentToken);
+                // handle antoher statement
+                currentToken = Expression(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_ELSE)
+            {
+                // handle antoher statement
+                currentToken = currentToken + 1;
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_THEN)
             {
                 // handle antoher statement
                 currentToken = currentToken + 1;
@@ -168,7 +181,7 @@ namespace Eso_Lang
 
         int  Statement_List(int currentToken)
         {
-            Console.WriteLine("Statement_List() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Statement_List() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
             currentToken = Statement(currentToken);
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_SCOLON)
@@ -184,22 +197,123 @@ namespace Eso_Lang
 
         int Term(int currentToken)
         {
-            Console.WriteLine("Term() Current token index " + currentToken + " , token id " + tokens[currentToken]);
+            Console.WriteLine("Term() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            // calling term here as the bnf states casues a left recursion issue
+            currentToken = Factor_p(++currentToken);
+
             return currentToken;
         }
 
-        void Factor(int currentToken) { }
+        int Factor(int currentToken) {
+            Console.WriteLine("Factor() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
-        void Factor_p(int currentToken) { }
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {
 
-        void Expression(int currentToken) { }
+            }else if ((tokens[currentToken] == (int)TOKENSPASCAL.T_NR)) {
 
-        void Expression_p(int currentToken) { }
+            }else {
+                Console.WriteLine("No factor found returning without increment");
+            }
+            return currentToken;
+        }
 
-        void SimpleExpression(int currentToken) { }
+        int Factor_p(int currentToken) {
+            Console.WriteLine("Factor_p() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            return currentToken;
 
-        void SimpleExpression_p(int currentToken) { }
+        }
 
+        int  Expression(int currentToken) {
+            Console.WriteLine("Expression() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            currentToken = SimpleExpression(++currentToken);
+            currentToken = Expression_p(++currentToken);
 
+            return currentToken;
+        }
+
+        int Expression_p(int currentToken) {
+            Console.WriteLine("Expression_p() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_EQUAL){
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LTHAN) {
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_GTHAN){
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LTHANEQ) {
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_GTHANEQ){
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_GTHANEQ){
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_NOTEQUAL){
+                currentToken = SimpleExpression(++currentToken);
+                currentToken = Expression_p(++currentToken);
+            }
+            else {
+                Console.WriteLine("no statement returned w/o incremnting");
+            }
+            return currentToken;
+            }
+
+        int SimpleExpression(int currentToken) {
+                Console.WriteLine("SimpleExpression() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+                currentToken = Term(++currentToken);
+                currentToken = SimpleExpression_p(++currentToken);
+                return currentToken;
+            }
+
+        int SimpleExpression_p(int currentToken) {
+            Console.WriteLine("SimpleExpression_p() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_PLUS)
+                {
+                    currentToken = Term(++currentToken);
+                    currentToken = SimpleExpression_p(++currentToken);
+                }
+                else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MINUS)
+                {
+                    currentToken = Term(++currentToken);
+                    currentToken = SimpleExpression_p(++currentToken);
+                }
+                else
+                {
+                    Console.WriteLine("no SimpleExpression returned w/o incremnting");
+                }
+                return currentToken;
+            }
+        int UnsignedConstant(int currentToken) {
+            Console.WriteLine("UnsignedConstant() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR) {
+                //dont increment cos we want to pass the number to unsinged int
+                currentToken = UnsignedInterger(currentToken);
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {
+                currentToken = CharacterString(currentToken);
+            }else {
+                Console.WriteLine("no unsinged constant found");
+            }
+            return currentToken;
+        }
+        int UnsignedInterger(int currentToken) {
+            Console.WriteLine("UnsignedInterger() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+
+            return currentToken;
+        }
+        int CharacterString(int currentToken) {
+            Console.WriteLine("CharacterString() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) { 
+            }
+            return currentToken;
+        }
     }
 }

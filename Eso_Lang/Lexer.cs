@@ -75,13 +75,17 @@ namespace Eso_Lang
                     break;
                 }
                 Console.WriteLine("got char at start : " + c);
-                if (c == '\n') {
+                if (c == '\n')
+                {
                     lines += 1;
                     currentChar++;
-                } else if (c == ';') {
+                }
+                else if (c == ';'){
                     tokens.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
                     currentChar++;
-
+                } else if (c == '=') {
+                    tokens.Add(new Token((int)TOKENSPASCAL.T_EQUAL, "is-equal", @"="));
+                    currentChar++;
                 } else if (c == ',') {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_COMMA, "COMMA", @"\,"));
                     currentChar++;
@@ -253,6 +257,12 @@ namespace Eso_Lang
                                 break;
                             case ">=":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_GTHANEQ, "GREATER-THAN-EQ", @"\>="));
+                                break;
+                            case "=":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_EQUAL, "EQUAL", @"="));
+                                break;
+                            case "<>":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_NOTEQUAL, "Not-EQUAL", @"<>"));
                                 break;
                             default:
                                 Console.WriteLine("can't match " + fragment_str);
