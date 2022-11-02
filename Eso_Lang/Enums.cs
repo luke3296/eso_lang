@@ -45,7 +45,10 @@ public enum TOKENSPASCAL
     T_GTHANEQ = 36,
     T_LTHANEQ = 37,
     T_EQUAL = 38,
-    T_NOTEQUAL = 39
+    T_NOTEQUAL = 39,
+    T_WHILE = 40,
+    T_DO = 41,
+
 
 
 }

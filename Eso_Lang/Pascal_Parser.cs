@@ -244,7 +244,7 @@ namespace Eso_Lang
             {
                 
                 Expression(Tokens[currentToken++]);
-                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_DO) 
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_DO) 
                 {
                    Expression(Tokens[currentToken++]);
                 }
@@ -254,7 +254,7 @@ namespace Eso_Lang
 
             }
             else if(t.id == (int)TOKENSPASCAL.T_BEGIN){
-                statement_list(Tokens[currentToken++]);
+                Statement_list(Tokens[currentToken++]);
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_DO) 
                 {
                    Expression(Tokens[currentToken++]);
@@ -276,7 +276,7 @@ namespace Eso_Lang
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_LPAR) 
                 {
                    write_parameter_list(Tokens[currentToken++]);
-                   if ((Tokens[currentToken++].id != (int)TOKENSPASCAL.T_RPAR) || (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
+                   if ((Tokens[currentToken++].id != (int)TOKENSPASCAL.T_RPAR) || (Tokens[currentToken++].id != (int)TOKENSPASCAL.T_SCOLON)){
                         Console.WriteLine("Error, list incomplete");
                    }
                 }
@@ -293,6 +293,11 @@ namespace Eso_Lang
 
         private void Simple_Expression_P(Token t) { }
 
+        private void Statement_list(Token t) { }
+        private void factor_P(Token t) { }
+        private void write_parameter_list(Token t) { }
+
+        
 
 
     }
