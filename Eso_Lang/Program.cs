@@ -34,21 +34,15 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_THEN, "THEN", @"then"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ELSE, "ElSE", @"else"));
-            //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));
-            //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"while"));
-            //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"do"));
-            //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_REPEAT, "REPEAT", @"repeat"));
-            //      tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
-
-
-
-
-
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"while"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"do"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_REPEAT, "REPEAT", @"repeat"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "COMMA", @"\,"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
-
             //checked last
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Indetifier", @"\b[a-zA-Z]\b"));
             // ^ don't change    v can change
@@ -63,7 +57,6 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "Greater-Than-Operator", @">\s"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "Less-Than-Operator", @"<\s"));
-
             */
             // any sting of letters and numbers starting with lowercase letter
 
@@ -115,7 +108,7 @@ namespace Eso_Lang
             }
 
             Console.WriteLine("attempting to parse");
-            Pascal_Parser_test p1 = new Pascal_Parser_test(pascal_ints);
+            Pascal_Parser_test p1 = new Pascal_Parser_test(pascal_ints, pascal_tokens_4);
             
 
            // Pascal_Parser p = new Pascal_Parser(pascal_tokens);

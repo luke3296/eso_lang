@@ -231,12 +231,12 @@ namespace Eso_Lang
             {
                 
                 Expression(Tokens[currentToken++]);
-                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_THEN) 
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_THEN) 
                 {
-                   Expression(Tokens[currentToken++])
+                    Expression(Tokens[currentToken++]);
                 }
                 else{
-                    Console.WriteLine("Error, if statement is incomplete")
+                    Console.WriteLine("Error, if statement is incomplete");
                 }
 
             }
@@ -249,39 +249,39 @@ namespace Eso_Lang
                    Expression(Tokens[currentToken++]);
                 }
                 else{
-                    Console.WriteLine("Error, while statement is incomplete")
+                    Console.WriteLine("Error, while statement is incomplete");
                 }
 
             }
             else if(t.id == (int)TOKENSPASCAL.T_BEGIN){
                 statement_list(Tokens[currentToken++]);
-                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_DO) 
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_DO) 
                 {
                    Expression(Tokens[currentToken++]);
                 }
-                else if((Tokens[currentToken++] != (int)TOKENSPASCAL.T_SCOLON or Tokens[currentToken++] != (int)TOKENSPASCAL.T_END)){
-                    Console.WriteLine("Error, begin statement is incomplete")
+                else if(Tokens[currentToken++].id != (int)TOKENSPASCAL.T_SCOLON | Tokens[currentToken++].id != (int)TOKENSPASCAL.T_END){
+                    Console.WriteLine("Error, begin statement is incomplete");
                 }
             }
             else if(t.id == (int)TOKENSPASCAL.T_VAR){
-                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_ASSIGN) 
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_ASSIGN) 
                 {
                    Expression(Tokens[currentToken++]);
                 }
                 else {
-                    Console.WriteLine("Error, assigning is incomplete")
+                    Console.WriteLine("Error, assigning is incomplete");
                 }
             }
-            else if(t.id == (int)TOKENSPASCAL.T_WRITE){
-                if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_LPAR) 
+            else if(t.id == (int)TOKENSPASCAL.T_WRITELINE){
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_LPAR) 
                 {
                    write_parameter_list(Tokens[currentToken++]);
-                   if ((Tokens[currentToken++] != (int)TOKENSPASCAL.T_RPAR) or (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
-                      Console.WriteLine("Error, list incomplete") 
+                   if ((Tokens[currentToken++].id != (int)TOKENSPASCAL.T_RPAR) || (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
+                        Console.WriteLine("Error, list incomplete");
                    }
                 }
                 else {
-                    Console.WriteLine("Error, statement is incomplete")
+                    Console.WriteLine("Error, statement is incomplete");
                 }
             }
 
