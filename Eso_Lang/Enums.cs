@@ -21,8 +21,6 @@ public enum TOKENSPASCAL
     T_SCOLON = 13,
     T_GTHAN = 14,
     T_LTHAN = 15,
-    T_GTHANE = 16,
-    T_LTHANE = 17,
     T_INTDIV = 18,
     T_INTMOD = 19,
     T_PERIOD = 20,

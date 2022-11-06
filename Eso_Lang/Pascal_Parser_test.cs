@@ -281,7 +281,7 @@ namespace Eso_Lang
             Console.WriteLine("Expression_p() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_EQUAL){
                 currentToken = SimpleExpression(++currentToken);
-                currentToken = Expression_p(++currentToken);
+                currentToken = Expression_p(currentToken);
             } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LTHAN) {
                 Console.WriteLine("found an Expression_p lthan ");
                 currentToken = SimpleExpression(++currentToken);
@@ -292,6 +292,7 @@ namespace Eso_Lang
                 currentToken = Expression_p(currentToken);
             }
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LTHANEQ) {
+                Console.WriteLine("found an Expression_p lthan-eq ");
                 currentToken = SimpleExpression(++currentToken);
                 currentToken = Expression_p(currentToken);
             }

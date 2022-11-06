@@ -61,7 +61,7 @@ namespace Eso_Lang
             int lines = 0;
             int currentChar = 0;
             List<Token> tokens = new List<Token>();
-            List<char> fragment = new List<char>();
+            List<char> fragment = new List<char>();                                                 
             bool done = false;
             Console.WriteLine("lexing: " + source);
             char c;
@@ -93,10 +93,19 @@ namespace Eso_Lang
                     tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
                     currentChar++;
                     //Console.WriteLine("got: " + c);
-                } else if (c == ' ') {
+                } else if (c == '+') {
+                    tokens.Add(new Token((int)TOKENSPASCAL.T_PLUS, "plus", @"\+"));
+                    currentChar++;
+                    //Console.WriteLine("got: " + c);
+                }else if (c == '-')
+                {
+                    tokens.Add(new Token((int)TOKENSPASCAL.T_MINUS, "minus", @"-"));
+                    currentChar++;
+                    //Console.WriteLine("got: " + c);
+                }else if (c == ' ') {
                     currentChar++;
                     //Console.WriteLine("got whitespace ");
-                } else if (c == '.') {
+                }else if (c == '.') {
                     currentChar++;
                     tokens.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
                     //Console.WriteLine("got period ");
@@ -117,7 +126,7 @@ namespace Eso_Lang
                         Console.Write(fragment_str);
                         fragment.Clear();
                     
-                        //put the churernt character back to catch the non-letter 
+                        //put the churernt character back to catch the non-digit 
                         currentChar--;
 
                 }else if (Char.IsLetter(c)){
@@ -262,6 +271,9 @@ namespace Eso_Lang
                                 break;
                             case "<>":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_NOTEQUAL, "Not-EQUAL", @"<>"));
+                                break;
+                            case "+":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_PLUS, "plus", @"\+"));
                                 break;
                             default:
                                 Console.WriteLine("can't match " + fragment_str);
