@@ -22,7 +22,7 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_BEGIN, "Begin", @"begin"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_END, "End", @"end"));
            // tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "write Line", @"writeln"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WRITELINE, "write Line", @"writeln"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentL", @"\(\*"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentR", @"\*\)"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_GTHANE, "Greater-or-Equal-Operator", @"\>="));
@@ -96,9 +96,6 @@ namespace Eso_Lang
             List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
             List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
             List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
-
-
-
 
             List<int> pascal_ints = new List<int>();
             foreach (Token tok in pascal_tokens_4)

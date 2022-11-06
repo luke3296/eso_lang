@@ -66,7 +66,6 @@ namespace Eso_Lang
             Console.WriteLine("lexing: " + source);
             char c;
 
-            //for( int i = 0; i< source.Length-1;i++){
             while (!done){
                 if (currentChar < source.Length){ 
                     c = source[currentChar];

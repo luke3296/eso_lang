@@ -38,6 +38,8 @@
 
 
 <term>                  ::= <term> <factor'>
+<term>                  ::= <term> <factor>
+
 <factor'>               ::= / <term> <factor'>
 <factor'>               ::= * <term> <factor'>
 <factor'>               ::= div <term> <factor'>
@@ -48,6 +50,7 @@
 		      
 <Simple_Expression'>    ::= + <term> <Simple_Expression'> 
 <Simple_Expression'>    ::= - <term> <Simple_Expression'> 
+<Simple_Expression'>    ::= <term> <Simple_Expression'>
 <Simple_Expression'>    ::= empty 
 
 <Expression>            ::= <Simple_Expression> <Expression'>
@@ -62,7 +65,8 @@
 
 <Expression_list>       ::= <Expression> , <Expression-list> | empty
 
-<write_parameter_list>   ::= ( <Expression_list> ) 
+<write_parameter_list>   ::= ( <Expression_list> )
+<write_parameter_list>   ::=  <Character_String>   
 
 <statement_list>        ::= <statement> ; <statement_list> 
 <statement_list>        ::= empty
@@ -70,11 +74,11 @@
 <block>                 ::= begin <statement_list> end
 
 		   
-<statement>             ::= <Variable> = <Expression>
-<statement>             ::=  if <Expression> then <Statement>
-<statement>             ::=  if <Expression> then <Statement> else <Statement>
+<statement>             ::= <Variable> := <Expression>
+<statement>             ::=  if ( <Expression> ) then <Statement>
+<statement>             ::=  if ( <Expression> ) then <Statement> else <Statement>
 <statement>             ::= begin <statement_list> ; end
 <statement>             ::= while <Expression> do <statement>
-<statement>             ::= write ( <write_parameter_list> ) ;
+<statement>             ::= writeln ( <write_parameter_list> ) 
 
 
