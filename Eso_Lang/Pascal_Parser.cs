@@ -188,6 +188,13 @@ namespace Eso_Lang
                      Console.WriteLine("variable not defined");
                    }
                 }
+                 else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                   var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
                 }
             }
             else{
