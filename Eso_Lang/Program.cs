@@ -41,7 +41,7 @@ namespace Eso_Lang
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
-            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_RPAR, "COMMA", @"\,"));
+            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_COMMA, "COMMA", @"\,"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
             //checked last
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IDENT, "Indetifier", @"\b[a-zA-Z]\b"));
