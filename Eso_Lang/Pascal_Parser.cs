@@ -174,10 +174,15 @@ namespace Eso_Lang
            if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
-                simple_expression_p(Tokens[currentToken++]);
+                Simple_Expression(Tokens[currentToken++]);
             }
-            else
+            else if(t.id == (int)TOKENSPASCAL.T_VAR)
             {
+                if (Tokens[currentToken++]==(int)TOKENSPASCAL.T_Assign){
+                   Simple_Expression(Tokens[currentToken++])
+                }
+            }
+            else{
                 Console.WriteLine("not a number");
             }
         }
