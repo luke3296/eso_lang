@@ -293,7 +293,14 @@ namespace Eso_Lang
 
         private void Simple_Expression_P(Token t) { }
 
-        private void Statement_list(Token t) { }
+        private void Statement_list(Token t) { 
+           statement(Tokens[currentToken]);
+           while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_SCOLON)
+           {
+            statement(Tokens[currentToken]);
+           }
+           
+        }
         private void factor_P(Token t) { }
         private void write_parameter_list(Token t) { }
 
