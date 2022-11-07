@@ -235,14 +235,25 @@ namespace Eso_Lang
         if(t.id == (int)TOKENSPASCAL.T_PLUS) 
             {
                 term(Tokens[currentToken++]);
-                Simple_Expression_P(Tokens[currentToken++]);
+                Expression_P(Tokens[currentToken++]);
             }
-        if(t.id == (int)TOKENSPASCAL.T_MINUS)
+        else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
                 term(Tokens[currentToken++]);
                 Simple_Expression_P(Tokens[currentToken++]);
             }
+        //handles variables
+        else if(t.id == (int)TOKENSPASCAL.T_VAR)
+        {
+          var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }  
+        }
+        
        }
+
        
 
         private void factor_p(Token t){
