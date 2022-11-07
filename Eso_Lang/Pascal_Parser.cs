@@ -303,7 +303,15 @@ namespace Eso_Lang
            }
            
         }
-        private void write_parameter_list(Token t) { }
+        private void parameter_list(Token t){
+         if (t.id == (int)TOKENSPASCAL.T_LPAR)
+         {
+            expression_list(Tokens[currentToken++]);
+            if (Tokens[currentToken++].id != (int)TOKENSPASCAL.R_LPAR){
+               Console.WriteLine("Error, list incomplete"); 
+            }
+         }
+        }
 
         
 
