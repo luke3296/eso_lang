@@ -201,12 +201,35 @@ namespace Eso_Lang
                 Console.WriteLine("not a number");
             }
         }
-        private void Simple_Expression(Token t){
-         if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+      private void Simple_Expression(Token t){
+        if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
             }
+            //handling variables
+        else if(t.id == (int)TOKENSPASCAL.T_VAR)
+            {
+                if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
+                   Simple_Expression(Tokens[currentToken++])
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
+                   var check = Array.Exists(Tokens, t)
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                   var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+
+                }
+            }
+        
        }
        private void simple_expression_p(Token t){
         if(t.id == (int)TOKENSPASCAL.T_PLUS) 
