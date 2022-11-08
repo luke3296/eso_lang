@@ -180,7 +180,6 @@ namespace Eso_Lang
                                 currentToken = Statement_List(++currentToken);
                                 Console.WriteLine("passed else statements");
                                 currentToken = advance(++currentToken);
-                               
                             }
                         }
 
