@@ -168,37 +168,91 @@ namespace Eso_Lang
                 Console.WriteLine("not a number");
             }
         }
-        private void Expression(Token t) 
+         private void Expression(Token t) 
         {  
            if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
-                simple_expression_p(Tokens[currentToken++]);
+                Simple_Expression(Tokens[currentToken++]);
             }
-            else
+            //handles variables
+            else if(t.id == (int)TOKENSPASCAL.T_VAR)
             {
+                if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
+                   Simple_Expression(Tokens[currentToken++])
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
+                   var check = Array.Exists(Tokens, t)
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+                 else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                   var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+                }
+            }
+            else{
                 Console.WriteLine("not a number");
             }
         }
-        private void Simple_Expression(Token t){
-         if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+      private void Simple_Expression(Token t){
+        if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
             }
+            //handling variables
+        else if(t.id == (int)TOKENSPASCAL.T_VAR)
+            {
+                if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
+                   Simple_Expression(Tokens[currentToken++])
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
+                   var check = Array.Exists(Tokens, t)
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                   var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                }
+
+                }
+            }
+        
        }
        private void simple_expression_p(Token t){
         if(t.id == (int)TOKENSPASCAL.T_PLUS) 
             {
                 term(Tokens[currentToken++]);
-                Simple_Expression_P(Tokens[currentToken++]);
+                Expression_P(Tokens[currentToken++]);
             }
-        if(t.id == (int)TOKENSPASCAL.T_MINUS)
+        else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
                 term(Tokens[currentToken++]);
                 Simple_Expression_P(Tokens[currentToken++]);
             }
+        //handles variables
+        else if(t.id == (int)TOKENSPASCAL.T_VAR)
+        {
+          var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }  
+        }
+        
        }
+
        
 
         private void factor_p(Token t){
@@ -286,15 +340,32 @@ namespace Eso_Lang
 
         }
         
-
+        private void Statement_list(Token t) { 
+           statement(Tokens[currentToken]);
+           while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_SCOLON)
+           {
+            statement(Tokens[currentToken]);
+           }
+           
+        }
+        private void Expression_list(Token t) { 
+           statement(Tokens[currentToken]);
+           while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_COMMA)
+           {
+            Expression(Tokens[currentToken]);
+           }
+           
+        }
+        private void parameter_list(Token t){
+         if (t.id == (int)TOKENSPASCAL.T_LPAR)
+         {
+            expression_list(Tokens[currentToken++]);
+            if (Tokens[currentToken++].id != (int)TOKENSPASCAL.R_LPAR){
+               Console.WriteLine("Error, list incomplete"); 
+            }
+         }
+        }
         
-        private void Expression_p(Token t) {  }
-
-        private void Simple_Expression_P(Token t) { }
-
-        private void Statement_list(Token t) { }
-        private void factor_P(Token t) { }
-        private void write_parameter_list(Token t) { }
 
         
 
