@@ -60,7 +60,6 @@ namespace Eso_Lang
             lookAhead = Tokens[++currentToken].id;
             Console.WriteLine("advance() called at level %d with next token %d", level, lookAhead);
         }
-
         private int Program(Token t) {
 
             if(t.id == (int)TOKENSPASCAL.T_PROGRAM){
