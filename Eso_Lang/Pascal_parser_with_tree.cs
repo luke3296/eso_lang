@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using 
 namespace Eso_Lang
 {
     
@@ -26,6 +25,16 @@ namespace Eso_Lang
         this.Children.Add(childNode);
         return childNode;
     }
+    public AddChild1(T child)
+    {
+        TreeNode<T> childNode = new TreeNode<T>(child) { Parent = this };
+        this.Children.Add(childNode);
+    }
+    public getChildren()
+    {
+        return this.Children;
+    }
+
 
 }
     class Pascal_Parser
@@ -86,9 +95,9 @@ namespace Eso_Lang
         private int Program(Token t) {
 
             if(t.id == (int)TOKENSPASCAL.T_PROGRAM){
-
-                Id(Tokens[currentToken++]);
                 rootnode=new TreeNode(t);
+                Id(Tokens[currentToken++]);
+                rootnode_child=rootnode.AddChild(Tokens[currentToken++]);
 
                 if(Tokens[currentToken++].id == (int)TOKENSPASCAL.T_SCOLON){
                     childnode1=rootnode.AddChild(Tokens[currentToken]);
@@ -199,6 +208,7 @@ namespace Eso_Lang
 
         private void Statement_list(Token t) { 
            statement(Tokens[currentToken]);
+           Statement_node = statement_list_node.AddChild(Tokens[currentToken]);
            while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_SCOLON)
            {
             statement(Tokens[currentToken]);
@@ -206,21 +216,18 @@ namespace Eso_Lang
            
         }
         private void Expression_list(Token t) { 
-           statement(Tokens[currentToken]);
+           Expression(Tokens[currentToken]);
+           Expression_list_node.AddChild1(Tokens[currentToken]);
            while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_COMMA)
            {
-            Expression(Tokens[currentToken]);
+            Expression_list_node.AddChild1(Tokens[currentToken]);
+            Expression(Tokens[currentToken++]);
+            
            }
            
         }
 
-        private void Statement(Token t) {  
-           if (t.id == (int)TOKENSPASCAL.T_IF) 
-            {
-                Console.WriteLine("got id");
-                Id(Tokens[currentToken++]);
-            }
-        }
+        
         private void term(Token t)
         {
              if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
@@ -236,16 +243,28 @@ namespace Eso_Lang
 
         private void Expression(Token t) 
         {  
+           children = Expression_list_node.Children;
+           for(int i = 0; i < values.Count; i++){
+            if (children[i]==t){
+              Expression_parent = children[i];
+            }
+           }
            if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
+                Expression_parent.AddChild1(t);
                 term(Tokens[currentToken]);
                 Simple_Expression(Tokens[currentToken++]);
+                Simple_expression_node=Expression_parent.AddChild(Tokens[currentToken]);
+
             }
             //handles variables
             else if(t.id == (int)TOKENSPASCAL.T_VAR)
             {
+                 Expression_parent.AddChild1(t);
                 if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
-                   Simple_Expression(Tokens[currentToken++])
+                   Expression_parent.AddChild1(Tokens[currentToken]);
+                   Simple_Expression(Tokens[currentToken++]);
+                   Expression_parent.AddChild1(Tokens[currentToken]);
                 }
                 else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
                    var check = Array.Exists(Tokens, t);
@@ -253,12 +272,18 @@ namespace Eso_Lang
                    {
                      Console.WriteLine("variable not defined");
                    }
+                   else{
+                    Expression_parent.AddChild1(Tokens[currentToken]);
+                   }
                 }
                 else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
                    var check = Array.Exists(Tokens, t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
+                   }
+                   else{
+                    Expression_parent.AddChild1(Tokens[currentToken]);
                    }
                 }
                 
@@ -274,25 +299,53 @@ namespace Eso_Lang
         if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
             {
                 term(Tokens[currentToken]);
+                Simple_expression_node.AddChild1(t);
+                Simple_Expression_P(Tokens[currentToken++]);
+
+            }
+        if(t.id == (int)TOKENSPASCAL.T_PLUS) 
+            {
+                term(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(t);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
+                Expression_P(Tokens[currentToken++]);
+            }
+        else if(t.id == (int)TOKENSPASCAL.T_MINUS)
+            {
+                term(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(t);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
             }
             //handling variables
         else if(t.id == (int)TOKENSPASCAL.T_VAR)
             {
+                Simple_expression_node.AddChild1(t);
                 if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
-                   Simple_Expression(Tokens[currentToken++])
-                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
-                   var check = Array.Exists(Tokens, t)
-                   if (check == false)
-                   {
-                     Console.WriteLine("variable not defined");
-                   }
+                   Simple_expression_node.AddChild1(t);
+                   Simple_Expression(Tokens[currentToken++]);
+                   Simple_expression_node.AddChild1(Tokens[currentToken]);
                 }
-                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
+                   Simple_expression_node.AddChild1(Tokens[currentToken]);
                    var check = Array.Exists(Tokens, t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
+                   }
+                   else{
+                     Simple_expression_node.AddChild1(Tokens[currentToken]);
+                   }
+                }
+                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
+                   Simple_expression_node.AddChild1(Tokens[currentToken]);
+                   var check = Array.Exists(Tokens, t);
+                   if (check == false)
+                   {
+                     Console.WriteLine("variable not defined");
+                   }
+                   else{
+                    Simple_expression_node.AddChild1(Tokens[currentToken]);
                    }
                 }
 
@@ -303,22 +356,28 @@ namespace Eso_Lang
        private void simple_expression_p(Token t){
         if(t.id == (int)TOKENSPASCAL.T_PLUS) 
             {
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 term(Tokens[currentToken++]);
                 Expression_P(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
             }
         else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 term(Tokens[currentToken++]);
                 Simple_Expression_P(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
             }
         //handles variables
         else if(t.id == (int)TOKENSPASCAL.T_VAR)
         {
+          Simple_expression_node.AddChild1(Tokens[currentToken]);
           var check = Array.Exists(Tokens, t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
-                   }  
+                   }
+          Simple_expression_node.AddChild1(Tokens[currentToken]); 
         }
         
        }
@@ -327,32 +386,47 @@ namespace Eso_Lang
         {  
            if(t.id == (int)TOKENSPASCAL.T_PLUS) 
             {
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 term(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
+
             }
           else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 term(Tokens[currentToken++]);
                 Simple_Expression_P(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
             }
           else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 term(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 Simple_Expression_P(Tokens[currentToken++]);
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
             }
           else if(t.id == (int)TOKENSPASCAL.T_VAR){
+                Simple_expression_node.AddChild1(Tokens[currentToken]);
                 if (Tokens[currentToken++] == (int)TOKENSPASCAL.T_ASSIGN) 
                 {
+                   Simple_expression_node.AddChild1(Tokens[currentToken]);
                    Expression(Tokens[currentToken++]);
+                   Simple_expression_node.AddChild1(Tokens[currentToken]);
                 }
                 else {
-                    Console.WriteLine("Error, assigning is incomplete")
+                    Console.WriteLine("Error, assigning is incomplete");
                 }
 
-          
+          }
+          else{
+
+          }
 
         }
-        private void factor_p(Token t){
+       private void factor_p(Token t){
             if(t.id == (int)TOKENSPASCAL.T_DIVIDE) 
             {
                 term(Tokens[currentToken++]);
@@ -377,73 +451,92 @@ namespace Eso_Lang
         private void statement(Token t){
             if(t.id == (int)TOKENSPASCAL.T_IF) 
             {
-                
+                IF_node = statement_node.AddChild(Tokens[currentToken]);
                 Expression(Tokens[currentToken++]);
+                Expression_node = statement_node.AddChild(Tokens[currentToken]);
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_THEN) 
                 {
-                   Expression(Tokens[currentToken++])
+                   THEN_node = statement_node.AddChild(Tokens[currentToken]);
+                   Expression(Tokens[currentToken++]);
+                   Expression_node = statement_node.AddChild(Tokens[currentToken]);
                 }
                 else{
-                    Console.WriteLine("Error, if statement is incomplete")
+                    Console.WriteLine("Error, if statement is incomplete");
                 }
 
             }
             else if(t.id == (int)TOKENSPASCAL.T_WHILE) 
             {
-                
+                WHILE_node = statement_node.AddChild(Tokens[currentToken]);
                 Expression(Tokens[currentToken++]);
+                Expression_node = statement_node.AddChild(Tokens[currentToken]);
+
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_DO) 
                 {
+                   Do_node = statement_node.AddChild(Tokens[currentToken]);
                    Expression(Tokens[currentToken++]);
                 }
                 else{
-                    Console.WriteLine("Error, while statement is incomplete")
+                    Console.WriteLine("Error, while statement is incomplete");
                 }
 
             }
             else if(t.id == (int)TOKENSPASCAL.T_BEGIN){
                 statement_list(Tokens[currentToken++]);
+                IF_node = statement_node.AddChild(Tokens[currentToken]);
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_DO) 
                 {
+                   
                    Expression(Tokens[currentToken++]);
+                   statement_node.AddChild1(Tokens[currentToken]);
                 }
-                else if((Tokens[currentToken++].id != (int)TOKENSPASCAL.T_SCOLON or Tokens[currentToken++] != (int)TOKENSPASCAL.T_END)){
-                    Console.WriteLine("Error, begin statement is incomplete")
+                else if((Tokens[currentToken++].id != (int)TOKENSPASCAL.T_SCOLON || Tokens[currentToken++] != (int)TOKENSPASCAL.T_END)){
+                    Console.WriteLine("Error, begin statement is incomplete");
                 }
             }
             else if(t.id == (int)TOKENSPASCAL.T_VAR){
+                 statement_node.AddChild1(Tokens[currentToken]);
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_ASSIGN) 
-                {
+                {   statement_node.AddChild1(Tokens[currentToken]);
                    Expression(Tokens[currentToken++]);
+                    statement_node.AddChild1(Tokens[currentToken]);
                 }
                 else {
-                    Console.WriteLine("Error, assigning is incomplete")
+                    Console.WriteLine("Error, assigning is incomplete");
                 }
             }
             else if(t.id == (int)TOKENSPASCAL.T_WRITE){
                 if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_LPAR) 
-                {
+                {  statement_node.AddChild1(Tokens[currentToken]);
                    write_parameter_list(Tokens[currentToken++]);
-                   if ((Tokens[currentToken++] != (int)TOKENSPASCAL.T_RPAR) or (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
-                      Console.WriteLine("Error, list incomplete") 
+                   Parameter_node = statement_node.AddChild(Tokens[currentToken]);
+                   if ((Tokens[currentToken++] != (int)TOKENSPASCAL.T_RPAR) || (Tokens[currentToken++] != (int)TOKENSPASCAL.SCOLON)){
+                      Console.WriteLine("Error, list incomplete");
                    }
+                   statement_node.AddChild(Tokens[currentToken]);
+                   statement_node.AddChild(Tokens[currentToken++]);
                 }
                 else {
-                    Console.WriteLine("Error, statement is incomplete")
+                    Console.WriteLine("Error, statement is incomplete");
                 }
             }
 
         }
-        private void parameter_list(Token t){
+        private void write_parameter_list(Token t){
          if (t.id == (int)TOKENSPASCAL.T_LPAR)
          {
+            Parameter_node.AddChild1(t);
             expression_list(Tokens[currentToken++]);
+            expression_list_node= Parameter_node.AddChild(t);
             if (Tokens[currentToken++].id != (int)TOKENSPASCAL.R_LPAR){
                Console.WriteLine("Error, list incomplete"); 
             }
+            else{
+                Parameter_node.AddChild1(t);
+            }
          }
+
         }
 
        
     }
-}
