@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Eso_Lang;
 
-namespace Eso_Lang
-{
+
     class Pascal_Parser
     {
-        int lookAhead = -1;
+
+
+        int lookAhead1;
         int currentToken = 0;
         int ret;
         List<Token> Tokens;
@@ -21,7 +23,7 @@ namespace Eso_Lang
         public int Parse()
         {
             currentToken = 0;
-            lookAhead = -1; // Initialise to non-existing token ID
+            lookAhead1 = -1; // Initialise to non-existing token ID
             int ret = 1;
             Console.Write("check the input\n");
             foreach(Token tok in this.Tokens){
@@ -36,14 +38,14 @@ namespace Eso_Lang
         public bool match(int token)
         {
             bool result;
-            if (lookAhead == -1)
+            if (lookAhead1 == -1)
             {
-                lookAhead = Tokens[currentToken].id;
+                lookAhead1 = Tokens[currentToken].id;
             }
 
-            result = (token == lookAhead);
+            result = (token == lookAhead1);
 
-            if ((token == lookAhead))
+            if ((token == lookAhead1))
             {
                 Console.WriteLine("Token[%d] =  %d matched", currentToken, token);
             }
@@ -57,8 +59,8 @@ namespace Eso_Lang
         //probably need to change how advance works
         public void advance(Token level)
         {
-            lookAhead = Tokens[++currentToken].id;
-            Console.WriteLine("advance() called at level %d with next token %d", level, lookAhead);
+            lookAhead1 = Tokens[++currentToken].id;
+            Console.WriteLine("advance() called at level %d with next token %d", level, lookAhead1);
         }
         private int Program(Token t) {
 
@@ -168,58 +170,63 @@ namespace Eso_Lang
                 Console.WriteLine("not a number");
             }
         }
-         private void Expression(Token t) 
-        {  
-           if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+        private void Expression(Token t)
+        {
+            if (t.id == (int)TOKENSPASCAL.T_DIGIT)
             {
                 term(Tokens[currentToken]);
                 Simple_Expression(Tokens[currentToken++]);
             }
             //handles variables
-            else if(t.id == (int)TOKENSPASCAL.T_VAR)
+            else if (t.id == (int)TOKENSPASCAL.T_VAR)
             {
-                if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
-                   Simple_Expression(Tokens[currentToken++])
-                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
-                   var check = Array.Exists(Tokens, t)
-                   if (check == false)
-                   {
-                     Console.WriteLine("variable not defined");
-                   }
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_ASSIGN)
+                {
+                    Simple_Expression(Tokens[currentToken++]);
                 }
-                 else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
-                   var check = Array.Exists(Tokens, t);
-                   if (check == false)
-                   {
-                     Console.WriteLine("variable not defined");
-                   }
+                else if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_PLUS)
+                {
+                    var check =Tokens.Contains(t);
+                    if (check == false)
+                    {
+                        Console.WriteLine("variable not defined");
+                    }
                 }
+                else if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_MINUS)
+                {
+                    var check =Tokens.Contains(t);
+                    
+                    if (check == false)
+                    {
+                        Console.WriteLine("variable not defined");
+                    }
                 }
             }
+
             else{
                 Console.WriteLine("not a number");
             }
         }
-      private void Simple_Expression(Token t){
-        if(t.id == (int)TOKENSPASCAL.T_DIGIT) 
+        private void Simple_Expression(Token t) {
+            if (t.id == (int)TOKENSPASCAL.T_DIGIT)
             {
                 term(Tokens[currentToken]);
-                Simple_Expression_P(Tokens[currentToken++]);
+            simple_expression_p(Tokens[currentToken++]);
             }
             //handling variables
-        else if(t.id == (int)TOKENSPASCAL.T_VAR)
+            else if(t.id == (int)TOKENSPASCAL.T_VAR)
             {
-                if (Tokens[currentToken++].id==(int)TOKENSPASCAL.T_Assign){
-                   Simple_Expression(Tokens[currentToken++])
-                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_PLUS){
-                   var check = Array.Exists(Tokens, t)
+                if (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_ASSIGN) {
+                    Simple_Expression(Tokens[currentToken++]);
+                } else if(Tokens[currentToken++].id==(int)TOKENSPASCAL.T_PLUS){
+                        var check =Tokens.Contains(t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
                    }
                 }
-                else if(Tokens[currentToken++]==(int)TOKENSPASCAL.T_MINUS){
-                   var check = Array.Exists(Tokens, t);
+                else if(Tokens[currentToken++].id==(int)TOKENSPASCAL.T_MINUS){
+                   var check =Tokens.Contains(t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
@@ -229,7 +236,7 @@ namespace Eso_Lang
                 }
             }
         
-       }
+       // removed a }
        private void simple_expression_p(Token t){
         if(t.id == (int)TOKENSPASCAL.T_PLUS) 
             {
@@ -239,12 +246,12 @@ namespace Eso_Lang
         else if(t.id == (int)TOKENSPASCAL.T_MINUS)
             {
                 term(Tokens[currentToken++]);
-                Simple_Expression_P(Tokens[currentToken++]);
+            simple_expression_p(Tokens[currentToken++]);
             }
         //handles variables
         else if(t.id == (int)TOKENSPASCAL.T_VAR)
         {
-          var check = Array.Exists(Tokens, t);
+          var check =Tokens.Contains(t);
                    if (check == false)
                    {
                      Console.WriteLine("variable not defined");
@@ -259,27 +266,27 @@ namespace Eso_Lang
             if(t.id == (int)TOKENSPASCAL.T_DIVIDE) 
             {
                 term(Tokens[currentToken++]);
-                factor_P(Tokens[currentToken++]);
+            factor_p(Tokens[currentToken++]);
             }
             else if(t.id == (int)TOKENSPASCAL.T_MULTIPLY) 
             {
                 term(Tokens[currentToken++]);
-                factor_P(Tokens[currentToken++]);
+            factor_p(Tokens[currentToken++]);
             }
             else if(t.id == (int)TOKENSPASCAL.T_INTDIV) 
             {
                 term(Tokens[currentToken++]);
-                factor_P(Tokens[currentToken++]);
+            factor_p(Tokens[currentToken++]);
             }
             else if(t.id == (int)TOKENSPASCAL.T_INTMOD) 
             {
                 term(Tokens[currentToken++]);
-                factor_P(Tokens[currentToken++]);
+            factor_p(Tokens[currentToken++]);
             }
         }
         
         
-          private void statement(Token t){
+        private void statement(Token t){
             if(t.id == (int)TOKENSPASCAL.T_IF) 
             {
                 
@@ -339,36 +346,37 @@ namespace Eso_Lang
             }
 
         }
-        
+
+    //not implmented
+    public void write_parameter_list(Token t) { }
+
+    private void Expression_P(Token t) { }
+
         private void Statement_list(Token t) { 
            statement(Tokens[currentToken]);
-           while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_SCOLON)
+           while (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_SCOLON)
            {
             statement(Tokens[currentToken]);
            }
-           
         }
         private void Expression_list(Token t) { 
            statement(Tokens[currentToken]);
-           while (Tokens[currentToken++].id == (int)TOKENPASCAL.T_COMMA)
+           while (Tokens[currentToken++].id == (int)TOKENSPASCAL.T_COMMA)
            {
             Expression(Tokens[currentToken]);
            }
-           
         }
         private void parameter_list(Token t){
          if (t.id == (int)TOKENSPASCAL.T_LPAR)
          {
-            expression_list(Tokens[currentToken++]);
-            if (Tokens[currentToken++].id != (int)TOKENSPASCAL.R_LPAR){
+            Expression_list(Tokens[currentToken++]);
+            if (Tokens[currentToken++].id != (int)TOKENSPASCAL.T_LPAR){
                Console.WriteLine("Error, list incomplete"); 
             }
          }
         }
-        
 
-        
 
 
     }
-}
+

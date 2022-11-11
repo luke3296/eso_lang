@@ -46,6 +46,8 @@ public enum TOKENSPASCAL
     T_NOTEQUAL = 39,
     T_WHILE = 40,
     T_DO = 41,
+    T_OR = 42,
+    T_AND = 43
 
 
 
