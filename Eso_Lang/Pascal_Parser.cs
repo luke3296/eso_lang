@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Eso_Lang;
 
 
-    class Pascal_Parser
+    class Pascal_Parser1
     {
 
 
@@ -15,7 +15,7 @@ using Eso_Lang;
         int ret;
         List<Token> Tokens;
 
-        public Pascal_Parser(List<Token> toks)
+        public Pascal_Parser1(List<Token> toks)
         {
             this.Tokens = toks;
         }
