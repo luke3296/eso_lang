@@ -159,7 +159,9 @@ namespace Eso_Lang
                     if (!foundAmatch) {
                         Console.WriteLine("looking for id in: " + fragment_str);
                         Console.WriteLine("identifier: " + fragment_str);
-                        tokens.Add(new Token((int)TOKENSPASCAL.T_IDENT, "identifier", "[a-zA-Z]+"));
+                        Token t = new Token((int)TOKENSPASCAL.T_IDENT, "identifier", "[a-zA-Z]+");
+                        t.stringval = fragment_str;
+                        tokens.Add(t);
                         fragment.Clear();
                     }
                     //Console.Write(fragment_str);

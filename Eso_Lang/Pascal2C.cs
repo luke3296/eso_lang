@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace Eso_Lang
 {
@@ -21,6 +22,7 @@ namespace Eso_Lang
         if (Tokens[0].id == (int)TOKENSPASCAL.T_PROGRAM)
         {
              this.fname = Tokens[1].stringval;
+                Console.WriteLine("filename "+ Tokens[1].stringval + " is " + Tokens[1].name);
         }
             int currentToken = 0;
             StringBuilder cstring = new StringBuilder();
@@ -244,6 +246,15 @@ namespace Eso_Lang
             return cstring.ToString();
         }
 
+        public void Write_file()
+        {
+            string path = Directory.GetCurrentDirectory();
+            string fname_ = "\\" + Tokens[1].stringval + ".c";
+            string c_source = generate();
+            using (StreamWriter writer = new StreamWriter(path + fname_))
+            {
+                writer.WriteLine(c_source);
+            }
+        }
     }
 }
-//program writealine(output); begin writeln('Hello World') end."

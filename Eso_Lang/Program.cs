@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.FSharp.Core;
 using Microsoft.FSharp.Collections;
 
+
 namespace Eso_Lang
 {
     class Program
@@ -86,18 +87,18 @@ namespace Eso_Lang
       
             string pascal_test_string = "program donothing; begin end.";
             string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
-            string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
-            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
+            //string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
+            //string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
 
             //string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10  20 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
             //passes and it shoudnt
             string eso_lang_test_string = " Meats Put with Goats ";
 
-            List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string);
+            //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
+            //List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string);
             List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
-            List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
-            List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
+            //List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
+            //List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
 
             List<int> pascal_ints = new List<int>();
             foreach (Token tok in pascal_tokens_2)
@@ -118,12 +119,12 @@ namespace Eso_Lang
             }
 
             Pascal2C p2c = new Pascal2C(pascal_tokens_2);
-            string c_source = p2c.generate();
-            Console.WriteLine(c_source);
+            //string c_source = p2c.generate();
+            p2c.Write_file();
 
             //from https://stackoverflow.com/questions/1469764/run-command-prompt-commands
             string strCmdText;
-            strCmdText = "/C copy /b Image1.jpg + Archive.rar Image2.jpg";
+            strCmdText = "cl ";
             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             /*
             Console.WriteLine("found matches: " + eso_tokens.Count);
