@@ -16,7 +16,7 @@ namespace Eso_Lang
         public TreeNode<Token> m { get; private set; }
         public Token token1 { get; private set; }
         public  Lexer lexer { get; private set; }
-        public  Pascal_Parser parser { get; private set; }
+        Pascal_Parser parser;//{ get; private set; }
 
         public Code_generator(){
         string output_string= "\n";
@@ -95,20 +95,27 @@ namespace Eso_Lang
       token1 = m.Data;
       create_file(token1.name);
       }
-    }
-   
-    public static void Main(){
-      string pascal_test_string = "program donothing; begin end.";
-      string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
-      string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
-      string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
-      lexer = new Lexer(tokensRegexPascal);
 
-      lexer.LexPascal(pascal_test_string);
-      parser= new Pascal_Parser(lexer.LexPascal(pascal_test_string));
+
+
+
+        //adding main here as it must be wwithin a class, renameing to Main 1 so that only 1 Main
+        //exsists call Code_generator.Main1 from Program.Main to call
+        public static void Main1()
+        {
+            string pascal_test_string = "program donothing; begin end.";
+            string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
+            string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
+            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
+
+            var lexer = new Lexer(tokensRegexPascal);
+
+            lexer.LexPascal(pascal_test_string);
+            var parser = new Pascal_Parser(lexer.LexPascal(pascal_test_string));
+
+        }
 
     }
-   
   }
 
 

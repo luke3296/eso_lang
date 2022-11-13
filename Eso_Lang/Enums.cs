@@ -47,9 +47,10 @@ public enum TOKENSPASCAL
     T_WHILE = 40,
     T_DO = 41,
     T_OR = 42,
-    T_AND = 43
-
-
+    T_AND = 43,
+    T_FOR = 44,
+    T_REPEAT = 45,
+    T_UNTIL = 46
 
 }
 
