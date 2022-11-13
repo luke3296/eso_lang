@@ -88,27 +88,21 @@ namespace Eso_Lang
                 } else if (c == ',') {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_COMMA, "COMMA", @"\,"));
                     currentChar++;
-                    //Console.WriteLine("got: " + c);
                 } else if (c == '\'') {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
                     currentChar++;
-                    //Console.WriteLine("got: " + c);
                 } else if (c == '+') {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_PLUS, "plus", @"\+"));
                     currentChar++;
-                    //Console.WriteLine("got: " + c);
                 }else if (c == '-')
                 {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_MINUS, "minus", @"-"));
                     currentChar++;
-                    //Console.WriteLine("got: " + c);
                 }else if (c == ' ') {
                     currentChar++;
-                    //Console.WriteLine("got whitespace ");
                 }else if (c == '.') {
                     currentChar++;
                     tokens.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
-                    //Console.WriteLine("got period ");
                 }
                 else if(Char.IsDigit(c)){
                         while (Char.IsDigit(c)){

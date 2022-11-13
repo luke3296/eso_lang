@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.FSharp.Core;
 using Microsoft.FSharp.Collections;
-
+using System.IO;
 
 namespace Eso_Lang
 {
@@ -120,12 +120,28 @@ namespace Eso_Lang
 
             Pascal2C p2c = new Pascal2C(pascal_tokens_2);
             //string c_source = p2c.generate();
-            p2c.Write_file();
+            string path = p2c.Write_file();
 
             //from https://stackoverflow.com/questions/1469764/run-command-prompt-commands
             string strCmdText;
-            strCmdText = "cl ";
-            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            
+            
+            string MVSC_dir = "\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\x64\\cl\"";
+            string gcc_dir = "C:\\cygwin64\\bin\\gcc.exe";
+            if (File.Exists(MVSC_dir))
+            {
+                
+                strCmdText = " cd "+ Directory.GetCurrentDirectory()+" ; "+MVSC_dir + " " + path;
+                Console.WriteLine("cmd string  " + strCmdText);
+                System.Diagnostics.Process.Start("CMD.exe", strCmdText);
+            }
+            else if (File.Exists(gcc_dir)) {
+                strCmdText = " cd " + Directory.GetCurrentDirectory() + " && " + gcc_dir +" "+ path;
+                Console.WriteLine("cmd string  " + strCmdText);
+                System.Diagnostics.Process.Start("cmd.exe", strCmdText);
+                //System.Diagnostics.Process.Start("cmd.exe", strCmdText);
+            }
+       
             /*
             Console.WriteLine("found matches: " + eso_tokens.Count);
 
@@ -150,6 +166,6 @@ namespace Eso_Lang
 
             Console.Read();
             */
-        }        
+        }
     }
 }

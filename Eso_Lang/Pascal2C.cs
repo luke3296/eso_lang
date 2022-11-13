@@ -246,7 +246,7 @@ namespace Eso_Lang
             return cstring.ToString();
         }
 
-        public void Write_file()
+        public string Write_file()
         {
             string path = Directory.GetCurrentDirectory();
             string fname_ = "\\" + Tokens[1].stringval + ".c";
@@ -255,6 +255,8 @@ namespace Eso_Lang
             {
                 writer.WriteLine(c_source);
             }
+            return (path + fname_);
         }
+        
     }
 }
