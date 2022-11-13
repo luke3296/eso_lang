@@ -100,21 +100,31 @@ namespace Eso_Lang
             List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
 
             List<int> pascal_ints = new List<int>();
-            foreach (Token tok in pascal_tokens_4)
+            foreach (Token tok in pascal_tokens_2)
             {
                 Console.Write(tok.name + " ");
                 pascal_ints.Add(tok.id);
             }
 
             Console.WriteLine("attempting to parse");
-            Pascal_Parser_test p1 = new Pascal_Parser_test(pascal_ints, pascal_tokens_4);
-            
+            Pascal_Parser_test p1 = new Pascal_Parser_test(pascal_ints, pascal_tokens_2);
+           
 
-           // Pascal_Parser p = new Pascal_Parser(pascal_tokens);
+
+            // Pascal_Parser p = new Pascal_Parser(pascal_tokens);
             int passed=p1.Parse();
             if (passed == 0) {
                 Console.WriteLine("parsed sucsessfully");
             }
+
+            Pascal2C p2c = new Pascal2C(pascal_tokens_2);
+            string c_source = p2c.generate();
+            Console.WriteLine(c_source);
+
+            //from https://stackoverflow.com/questions/1469764/run-command-prompt-commands
+            string strCmdText;
+            strCmdText = "/C copy /b Image1.jpg + Archive.rar Image2.jpg";
+            System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             /*
             Console.WriteLine("found matches: " + eso_tokens.Count);
 

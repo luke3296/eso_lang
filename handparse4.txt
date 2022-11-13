@@ -1,0 +1,59 @@
+Program identifier Block-Delimiter Begin IF LPAR number LESS-THAN number RPAR THEN write Line LPAR APOSTROPHE character String APOSTROPHE RPAR ElSE write Line LPAR APOSTROPHE character String APOSTROPHE RPAR Semi-Colon End Period
+
+
+program simpleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. = <Program>
+program simpleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. = program <id> ; <block> .
+simpleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. = <id> ; <block> .
+simpleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. = <letter> <id> ; <block> .
+simpleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. = s <id> ; <block> .
+impleIfElse ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =  <id> ; <block> .
+   .
+   .
+   .
+            ; begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =   ; <block> .
+              begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <block> .
+              begin  if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =    begin <statement_list> end .
+                    if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <statement_list> end .
+                    if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <statement> ; <statement_list>  end .
+                    if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <statement> ; <statement_list>  end .
+                    if( 10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     if ( <Expression> ) then <Statement> else <Statement> ; <statement_list>  end .
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <Expression> ) then <Statement> else <Statement> ; <statement_list>  end .
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <Simple_Expression> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <term> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <term> <factor> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .   | use term => emmpty
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <factor> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .  
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <Unsigned_Constant> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end . 
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <Unsigned_number> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end . 
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     <Unsinged_interger> <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end . 
+                        10 < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =     10  <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end . 
+                           < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =        <Simple_Expression'> <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .                | use <Simple_Expression'>  => emmpty
+                           < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                             <Expression'> ) then <Statement> else <Statement> ; <statement_list>  end .
+                            < 20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                             < <Simple_Expression> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                            20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                             <Simple_Expression> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end .
+                            20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                             <term> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                            20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                             <term> <factor> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                            20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   <factor> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                            20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   <Unsigned_Constant> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                             20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   <Unsigned_number> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end .
+                             20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   <Unsigned_interger> <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end .
+                             20 ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   20 <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end .  
+                               ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                    <Simple_Expression'> <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end .  
+                             ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                     <Expression'>  ) then <Statement> else <Statement> ; <statement_list>  end . 
+                               ) then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                     ) then <Statement> else <Statement> ; <statement_list>  end . 
+                                  then writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                      then <Statement> else <Statement> ; <statement_list>  end . 
+                                    writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                   <Statement> else <Statement> ; <statement_list>  end .
+                                writeln('a is less than 20' )  else writeln('an error occured' );  end. =                                  writeln ( <write_parameter_list> ) else <Statement> ; <statement_list>  end .      
+                                 ('a is less than 20' )  else writeln('an error occured' );  end. =                                   ( <write_parameter_list> ) else <Statement> ; <statement_list>  end . 
+                                 'a is less than 20' )  else writeln('an error occured' );  end. =                                  <Character_String>    ) else <Statement> ; <statement_list>  end . 
+                                   )  else writeln('an error occured' );  end. =                                   ) else <Statement> ; <statement_list>  end . 
+                                     else writeln('an error occured' );  end. =                                    else <Statement> ; <statement_list>  end . 
+                                      writeln('an error occured' );  end. =                                   <Statement> ; <statement_list>  end . 
+                                      writeln('an error occured' );  end. =                                   writeln ( <write_parameter_list> ) ; <statement_list>  end . 
+                                      ('an error occured' );  end. =                                   ( <write_parameter_list> ) ; <statement_list>  end . 
+                                       'an error occured' );  end. =                                    <write_parameter_list> ) ; <statement_list>  end . 
+                                       'an error occured' );  end. =                                    <Character_String>  ) ; <statement_list>  end . 
+                                                          );  end. =                                     ) ; <statement_list>  end . 
+                                                          ;  end. =                                    ; <statement_list>  end . 
+                                                             end. =                                     <statement_list>  end .                                                                                                     | use <statement_list> => empty
+                                                              end. =                                      end . 
+                                                                . =                                      . 

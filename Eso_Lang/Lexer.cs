@@ -234,7 +234,10 @@ namespace Eso_Lang
                                 }
                                 if (fragment.Count != 0)
                                 {
-                                    tokens.Add(new Token((int)TOKENSPASCAL.T_STRING, "character String", @"[a-zA-Z\s]"));
+                                    Token t = new Token((int)TOKENSPASCAL.T_STRING, "character String", @"[a-zA-Z\s]");
+                                     string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
+                                    t.stringval = string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
+                                    tokens.Add(t);
                                 }
 
 
