@@ -10,16 +10,17 @@ using System.IO;  // include the System.IO namespace
 namespace Eso_Lang
 {
     public class  Code_generator{
-    String output_string;
+    
     public static List<Token> tokenRegexsC;
 
         public TreeNode<Token> m { get; private set; }
         public Token token1 { get; private set; }
         public  Lexer lexer { get; private set; }
         Pascal_Parser parser;//{ get; private set; }
+        public  string output_string { get; private set; }
 
-        public Code_generator(){
-        string output_string= "\n";
+        public Code_generator(string pascal_test_string){
+        this.output_string= "";
         tokenRegexsC = new List<Token>();
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_PROGRAM, "Program", @"program"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
@@ -61,6 +62,10 @@ namespace Eso_Lang
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "Greater-Than-Operator", @">\s"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "Less-Than-Operator", @"<\s"));
+        this.lexer = new Lexer(tokensRegexPascal);
+        this.token1=new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s");
+        this.m = new TreeNode<Token>(token1);
+        this.parser = new Pascal_Parser(lexer.LexPascal(pascal_test_string));
        
 
     }
@@ -72,12 +77,16 @@ namespace Eso_Lang
     void convert_to_c(Token t){
       foreach(Token s in tokenRegexsC){
         if(t.id==s.id){
-         output_string = output_string+ " "  + s.stringval;
+         this.output_string = this.output_string + " "  + s.stringval;
       }
       }
     }
+    public string output(){
+     
+      return this.output_string;
+    }
     void write_to_file(){
-     File.WriteAllText("filename.txt", output_string); 
+     File.WriteAllText("filename.txt", this.output_string); 
     }
     void node_traversal(TreeNode<Token> node){
       foreach(TreeNode<Token> child in node.getChildren()){
@@ -117,5 +126,3 @@ namespace Eso_Lang
 
     }
   }
-
-
