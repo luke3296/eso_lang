@@ -1,0 +1,29 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="Pascal" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<Color name="Comment" foreground="Gray" />
+	<Color name="String" foreground="#d69d85" />
+	<Color name="Keyword" foreground="#569cd6" />
+	<Color name="Number" foreground="#b5cea8" />
+	<Color name="Type" foreground="#4ec9b0" />
+	
+	<RuleSet>
+		<Span color="Comment" multiline="false" begin="{" end="}" />
+		<Span color="String">
+			<Begin>'</Begin>
+			<End>'</End>
+			<RuleSet>
+				<Span begin="\\" end="." />
+			</RuleSet>
+		</Span>
+
+		<Keywords color="Keyword">
+			<Word>if</Word> <Word>IF</Word>
+			<Word>then</Word> <Word>THEN</Word>
+			<Word>else</Word> <Word>ELSE</Word>
+		</Keywords>
+
+		<Rule color="Number">
+			 \d+(\.[0-9]+)?
+		</Rule>
+	</RuleSet>
+</SyntaxDefinition>

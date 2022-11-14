@@ -1,0 +1,44 @@
+﻿<Window x:Class="blaise.EditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:blaise"
+        mc:Ignorable="d"
+        Title="Blaise" Height="685" Width="914" Background="#FFF9F9F9">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open..." Click="OpenFile" />
+                <MenuItem Header="Save" Click="SaveFile" />
+                <MenuItem Header="Save as..." Click="SaveFileAs" />
+                <Separator />
+                <MenuItem Header="Exit Blaise" Click="Exit" />
+            </MenuItem>
+            <MenuItem Header="Build">
+                <MenuItem Header="Build file" Click="Build" />
+                <MenuItem Header="Build and run" Click="BuildAndRun" />
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom" >
+            <StatusBarItem>
+                <Grid>
+                    <Image Source="/images/checkmark.png" HorizontalAlignment="Left" Width="16" />
+                    <TextBlock Name="lblCompilerStatus" Text="Compiler ready. Press Ctrl+R to run." Margin="21,0,-22,0" />
+                </Grid>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="lblBlaiseVersion" Text="Blaise v0.1" />
+            </StatusBarItem>
+        </StatusBar>
+        <GroupBox Header="Code editor" Margin="10,5,10,10">
+            <avalonEdit:TextEditor
+                    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    Name="codeEditor"
+                    FontFamily="Consolas"
+                    SyntaxHighlighting="Pascal"
+                    ShowLineNumbers="True"
+                    FontSize="10pt"/>
+        </GroupBox>
+    </DockPanel>
+</Window>
