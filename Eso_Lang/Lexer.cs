@@ -5,6 +5,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+/*
+ issues 
+identifier names that contain reserved words are matched as reserved words not identifiers
+ 
+ */
 namespace Eso_Lang
 {
     public class Lexer
@@ -12,17 +17,13 @@ namespace Eso_Lang
         const int MAX_LEN = 32;
         public int[] Tokens;
         public string[] Symbols;
-        char[] tmp;
         List<Token> tokenRegexs;
         public Lexer(List<Token> toks)
         {
             Tokens = new int[MAX_LEN];
             Symbols = new string[MAX_LEN];
-            tmp = new char[MAX_LEN];
-
             tokenRegexs = toks;
 
-            // any sting of letters and numbers starting with lowercase letter
 
         }
 
@@ -56,6 +57,7 @@ namespace Eso_Lang
             return tokens;
         }
 
+
         public List<Token> LexPascal(string source)
         {
             int lines = 0;
@@ -67,13 +69,17 @@ namespace Eso_Lang
             char c;
 
             while (!done){
+                //make sure we haven't gone out of bounds
                 if (currentChar < source.Length){ 
                     c = source[currentChar];
                 }else {
                     Console.WriteLine("reached end of string");
                     break;
                 }
+
                 Console.WriteLine("got char at start : " + c);
+
+                //match single character tokens 
                 if (c == '\n')
                 {
                     lines += 1;
@@ -104,6 +110,7 @@ namespace Eso_Lang
                     currentChar++;
                     tokens.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
                 }
+                //read a number 
                 else if(Char.IsDigit(c)){
                         while (Char.IsDigit(c)){
                             if (currentChar < source.Length){
@@ -114,15 +121,18 @@ namespace Eso_Lang
                                 break;
                             }
                         }
+                   //removes the last character from fragment as it will be a non digit
                     string fragment_str = string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
-
-                    tokens.Add(new Token((int)TOKENSPASCAL.T_NR, "number", @"\d+"));
+                    Token t = new Token((int)TOKENSPASCAL.T_NR, "number", @"\d+");
+                    t.intval = Int32.Parse(fragment_str);
+                    tokens.Add(t);
                         Console.Write(fragment_str);
                         fragment.Clear();
                     
                         //put the churernt character back to catch the non-digit 
                         currentChar--;
 
+                // if the token started with a letter, needs to match idenetifiers and reserved words
                 }else if (Char.IsLetter(c)){
                     while (Char.IsLetter(c)){
                         if (currentChar < source.Length){
@@ -138,6 +148,8 @@ namespace Eso_Lang
                     string fragment_str = string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
                     Console.WriteLine("looking for word in: " + fragment_str);
                     bool foundAmatch = false;
+                    //checks for a match in the token list provided in the constructor, if found then a reserved word was 
+                    // found, make a token for it
                     foreach (Token t in tokenRegexs){
                         var match = t.match_str(fragment_str);
                         foundAmatch = false;
@@ -146,10 +158,12 @@ namespace Eso_Lang
                             foundAmatch = true;
                             tokens.Add(new Token(t.id, t.name, t.tokenRE));
                             fragment.Clear();
+                            //break on the first matched reserved word
                             break;
                         }
                     }
                     
+                    //else the word wasn't reserved set it as an identifier
                     if (!foundAmatch) {
                         Console.WriteLine("looking for id in: " + fragment_str);
                         Console.WriteLine("identifier: " + fragment_str);
@@ -158,12 +172,10 @@ namespace Eso_Lang
                         tokens.Add(t);
                         fragment.Clear();
                     }
-                    //Console.Write(fragment_str);
-
-                    //fragment.Clear();
+                 
                     //put the churernt character back to catch the non-letter 
                     currentChar--;
-                    //break;
+                    //else collect blocks of symbols
                 }else if(!Char.IsDigit(c) & !Char.IsLetter(c) &!Char.IsWhiteSpace(c)){
                     while (!Char.IsDigit(c) & !Char.IsLetter(c)&!Char.IsWhiteSpace(c)){
                         if (currentChar < source.Length)
@@ -175,6 +187,7 @@ namespace Eso_Lang
                             break;
                         }
                     }
+                    //remove the last non-symbol
                     string fragment_str = string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
                     //string fragment_str =string.Join("", fragment);
 
