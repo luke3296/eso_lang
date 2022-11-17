@@ -24,6 +24,8 @@ namespace Eso_Lang
         // when calling tokens[currentToken] the tokens look up will be done at index 0 and
         // then the currentToken valuse passed will be incremneted
 
+
+        //returns 0 if the sequence of tokens is derivable from the LRpascal_bnf or 1 if it isn't
         int Program(int currentToken)
         {
             Console.WriteLine("Program() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
@@ -66,12 +68,13 @@ namespace Eso_Lang
             return 1;
         }
 
+        //prints the token given to it
         private int advance(int v)
         {
             Console.WriteLine("called advance with token " +  v);
             return v;
         }
-
+        //returns the next token index if the token passed to it was a T_IDENT
         int Id(int currentToken)
         {
             Console.WriteLine("Id() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
@@ -80,29 +83,35 @@ namespace Eso_Lang
                 currentToken = currentToken + 1;
                 //Console.WriteLine("Id()token was id incemeting token to" + currentToken);
             }
+            //should probably fail here, instead it returns the Token it got that wasnt a T_IDENT
             return currentToken;
+            
         }
 
+
+        //returns the next token index after a list of id's has been parsed e.g abc, mdjf, jwhr...
         private int Id_List(int currentToken)
         {
             Console.WriteLine("Id_List() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
             {
+                //id will do the incrememnt if currentToken was an id so no need to increment here
                 currentToken = Id(currentToken);
                 if (tokens[currentToken] == (int)TOKENSPASCAL.T_COMMA)
                 {
                     currentToken= Id_List(++currentToken);
                 }
                 else
-                {
-                    //there are no more id's in the list
-                    // Id(currentToken);
+                { 
+                    // at the end of the list
                 }
             }
+            //equvilent to | empty, returns the next Token after the Id_List
             return currentToken;
         }
 
+        //returns next token index ater the end token of a block. tokens up to end are pared to statement_list
         int Block(int currentToken)
         {
             Console.WriteLine("Block() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
@@ -113,14 +122,21 @@ namespace Eso_Lang
                 currentToken = Statement_List(++currentToken);
                 if (tokens[currentToken] == (int)TOKENSPASCAL.T_END)
                 {
+                    //should return here
                     currentToken = advance( ++currentToken);
+                    //return currentToken;
                 }
             }
             Console.WriteLine(" return from Block() Current token index " + currentToken + " , token id " + tokens[currentToken] + "  is " + Tokens[currentToken].name);
 
-            return currentToken;
+            //should error here
+           return currentToken;
         }
 
+
+        // token index parsed should be a statment token e.g: if, for, then, while, else, writeline mabey var and const assignments
+        // it parses the statement tokens paramaters to check then e.g If If shold see an LPAR EXPRESSION RPAR next, If WRITLINE should
+        // see a LPAR APOSTROPHE CHARACTER-STRING APOSTROPHE.. ||   LPAR T_NR || LPAR EXPRESSION 
         int Statement(int currentToken)
         {
             Console.WriteLine("Statement() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
@@ -220,6 +236,8 @@ namespace Eso_Lang
             return currentToken;
         }
 
+        // same as ID_list but for statments, input is the id of the first statement, output is the the next Token index after the
+        //final statment or ; 
         int  Statement_List(int currentToken)
         {
             Console.WriteLine("Statement_List() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
@@ -236,6 +254,7 @@ namespace Eso_Lang
             return currentToken;
         }
 
+        //changed from the bnf Term -> Factror
         int Term(int currentToken)
         {
             Console.WriteLine("Term() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
