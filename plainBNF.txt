@@ -22,34 +22,32 @@ step 2 other stuff
 	     |  <while-statement>
 	     |  <for-statement>
 
-<statments> ::= <statment> <statment>
+<statment_list> ::= <statment> <statments_list>
 
 
-<expression> ::=  <arithmetic-expression>
-	       |  <relational-expression>
+<expression> ::= <simple_expression>
+		|  <simple_expression> < <simple_expression>
+		|  <simple_expression> > <simple_expression>
+		|  <simple_expression> <= <simple_expression>
+		|  <simple_expression> >= <simple_expression>
+		|  <simple_expression> < <simple_expression> 
+		|  <simple_expression> in <simple_expression>
 
-
-<relational-expression> ::=  <varible> < <varible>
-			                     |  <varible> > <varible>
-			                     |  <varible> <= <varible>
-		                       |  <varible> >= <varible>
-			  								 	 |  <varible> == <varible>
-			  								 	 |  <varible> => <varible>
-			  								   |  <varible> =< <varible>
-			  								   |  <varible> !< <varible>
-			  								   |  <varible> <> <varible>
+	       
 
 
 <varible> ::= <charactecter> <string>
-						| <character> <int>
+	   | <character> <int>
+
+<var-block> ::=  var <var-declararion>
+<var-declaration> ::= <ident> <type> <>
+
+<assignment-statmen>  ::=   <varible> := <int>
+	                |   <varible> := <string>
 
 
-<assignment-statmen>  ::=   <varible> = <int>
-	                			|   <varible> = <string>
 
-
-
-<if-statement> ::= if( <relational-expression> ) { <statements> }
+<if-statement> ::= if( <expression> ) { <statement_list> }
 		 | }else if ( <relational-expression> ){ <statment> }
 		 | } else { <statments> }
 

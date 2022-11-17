@@ -32,7 +32,10 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"mod"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_VAR, "Modulous", @"var"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "Modulous", @"const"));
+            //versions of if
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if\s"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if"));
+
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_THEN, "THEN", @"then"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ELSE, "ElSE", @"else"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));

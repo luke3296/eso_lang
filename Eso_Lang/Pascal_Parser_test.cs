@@ -201,13 +201,11 @@ namespace Eso_Lang
 
                     }
                 }
-                else
+                else 
                 {
                     Console.WriteLine("did't find a lpar after if");
                 }
-            }
-
-            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_ELSE)
+            }else if (tokens[currentToken] == (int)TOKENSPASCAL.T_ELSE)
             {
                 // handle antoher statement
                 Console.WriteLine("Statement() foud a else after an if");
@@ -218,7 +216,7 @@ namespace Eso_Lang
                 // handle antoher statement
                 Console.WriteLine("Statement() foud a then after an if");
                 currentToken = currentToken + 1;
-            }
+            }// add while var const etc other statments 
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_END)
             {
                 Console.WriteLine("staement was empty not incrementing  and returning");
@@ -264,6 +262,7 @@ namespace Eso_Lang
             return currentToken;
         }
 
+        //should check if the current token is a unsignedConstant, Expression between () or a varible 
         int Factor(int currentToken) {
             Console.WriteLine("Factor() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
@@ -355,16 +354,20 @@ namespace Eso_Lang
                     currentToken = SimpleExpression_p(++currentToken);
                 }
                 else if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR)
-            {
+                {
                 //not incmrementing becuase Simeple_Expression_P doesnt handle numbers 
                 currentToken = Term(currentToken);
                 //currentToken = SimpleExpression_p(++currentToken);
-            }else
-            {
+                }else{
                     Console.WriteLine("no SimpleExpression returned w/o incremnting");
                 }
                 return currentToken;
             }
+
+        // should check if the current Token in a unsinged in, character-string or unsigned float
+        //we don't increment in UnsignedConstant because we only increment if A) we matched the currentToken with a terminal
+        //                                                B) we need to check the next token (increment it with advance vv) 
+        //                                                currentToken = advance(++currentToken);
         int UnsignedConstant(int currentToken) {
             Console.WriteLine("UnsignedConstant() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
@@ -378,6 +381,7 @@ namespace Eso_Lang
             }
             return currentToken;
         }
+        // if currentToken is an interger increment the currentToken and return, otherwise return the token that wasnt an int 
         int UnsignedInterger(int currentToken) {
             Console.WriteLine("UnsignedInterger() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             //increment because we're at the end of a chain
@@ -385,8 +389,10 @@ namespace Eso_Lang
             {
                 return ++currentToken;
             }
+            //should probably fail here
             return currentToken;
         }
+        //same as unsigned int
         int CharacterString(int currentToken) {
             Console.WriteLine("CharacterString() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {

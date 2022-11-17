@@ -1,0 +1,67 @@
+while epxresion do
+begin
+   sum := sum + number;
+   number := number - 2;
+end;
+
+
+while(expression){
+statments 
+}
+
+
+
+if epxresion then
+   staements
+
+else
+  statments 
+
+
+if ( expression ) {
+	staments 
+}else{
+	staments 
+}
+
+
+program simpleIfElse ; begin  \n if( 10 < 20 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' )
+
+
+genIF(Token[] tokens){
+// tokens = [ if ( a < 20 )]
+} 
+==> if(10 < 20)
+
+genWhile(Tokens tokens){
+// tokens = [while ( epxresion ) do]
+}
+string output ==> while(expression)
+
+genBlock{
+	get if array
+	gen if
+}
+
+
+
+if(boolean_expression 1)then 
+   S1 (* Executes when the boolean expression 1 is true *)
+
+else if( boolean_expression 2) then 
+   S2 (* Executes when the boolean expression 2 is true *)
+
+else if( boolean_expression 3) then 
+   S3 (* Executes when the boolean expression 3 is true *)
+
+else 
+   S4; ( * executes when the none of the above condition is true *)
+
+
+end
+
+
+if (expr) then 
+stanment
+stamenat_list
+end
