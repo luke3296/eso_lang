@@ -13,10 +13,8 @@ namespace Eso_Lang
     
        public static List<Token> tokenRegexsC;
 
+      
        
-        //public Token token1 { get; private set; }
-        public  Lexer lexer { get; private set; }
-        Pascal_Parser parser;//{ get; private set; }
         public  string output_string { get; private set; }
         
 
@@ -27,7 +25,7 @@ namespace Eso_Lang
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_BEGIN, "Begin", @"begin"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_END, "End", @"end"));
-           // tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
+        // tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\."));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_WRITELINE, "write Line", @"writeln"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentL", @"\(\*"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_COMMENT, "CommentR", @"\*\)"));

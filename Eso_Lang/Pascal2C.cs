@@ -144,7 +144,7 @@ namespace Eso_Lang
                         piece.Add(Tokens[currentToken]);
                         while (tokes[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
                         {
-                            /*
+                            
                             Console.WriteLine("genBlock() saw a "+ Tokens[currentToken].name+ " while parsing writeln");
                             if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
                             {
@@ -161,7 +161,7 @@ namespace Eso_Lang
                                 Console.WriteLine("added token" + Tokens[currentToken]);
                                 piece.Add(Tokens[currentToken]);
                             }
-                            */
+                            
                             Console.WriteLine("added token" + Tokens[currentToken].name);
 
 
@@ -172,7 +172,7 @@ namespace Eso_Lang
                         cstring.Append(genWriteLine(piece.ToArray()));
                         piece.Clear();
                         break;
-                        /*
+                        
                     case (int)TOKENSPASCAL.T_IF:
                         while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
                         {
@@ -202,7 +202,7 @@ namespace Eso_Lang
                         cstring.Append(genBlock(piece.ToArray()));
 
                         break;
-                        */
+                        
                     default:
                         break;
                 }
