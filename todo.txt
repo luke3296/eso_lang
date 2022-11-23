@@ -1,0 +1,8 @@
+need to remove the TokensRegexPascal and add them to the lexer
+need to do this to fix null ref execptoion in the test class that arises because\
+the list of TokenRegex is't generated untill Programs Main function is run which \
+won't happen when running the unit tests
+
+this means Lexer and Parser are specific
+
+also need to remove 

@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Eso_Lang
 {
-    class Pascal2C
+    public class Pascal2C
     {
         List<Token> Tokens;
         string fname;
@@ -100,7 +100,7 @@ namespace Eso_Lang
                         piece.Add(Tokens[currentToken]);
                         while (tokes[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
                         {
-                            
+                       
                             Console.WriteLine("genBlock() saw a "+ Tokens[currentToken].name+ " while parsing writeln");
                             if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
                             {

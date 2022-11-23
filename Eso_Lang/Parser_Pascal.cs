@@ -5,14 +5,20 @@ using System.Text;
 namespace Eso_Lang
 {
     
-    class Pascal_Parser_test
+    public class Parser_Pascal
     {
         List<int> tokens;
         List<Token> Tokens;
-        public Pascal_Parser_test(List<int> toks, List<Token> tokes)
+        public Parser_Pascal(List<Token> tokes)
         {
-            this.tokens = toks;
             this.Tokens = tokes;
+            List<int> pascal_ints = new List<int>();
+            foreach (Token tok in tokes)
+            {
+                pascal_ints.Add(tok.id);
+            }
+            this.tokens = pascal_ints;
+
         }
         public int Parse()
         {
