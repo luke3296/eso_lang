@@ -19,10 +19,11 @@ namespace blaise
     /// </summary>
     public partial class OutputWindow : Window
     {
-        public OutputWindow(String compilerOutput)
+        public OutputWindow(String compilerOutput, String transpiledCode)
         {
             InitializeComponent();
             compilerOutputEditor.Text = compilerOutput;
+            transpiledCodeEditor.Text = transpiledCode;
         }
     }
 }

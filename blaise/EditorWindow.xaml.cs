@@ -1,5 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using Eso_Lang;
+using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -78,17 +80,48 @@ namespace blaise
             else
             {
                 // saves the open file before compilation
-                SaveFile(null, null);
-                
-                // here, we'd run the Pascal -> C transpiler, and get the output as a string.
-                // currently we're just passing the open file to the C compiler (it can't handle .pas files,
-                // which is why I've disabled the open file filter)
+                if (currentFileName == null)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "Pascal source file (*.pas)|*.pas";
+                    if (sfd.ShowDialog() == true)
+                    {
+                        File.WriteAllText(sfd.FileName, codeEditor.Text);
+                        currentFileName = sfd.FileName;
+                        this.Title = "Blaise: " + currentFileName;
+                    } else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    File.WriteAllText(currentFileName, codeEditor.Text);
+                }
 
+                // run the Pascal -> C transpiler, returns the C code as a string
+                Lexer_Pascal lexer = new Lexer_Pascal();
+                List<Token> tokens = lexer.LexPascal(codeEditor.Text);
+                Parser_Pascal parser = new Parser_Pascal(tokens);
+                if (parser.Parse() == 1) 
+                {
+                    MessageBox.Show("Syntax error!");
+                    return;
+                }
+
+                Pascal2C transpiler = new Pascal2C(tokens);
+                String transpiledCode = transpiler.generate();
+
+                MessageBox.Show(transpiledCode);
+
+                String outputDirectory = Path.GetDirectoryName(currentFileName);
                 String outputFileName = Path.GetFileNameWithoutExtension(currentFileName);
+
+                File.WriteAllText($"{outputDirectory}\\{outputFileName}.c", transpiledCode);
 
                 Process p = new Process();
                 p.StartInfo.FileName = blaise.Properties.Settings.Default.Compiler;
-                p.StartInfo.Arguments = $"{currentFileName} -Wall -g -o {Directory.GetCurrentDirectory()}\\{outputFileName}.exe";
+                p.StartInfo.Arguments = $"{outputDirectory}\\{outputFileName}.c -Wall -g -o {outputDirectory}\\{outputFileName}.exe";
                 p.StartInfo.CreateNoWindow = true;
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.RedirectStandardOutput = true;
@@ -111,7 +144,7 @@ namespace blaise
                 p.WaitForExit();
                 p.CancelOutputRead();
 
-                OutputWindow ow = new OutputWindow(compilerOutput);
+                OutputWindow ow = new OutputWindow(compilerOutput, transpiledCode);
                 ow.Show();
             }
         }

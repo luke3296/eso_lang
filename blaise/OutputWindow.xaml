@@ -19,7 +19,14 @@
                     />
             </TabItem>
             <TabItem Header="Transpiled C code">
-                <Label>Here you can view the transpiled C that the compiler outputs, which is then turned into the executable.</Label>
+                <avalonEdit:TextEditor
+                    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    Name="transpiledCodeEditor"
+                    FontFamily="Consolas"
+                    ShowLineNumbers="True"
+                    FontSize="10pt"
+                    IsReadOnly="True"
+                    />
             </TabItem>
         </TabControl>
     </Grid>
