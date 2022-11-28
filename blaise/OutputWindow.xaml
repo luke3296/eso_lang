@@ -9,7 +9,14 @@
     <Grid>
         <TabControl>
             <TabItem Header="Compiler output">
-                <Label>Here we'll show the output of the compiler, any errors, warnings etc</Label>
+                <avalonEdit:TextEditor
+                    xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    Name="compilerOutputEditor"
+                    FontFamily="Consolas"
+                    ShowLineNumbers="True"
+                    FontSize="10pt"
+                    IsReadOnly="True"
+                    />
             </TabItem>
             <TabItem Header="Transpiled C code">
                 <Label>Here you can view the transpiled C that the compiler outputs, which is then turned into the executable.</Label>

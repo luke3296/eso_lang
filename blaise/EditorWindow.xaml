@@ -16,8 +16,9 @@
                 <MenuItem Header="Exit Blaise" Click="Exit" />
             </MenuItem>
             <MenuItem Header="Build">
-                <MenuItem Header="Build file" Click="Build" />
                 <MenuItem Header="Build and run" Click="BuildAndRun" />
+                <Separator />
+                <MenuItem Header="Select C compiler..." Click="SelectCompiler" />
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" >

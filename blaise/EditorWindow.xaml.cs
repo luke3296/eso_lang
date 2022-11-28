@@ -1,19 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace blaise
 {
@@ -33,7 +22,7 @@ namespace blaise
         private void OpenFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Pascal source file (*.pas)|*.pas";
+            //ofd.Filter = "Pascal source file (*.pas)|*.pas";
             if(ofd.ShowDialog() == true)
             {
                 codeEditor.Text = File.ReadAllText(ofd.FileName);
@@ -79,15 +68,70 @@ namespace blaise
 
         private void Build(object sender, RoutedEventArgs e)
         {
-            // no-op
+            if (blaise.Properties.Settings.Default.Compiler == null || !File.Exists(blaise.Properties.Settings.Default.Compiler))
+            {
+                // no compiler selected, cancel execution and show compiler window
+                MessageBox.Show("Either no C compiler has been set, or it can't be found. Ensure a working compiler has been set up and select the path to the executable before execution.");
+                SelectCompilerWindow scw = new SelectCompilerWindow();
+                scw.Show();
+            }
+            else
+            {
+                // saves the open file before compilation
+                SaveFile(null, null);
+                
+                // here, we'd run the Pascal -> C transpiler, and get the output as a string.
+                // currently we're just passing the open file to the C compiler (it can't handle .pas files,
+                // which is why I've disabled the open file filter)
+
+                String outputFileName = Path.GetFileNameWithoutExtension(currentFileName);
+
+                Process p = new Process();
+                p.StartInfo.FileName = blaise.Properties.Settings.Default.Compiler;
+                p.StartInfo.Arguments = $"{currentFileName} -Wall -g -o {Directory.GetCurrentDirectory()}\\{outputFileName}.exe";
+                p.StartInfo.CreateNoWindow = true;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.EnableRaisingEvents = true;
+
+                String compilerOutput = "";
+
+                p.OutputDataReceived += (sender, args) =>
+                {
+                    compilerOutput += args.Data;
+                    Debug.Print(args.Data);
+                };
+                p.ErrorDataReceived += (sender, args) =>
+                {
+                    compilerOutput += args.Data;
+                    Debug.Print(args.Data);
+                };
+                p.Start();
+                p.BeginOutputReadLine();
+                p.WaitForExit();
+                p.CancelOutputRead();
+
+                OutputWindow ow = new OutputWindow(compilerOutput);
+                ow.Show();
+            }
         }
 
         private void BuildAndRun(object sender, RoutedEventArgs e)
         {
-            // simulated - shows the output window and echoes something to a new command line window
-            OutputWindow ow = new OutputWindow();
-            ow.Show();
-            System.Diagnostics.Process.Start("cmd.exe", "/K echo /b \"This is where the compiled C program would execute and show the output.\"");
+            // First build the app
+            Build(null, null);
+        }
+
+        /*
+         * Allows the user to set the path of a valid C compiler
+         * Currently we don't check to see if the provided binary is a valid C compiler,
+         * but we do make sure it is an executable.
+         * Chosen binary is persisted in the app's settings.
+         */
+        private void SelectCompiler(object sender, RoutedEventArgs e)
+        {
+            SelectCompilerWindow scw = new SelectCompilerWindow();
+            scw.Show();
         }
     }
 }
