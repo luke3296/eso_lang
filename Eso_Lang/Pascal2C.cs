@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Eso_Lang
 {
-    class Pascal2C
+    public class Pascal2C
     {
         List<Token> Tokens;
         string fname;
@@ -71,6 +71,137 @@ namespace Eso_Lang
            
             return cstring.ToString(); 
         }
+       
+
+        //pass the tokens begin .. here .. end 
+        string genBlock(Token[] tokes)
+        {
+            List<Token> piece = new List<Token>();
+            StringBuilder cstring = new StringBuilder("{");
+           
+            bool flag = false;
+            int currentToken = 0;
+            int i = 0;
+            foreach (Token t in tokes ) {
+                Console.WriteLine("BLOCK " + t.name);
+            }
+            while (currentToken < tokes.Length)
+            {
+                switch (tokes[currentToken].id)
+                {
+                    case (int)TOKENSPASCAL.T_ASSIGN:
+                        cstring.Append(tokes[i].intval);
+                        break;
+                    case (int)TOKENSPASCAL.T_SCOLON:
+                        cstring.Append(";");
+                        break;
+                    case (int)TOKENSPASCAL.T_WRITELINE:
+                        this.includeSTDIO = true;
+                        piece.Add(Tokens[currentToken]);
+                        while (tokes[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
+                        {
+                       
+                            Console.WriteLine("genBlock() saw a "+ Tokens[currentToken].name+ " while parsing writeln");
+                            if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
+                            {
+                                flag = true;
+                               // currentToken++;
+                            }
+                            if (flag)
+                            {
+                                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
+                                {
+                                    flag = false;
+                                    piece.Clear();
+                                }
+                                Console.WriteLine("added token" + Tokens[currentToken]);
+                                piece.Add(Tokens[currentToken]);
+                            }
+                            
+                            Console.WriteLine("added token" + Tokens[currentToken].name);
+
+
+                            piece.Add(tokes[currentToken]);
+                            currentToken++;
+                        }
+                        Console.WriteLine(piece.ToArray().Length);
+                        cstring.Append(genWriteLine(piece.ToArray()));
+                        piece.Clear();
+                        break;
+                        
+                    case (int)TOKENSPASCAL.T_IF:
+                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
+                        {
+                            piece.Add(Tokens[currentToken]);
+                            currentToken++;
+                        }
+                        cstring.Append(genIf(piece.ToArray()));
+                        piece.Clear();
+
+                        break;
+                    case (int)TOKENSPASCAL.T_THEN:
+                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_ELSE)
+                        {
+                            piece.Add(Tokens[currentToken]);
+                            currentToken++;
+                        }
+                        currentToken--;
+                        cstring.Append(genBlock(piece.ToArray()));
+                            break;
+                    case (int)TOKENSPASCAL.T_ELSE:
+                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_END || Tokens[currentToken].id != (int)TOKENSPASCAL.T_SCOLON)
+                        {
+                            piece.Add(Tokens[currentToken]);
+                            currentToken++;
+                        }
+                        currentToken--;
+                        cstring.Append(genBlock(piece.ToArray()));
+
+                        break;
+                        
+                    default:
+                        break;
+                }
+                //i++;
+                if (currentToken < tokes.Length)
+                {
+                    currentToken++;
+                }
+            }
+            cstring.Append("}");
+            return cstring.ToString();
+        }
+
+        string genWriteLine(Token[] tokes)
+        {
+            foreach (Token t in tokes) {
+                Console.WriteLine("genWriteLine() " + t.name);
+            }
+            Console.WriteLine("genWriteLine() " +tokes.Length);
+            StringBuilder cstring = new StringBuilder("printf(");
+            foreach (Token t in tokes)
+            {
+                switch (t.id)
+                {
+                    case (int)TOKENSPASCAL.T_STRING:
+                        cstring.Append('\"');
+                        cstring.Append(t.stringval);
+                        cstring.Append('\"');
+                        break;
+                    case (int)TOKENSPASCAL.T_NR:
+                        cstring.Append(t.intval);
+                        break;
+                    case (int)TOKENSPASCAL.T_PLUS:
+                        cstring.Append("+");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            cstring.Append(");");
+            return cstring.ToString();
+        }
+
         string genIf(Token[] tokes)
         {
             StringBuilder cstring = new StringBuilder("if(");
@@ -114,135 +245,6 @@ namespace Eso_Lang
                 }
             }
             cstring.Append(")");
-            return cstring.ToString();
-        }
-
-        //pass the tokens begin .. here .. end 
-        string genBlock(Token[] tokes)
-        {
-            List<Token> piece = new List<Token>();
-            StringBuilder cstring = new StringBuilder("{");
-           
-            bool flag = false;
-            int currentToken = 0;
-            int i = 0;
-            foreach (Token t in tokes ) {
-                Console.WriteLine("BLOCK " + t.name);
-            }
-            while (currentToken < tokes.Length)
-            {
-                switch (tokes[currentToken].id)
-                {
-                    case (int)TOKENSPASCAL.T_ASSIGN:
-                        cstring.Append(tokes[i].intval);
-                        break;
-                    case (int)TOKENSPASCAL.T_SCOLON:
-                        cstring.Append(";");
-                        break;
-                    case (int)TOKENSPASCAL.T_WRITELINE:
-                        this.includeSTDIO = true;
-                        piece.Add(Tokens[currentToken]);
-                        while (tokes[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
-                        {
-                            /*
-                            Console.WriteLine("genBlock() saw a "+ Tokens[currentToken].name+ " while parsing writeln");
-                            if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
-                            {
-                                flag = true;
-                               // currentToken++;
-                            }
-                            if (flag)
-                            {
-                                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_APOSTROPHE)
-                                {
-                                    flag = false;
-                                    piece.Clear();
-                                }
-                                Console.WriteLine("added token" + Tokens[currentToken]);
-                                piece.Add(Tokens[currentToken]);
-                            }
-                            */
-                            Console.WriteLine("added token" + Tokens[currentToken].name);
-
-
-                            piece.Add(tokes[currentToken]);
-                            currentToken++;
-                        }
-                        Console.WriteLine(piece.ToArray().Length);
-                        cstring.Append(genWriteLine(piece.ToArray()));
-                        piece.Clear();
-                        break;
-                        /*
-                    case (int)TOKENSPASCAL.T_IF:
-                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_RPAR)
-                        {
-                            piece.Add(Tokens[currentToken]);
-                            currentToken++;
-                        }
-                        cstring.Append(genIf(piece.ToArray()));
-                        piece.Clear();
-
-                        break;
-                    case (int)TOKENSPASCAL.T_THEN:
-                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_ELSE)
-                        {
-                            piece.Add(Tokens[currentToken]);
-                            currentToken++;
-                        }
-                        currentToken--;
-                        cstring.Append(genBlock(piece.ToArray()));
-                            break;
-                    case (int)TOKENSPASCAL.T_ELSE:
-                        while (Tokens[currentToken].id != (int)TOKENSPASCAL.T_END || Tokens[currentToken].id != (int)TOKENSPASCAL.T_SCOLON)
-                        {
-                            piece.Add(Tokens[currentToken]);
-                            currentToken++;
-                        }
-                        currentToken--;
-                        cstring.Append(genBlock(piece.ToArray()));
-
-                        break;
-                        */
-                    default:
-                        break;
-                }
-                //i++;
-                if (currentToken < tokes.Length)
-                {
-                    currentToken++;
-                }
-            }
-            cstring.Append("}");
-            return cstring.ToString();
-        }
-
-        string genWriteLine(Token[] tokes)
-        {
-            foreach (Token t in tokes) {
-                Console.WriteLine("genWriteLine() " + t.name);
-            }
-            Console.WriteLine("genWriteLine() " +tokes.Length);
-            StringBuilder cstring = new StringBuilder("printf(");
-            foreach (Token t in tokes)
-            {
-                switch (t.id)
-                {
-                    case (int)TOKENSPASCAL.T_STRING:
-                        cstring.Append('\"');
-                        cstring.Append(t.stringval);
-                        cstring.Append('\"');
-                        break;
-                    case (int)TOKENSPASCAL.T_NR:
-                        cstring.Append(t.intval);
-                        break;
-                    case (int)TOKENSPASCAL.T_PLUS:
-                        cstring.Append("+");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            cstring.Append(");");
             return cstring.ToString();
         }
 

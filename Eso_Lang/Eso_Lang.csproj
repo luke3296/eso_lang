@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="final_code_generator.cs" />
+    <Compile Remove="final_parser.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="final_code_generator.cs" />
+    <None Include="final_parser.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FSharpLib\FSharpLib.fsproj" />
   </ItemGroup>
 

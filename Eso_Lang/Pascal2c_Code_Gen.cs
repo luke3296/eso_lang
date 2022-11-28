@@ -15,7 +15,7 @@ namespace Eso_Lang
 
         public TreeNode<Token> m { get; private set; }
         public Token token1 { get; private set; }
-        public  Lexer lexer { get; private set; }
+        public  Lexer_Pascal lexer { get; private set; }
         Pascal_Parser parser;//{ get; private set; }
         public  string output_string { get; private set; }
 
@@ -62,7 +62,7 @@ namespace Eso_Lang
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_GTHAN, "Greater-Than-Operator", @">\s"));
         tokenRegexsC.Add(new Token((int)TOKENSPASCAL.T_LTHAN, "Less-Than-Operator", @"<\s"));
-        this.lexer = new Lexer(tokensRegexPascal);
+        this.lexer = new Lexer_Pascal();
         this.token1=new Token((int)TOKENSPASCAL.T_ASSIGN, "Assignment-Operator", @"=\s");
         this.m = new TreeNode<Token>(token1);
         this.parser = new Pascal_Parser(lexer.LexPascal(pascal_test_string));
@@ -117,7 +117,7 @@ namespace Eso_Lang
             string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
             string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
 
-            var lexer = new Lexer(tokensRegexPascal);
+            var lexer = new Lexer_Pascal();
 
             lexer.LexPascal(pascal_test_string);
             var parser = new Pascal_Parser(lexer.LexPascal(pascal_test_string));

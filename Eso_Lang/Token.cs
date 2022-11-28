@@ -110,6 +110,12 @@ namespace Eso_Lang
             }
         }
 
-    }
+        //for the testing to work we must define what is means for two token instances to be equal
+        public override bool Equals(object obj)
+        {
+            var tok = obj as Token;
+            return tok.id == this.id;
+        }
 
+    }
 }
