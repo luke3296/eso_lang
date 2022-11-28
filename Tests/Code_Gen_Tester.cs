@@ -37,7 +37,44 @@ namespace Tests
             Assert.AreEqual(exprectedRes, actual);
 
         }
+        
+        public void testWriteLineOutput(){
 
+            string exprectedRes = "#include \"stdio.h\"\nvoid main(){printf('Hello World')}";
+            List<Token> Tokens= new List<Token>();
+
+            Token t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15;
+            t1 = new Token((int)TOKENSPASCAL.T_PROGRAM, "Program", @"^program$");
+            t2 = new Token((int)TOKENSPASCAL.T_IDENT, "identifier", "[a-zA-Z]+");
+            t3 = new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\(");
+            t4 = new Token((int)TOKENSPASCAL.T_VAR, "Modulous", @"^var$");
+            t5 = new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)");
+            t6 = new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimeter", @";")
+            t7 = new Token((int)TOKENSPASCAL.T_BEGIN, "Begin", @"^begin$");
+            t8 = new Token((int)TOKENSPASCAL.T_WRITELINE, "write line", @"^writeln$");
+            t9 = new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\(");
+            t10 = new Token((int)TOKENSPASCAL.T_APOSTROPHE, "Apostrophe", @"\'");
+            t11 = new Token((int)TOKENSPASCAL.T_STRING, "character String", @"[a-zA-Z\s]");
+            t12 = new Token((int)TOKENSPASCAL.T_APOSTROPHE, "Apostrophe", @"\'");
+            t13 = new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)");
+            t14 = new Token((int)TOKENSPASCAL.T_END, "End", @"^end$");
+            t15 = new Token((int)TOKENSPASCAL.T_PERIOD, "Period", @"\.");
+            Tokens.Add(t1);
+            Tokens.Add(t2);
+            Tokens.Add(t3);
+            Tokens.Add(t4);
+            Tokens.Add(t5);
+            Tokens.Add(t6);
+            Tokens.Add(t7);
+            Tokens.Add(t8);
+            Tokens.Add(t9);
+            Tokens.Add(t10);
+            Tokens.Add(t11);
+            Tokens.Add(t12);
+            Tokens.Add(t13);
+            Tokens.Add(t14);
+            Tokens.Add(t15);
+        }
         //add more methods like above for:
         //string pascal_test_string = "program donothing; begin end.";
         //string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
