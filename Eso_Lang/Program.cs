@@ -46,7 +46,7 @@ namespace Eso_Lang
             string pascal_test_string_2 = "program writealine(output); begin writeln('Hello World') end.";
             string pascal_test_string_3 = "program writeManyLines(output); \n begin  writeln('abc'); \n writeln('def'); \n end.";
             string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
-
+            string t4 = "program test; begin if( 10 > 20 ) then writeline(\"oof\") end .";
             //string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10  20 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
             //passes and it shoudnt
             string pascal_test_string_5 = "program simpleifelse;begin\nif(10+10-10)then\nwriteln('a is less than 20' )\nelsewriteln('an error occured' );\nend.";
@@ -54,26 +54,25 @@ namespace Eso_Lang
             string eso_lang_test_string = " Meats Put with Goats ";
 
             //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string);
-            List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string);
-            List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
-            List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
+            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(t4);
+            //List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string);
+            //List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
+            //List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
 
            
 
             Console.WriteLine("attempting to parse");
-            Parser_Pascal p1 = new Parser_Pascal(pascal_tokens_2);
+            Parser_Pascal p1 = new Parser_Pascal(pascal_tokens_1);
             //Pascal_parser_with_tree ppwt = new Pascal_parser_with_tree(pascal_tokens_2);
 
 
 
-             Pascal_Parser p = new Pascal_Parser(pascal_tokens_1);
             int passed=p1.Parse();
             if (passed == 0) {
                 Console.WriteLine("parsed sucsessfully");
             }
 
-            Pascal2C p2c = new Pascal2C(pascal_tokens_2);
+            Pascal2C p2c = new Pascal2C(pascal_tokens_1);
             string c_source = p2c.generate();
             string path = p2c.Write_file();
 

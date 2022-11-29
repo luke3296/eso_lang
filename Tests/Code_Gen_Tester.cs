@@ -40,6 +40,7 @@ namespace Tests
         }
 
         //string pascal_test_string_2 = "program writealine; begin writeln('Hello World') end.";
+        [TestMethod]
         public void testWriteLineOutput()
         {
 
