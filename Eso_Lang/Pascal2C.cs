@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+/*
+ issues :
+the stdio.h is inserted even when theres no writeline
+ */
 namespace Eso_Lang
 {
     public class Pascal2C

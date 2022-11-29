@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 /*
  issues 
-identifier names that contain reserved words are matched as reserved words not identifiers
+identifier names that contain reserved words are matched as reserved words not identifiers : fixed make regex's account for start of string and end of string 
  
  */
 namespace Eso_Lang

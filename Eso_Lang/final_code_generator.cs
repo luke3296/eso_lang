@@ -101,9 +101,6 @@ namespace Eso_Lang
       }
     }
 
-
-
-
         //adding main here as it must be wwithin a class, renameing to Main 1 so that only 1 Main
         //exsists call Code_generator.Main1 from Program.Main to call
        
