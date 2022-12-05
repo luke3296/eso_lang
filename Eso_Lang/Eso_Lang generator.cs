@@ -31,7 +31,7 @@ namespace Eso_Lang2 {
         String[] result = str.Split(delimiter);
         for (int i = 0; i < result.Length; i++) {
             
-            if (result[i]=="Put"){
+           if (result[i]=="Put"){
               Output_String= Output_String+ Match_numbers(result[i+1]);
                if (result[i+2]=="with"){
                   
