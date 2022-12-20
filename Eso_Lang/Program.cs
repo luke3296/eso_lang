@@ -15,7 +15,7 @@ namespace Eso_Lang
 
         public static void Main(string[] args)
         {
-
+            
 
 
             tokenRegexsEso = new List<Token>();
@@ -54,18 +54,10 @@ namespace Eso_Lang
             //string eso_lang_test_string = " Meats Put with Goats ";
 
             //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-<<<<<<< Updated upstream
             List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(t4);
             //List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string);
             //List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
             //List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
-=======
-            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string_4);
-           // List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
-            //List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
-            //List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
-
->>>>>>> Stashed changes
 
            
 
@@ -73,25 +65,14 @@ namespace Eso_Lang
             Parser_Pascal p1 = new Parser_Pascal(pascal_tokens_1);
             //Pascal_parser_with_tree ppwt = new Pascal_parser_with_tree(pascal_tokens_2);
 
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
             int passed=p1.Parse();
             if (passed == 0) {
                 Console.WriteLine("parsed sucsessfully");
             }
 
-<<<<<<< Updated upstream
             Pascal2C p2c = new Pascal2C(pascal_tokens_1);
             string c_source = p2c.generate();
             string path = p2c.Write_file();
-=======
-            //Pascal2C p2c = new Pascal2C(pascal_tokens_1);
-            //string c_source = p2c.generate();
-            //string path = p2c.Write_file();
->>>>>>> Stashed changes
 
             //from https://stackoverflow.com/questions/1469764/run-command-prompt-commands
             //string strCmdText;
