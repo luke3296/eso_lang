@@ -1,0 +1,26 @@
+program writealine ; begin writeln('Hello World') end.
+
+program test ; begin if( 10 > 20 ) then writeln('oof') end .
+
+program writeManyLines ; 
+begin 
+writeln('abc'); 
+writeln('def'); 
+end.
+
+
+
+program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.
+
+
+program assign ; 
+var 
+firstint : integer ; 
+str : string ; 
+begin  
+if( 10 + 10 - 10 ) then 
+writeln('a is less than 20' ); 
+firstint := 0 ; 
+else writeln('an error occured' ); 
+str := 'a string' ; 
+end.

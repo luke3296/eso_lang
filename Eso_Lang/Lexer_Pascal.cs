@@ -38,8 +38,13 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LTHANEQ, "Less-or-Equal-Operator", @"\<="));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "Integer-Division", @"^div$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"^mod$"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_VAR, "Modulous", @"^var$"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "Modulous", @"^const$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_VAR, "VarBlock", @"^var$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "ConstBlock", @"^const$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "Int type", @"^integer$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "string type", @"^string$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_TRUE, "true bool type", @"^true$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FALSE, "false bool type", @"^false$"));
+
             //versions of if
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"^if$"));
             // tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_IF, "IF", @"if"));
@@ -47,8 +52,8 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_THEN, "THEN", @"^then$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_ELSE, "ElSE", @"^else$"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FOR, "FOR", @"for"));
-            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"while"));
-            //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"do"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_WHILE, "WHILE", @"^while$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_DO, "DO", @"^do$"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_REPEAT, "REPEAT", @"repeat"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_UNTIL, "UNTIL", @"until"));
             //tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
@@ -334,6 +339,9 @@ namespace Eso_Lang
                                 break;
                             case "+":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_PLUS, "plus", @"\+"));
+                                break;
+                            case ":=":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "assign", @":="));
                                 break;
                             default:
                                 Console.WriteLine("can't match " + fragment_str);

@@ -50,8 +50,11 @@ public enum TOKENSPASCAL
     T_AND = 43,
     T_FOR = 44,
     T_REPEAT = 45,
-    T_UNTIL = 46
-
+    T_UNTIL = 46,
+    T_BOOL_TYPE = 47,
+    T_INT_TYPE = 50,
+    T_TRUE = 51,
+    T_FALSE =52
 }
 
 public enum TOKENSESO

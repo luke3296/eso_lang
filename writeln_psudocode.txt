@@ -1,0 +1,11 @@
+witeline
+if string
+	while not rpar
+		if comma
+			if ' then string
+			else ident
+else if ident
+	while not rpar
+		if comma
+			if ' then string
+			else ident

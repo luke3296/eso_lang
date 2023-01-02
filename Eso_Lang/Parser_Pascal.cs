@@ -41,18 +41,28 @@ namespace Eso_Lang
                 //here we are getting ident again, why is it not incrementing
                
             }
-            Console.WriteLine("saw program name currentToken is " + currentToken + " which is " + tokens[currentToken]);
+            Console.WriteLine("saw program name currentToken is " + currentToken + " which is " + Tokens[currentToken].name);
 
             //use an else if if you have 2 token types to check that would be in the same posistion
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_SCOLON)
             {
-             //Console.WriteLine("saw scolon currentToken is " + currentToken + " which is " + tokens[currentToken]);
+                //Console.WriteLine("saw scolon currentToken is " + currentToken + " which is " + tokens[currentToken]);
+
+                //add if block to handle var block using a lookahead
+                var tempIdx = currentToken+1;
+                if (Tokens[tempIdx].id == (int)TOKENSPASCAL.T_VAR) {
+                    Console.WriteLine("Parsing var block");
+                    currentToken = VarBlock(++currentToken);
+                    Console.WriteLine("Program() returned from var block, current token is " + Tokens[currentToken].name);
+                }
+                
 
                 currentToken = Block(++currentToken);
-                Console.WriteLine("Program() returned from simple block current index " + currentToken + " token at index is " + tokens[currentToken]);
+                Console.WriteLine("Program() returned from simple block current index " + currentToken + " token at index is " + Tokens[currentToken].name);
             }
-            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR)
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR) // no longer checking this case, will remove
             {
+                /*
                 Console.WriteLine("Program() saw an lpar");
                 currentToken = Id_List(++currentToken);
                 Console.WriteLine("back from id list  token index  is "+ currentToken +" which is " + tokens[currentToken] + " which is " + Tokens[currentToken].name);
@@ -65,6 +75,7 @@ namespace Eso_Lang
                         Console.WriteLine("Program() finshed Block, look for period");
                     }
                 }
+                */
             }
             Console.WriteLine("the next token should be . and the final token in the list. the next token is " + tokens[currentToken]);
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_PERIOD)
@@ -77,7 +88,7 @@ namespace Eso_Lang
         //prints the token given to it
         private int advance(int v)
         {
-            Console.WriteLine("called advance with token " +  v);
+            Console.WriteLine("called advance with token " +  v + " which is " + Tokens[v].name );
             return v;
         }
         //returns the next token index if the token passed to it was a T_IDENT
@@ -124,7 +135,7 @@ namespace Eso_Lang
 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_BEGIN)
             {
-                Console.WriteLine("Block() calling statment list with token index " + currentToken + " tok id " + tokens[currentToken]);
+                Console.WriteLine("Block() calling statment list with token index " + currentToken + " tok  " + Tokens[currentToken].name);
                 currentToken = Statement_List(++currentToken);
                 if (tokens[currentToken] == (int)TOKENSPASCAL.T_END)
                 {
@@ -147,7 +158,56 @@ namespace Eso_Lang
         int Statement(int currentToken)
         {
             Console.WriteLine("Statement() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
-
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_WRITELINE) {
+                currentToken = advance(++currentToken);
+                if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR)
+                //below may not be nessery
+                // currentToken = advance(++currentToken);
+                {
+                    while (tokens[currentToken] != (int)TOKENSPASCAL.T_RPAR) {
+                        if (tokens[currentToken] == (int)TOKENSPASCAL.T_APOSTROPHE)
+                        {
+                            currentToken = advance(++currentToken);
+                            if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING)
+                            {
+                                currentToken = advance(++currentToken);
+                                if (tokens[currentToken] == (int)TOKENSPASCAL.T_APOSTROPHE)
+                                {
+                                    currentToken = advance(++currentToken);
+                                    if (tokens[currentToken] == (int)TOKENSPASCAL.T_RPAR)
+                                    {
+                                        //fix's 3 
+                                        // currentToken= advance(++currentToken);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
+                        {
+                            //not incrememnting here as the currentToken should be an Id
+                            currentToken = Id(currentToken);
+                            if (tokens[currentToken] == (int)TOKENSPASCAL.T_RPAR)
+                            {
+                                currentToken = advance(++currentToken);
+                                break;
+                            }
+                        }
+                        else if (tokens[currentToken] == (int)TOKENSPASCAL.T_COMMA)
+                        {
+                            currentToken = advance(++currentToken);
+                        }
+                        else
+                        {
+                            //incrment the while loop, should only be called once on the LPAR
+                            ++currentToken;
+                        }
+                    }
+                    //after while increment currentToken passed the RPAR
+                    ++currentToken;
+                }
+            }
+            /* replaced 
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_WRITELINE)
             {
                 // handle a writeline
@@ -156,6 +216,7 @@ namespace Eso_Lang
                 if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR)
                 {
                     currentToken = advance(++currentToken);
+                    //if its a single string literal
                     if (tokens[currentToken] == (int)TOKENSPASCAL.T_APOSTROPHE)
                     {
                         currentToken = advance(++currentToken);
@@ -174,10 +235,15 @@ namespace Eso_Lang
                                 }
                             }
                         }
+                        //if its a varible
+                    } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT) { 
+                    
                     }
 
                 }
             }
+            */
+
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IF)
             {
                 Console.WriteLine("Statement() found an IF at index " + currentToken);
@@ -188,13 +254,13 @@ namespace Eso_Lang
                 {
                     //call expression on the terms inside the if() brackets
                     currentToken = Expression(++currentToken);
-                    Console.WriteLine("Statement() if passed if expression current token is " +Tokens[currentToken].name);
+                    Console.WriteLine("Statement() if passed if expression current token is " + Tokens[currentToken].name);
                     if (tokens[currentToken] == (int)TOKENSPASCAL.T_RPAR)
                     {
                         Console.WriteLine("passed if expression");
                         currentToken = advance(++currentToken);
                         if (tokens[currentToken] == (int)TOKENSPASCAL.T_THEN)
-                        {
+                        { //currently only parses a list of statements 
                             currentToken = Statement_List(++currentToken);
                             Console.WriteLine("passed then statements   current token is a " + Tokens[currentToken].name);
                             //currentToken = advance(++currentToken);
@@ -208,11 +274,12 @@ namespace Eso_Lang
 
                     }
                 }
-                else 
+                else
                 {
                     Console.WriteLine("did't find a lpar after if");
                 }
-            }else if (tokens[currentToken] == (int)TOKENSPASCAL.T_ELSE)
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_ELSE)
             {
                 // handle antoher statement
                 Console.WriteLine("Statement() foud a else after an if");
@@ -222,14 +289,50 @@ namespace Eso_Lang
             {
                 // handle antoher statement
                 Console.WriteLine("Statement() foud a then after an if");
-                currentToken = currentToken + 1;
+                //currentToken = currentToken + 1;
+                currentToken = Statement_List(++currentToken);
+
             }// add while var const etc other statments 
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_END)
             {
                 Console.WriteLine("staement was empty not incrementing  and returning");
             }
-            else
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
             {
+                //do a look ahead, if the next Token is a '=' this is an assignment statment
+                Console.WriteLine("Statement() saw a ident Token at index " + currentToken + " is " + Tokens[currentToken].name + " the next tok is " + Tokens[currentToken + 1].name);
+                var lookAhead = currentToken + 1;
+                if (Tokens[lookAhead].id == (int)TOKENSPASCAL.T_ASSIGN)
+                {
+                    
+                    currentToken = advance(++currentToken);
+                    currentToken = Expression(++currentToken);
+
+                }
+                //else its a function or procedure name 
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_WHILE)
+            {
+                //check if the next token is Begin, if it is call Block else call statmentlist
+                currentToken = Expression(++currentToken);
+                if (tokens[currentToken] == (int)TOKENSPASCAL.T_DO)
+                {
+                    var lookAhead = currentToken + 1;
+                    if (Tokens[lookAhead].id == (int)TOKENSPASCAL.T_BEGIN)
+                    {
+                        currentToken = Block(++currentToken);
+                    }
+                    else {
+                        currentToken = Statement_List(++currentToken);
+                    }
+                }
+
+            } 
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_BEGIN) {
+                currentToken = Block(currentToken);
+             
+            }
+            else{
                 Console.WriteLine("Statement() Current token index " + currentToken + " , token id " + tokens[currentToken] + "  is " + Tokens[currentToken].name);
 
                 Console.WriteLine("staement not found, not incrementing  and returning");
@@ -280,6 +383,11 @@ namespace Eso_Lang
                 Console.WriteLine("factor is number");
                 currentToken = UnsignedConstant(currentToken);
             }
+            else if ((tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT))
+            {
+                Console.WriteLine("factor is ident");
+                currentToken = Id(currentToken);
+            }
             else {
                 Console.WriteLine("No factor found returning without increment");
             }
@@ -294,6 +402,7 @@ namespace Eso_Lang
 
         int  Expression(int currentToken) {
             Console.WriteLine("Expression() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+
             //not rncrementing becuase we with to pass the number to SimpleExpression
             currentToken = SimpleExpression(currentToken);
             currentToken = Expression_p(currentToken);
@@ -383,6 +492,10 @@ namespace Eso_Lang
                 currentToken = UnsignedInterger(currentToken);
             } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {
                 currentToken = CharacterString(currentToken);
+            }else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT) {
+                //increment here because we have passed an ident
+                Console.WriteLine("unsingedConstat saw an ID");
+                ++currentToken;
             }else {
                 Console.WriteLine("no unsinged constant found");
             }
@@ -405,6 +518,67 @@ namespace Eso_Lang
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {
                 return ++currentToken;
             }
+            return currentToken;
+        }
+
+        int VarBlock(int currentToken) {
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_VAR)
+            {
+                while (tokens[currentToken] != (int)TOKENSPASCAL.T_BEGIN)
+                {
+                    Console.WriteLine("saw a var block");
+                    currentToken = Id_List(++currentToken);
+                    Console.WriteLine("VarBlock() returned from id list toke is " + Tokens[currentToken].name);
+                    if (tokens[currentToken] == (int)TOKENSPASCAL.T_COLON)
+                    {
+                        currentToken = advance(++currentToken);
+                        currentToken = Type(++currentToken);
+                        if (tokens[currentToken] == (int)TOKENSPASCAL.T_ASSIGN) {
+                            currentToken = Expression(++currentToken);
+                        }
+                            currentToken = advance(++currentToken);
+                    }
+                } 
+                --currentToken;
+            }
+            return currentToken;
+        }
+
+        int Type(int currentToken) {
+            switch (Tokens[currentToken].id) {
+                case (int)TOKENSPASCAL.T_INT_TYPE :
+                    return ++currentToken;
+                    break;
+                case (int)TOKENSPASCAL.T_STRING:
+                    return ++currentToken;
+                    break;
+                case (int)TOKENSPASCAL.T_BOOL_TYPE:
+                    return ++currentToken;
+                    break;
+                default:
+                    Console.WriteLine("Not a type");
+                    return currentToken;
+            }
+        }
+
+        private int VarList(int currentToken)
+        {
+            Console.WriteLine("Id_List() Current token index " + currentToken + " , token id " + tokens[currentToken] + "  is " + Tokens[currentToken].name);
+
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
+            {
+                //id will do the incrememnt if currentToken was an id so no need to increment here
+                currentToken = VarBlock(currentToken);
+                if (tokens[currentToken] == (int)TOKENSPASCAL.T_SCOLON)
+                {
+                    currentToken = VarList(++currentToken);
+                }
+                else
+                {
+                    // at the end of the list
+                }
+            }
+            //equvilent to | empty, returns the next Token after the Id_List
             return currentToken;
         }
     }
