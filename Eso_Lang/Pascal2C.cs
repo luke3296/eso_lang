@@ -123,9 +123,17 @@ namespace Eso_Lang
                          tokes = tokestmp.Skip(1).ToArray();
                          cstring.Append(genBlock(tokes));
                         break;
-                    case (int)TOKENSPASCAL.T_ASSIGN:
-                       // cstring.Append(genAssign(t));
+                    case (int)TOKENSPASCAL.T_DO:
+                        tokestmp = tokes.ToList();
+                        tokes = tokestmp.Skip(2).ToArray();
+                        cstring.Append(genBlock(tokes));
                         break;
+                case (int)TOKENSPASCAL.T_IDENT:
+                    if (tokes[idx + 1].id == (int)TOKENSPASCAL.T_ASSIGN) {
+                         cstring.Append(genAssign(tokes));
+                    }
+
+                    break;
               
 
 
@@ -644,7 +652,17 @@ namespace Eso_Lang
                     cstring.Append(genElse(ifBlock.ToArray()));
                 }
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_PERIOD) { cstring.Append("\n}"); }
+                if (Tokens[i].id == (int)TOKENSPASCAL.T_ASSIGN) {
+                    List<Token> assignBlock = new List<Token>();
+                    assignBlock.Add(Tokens[i - 1]);
+                    while (Tokens[i].id != (int)TOKENSPASCAL.T_SCOLON) {
 
+                        assignBlock.Add(Tokens[i]);
+                        i++;
+                    } 
+                 
+                    cstring.Append(genAssign(assignBlock.ToArray()));
+                }
 
                 i++;
             }
@@ -713,8 +731,18 @@ namespace Eso_Lang
             }
             return cstring.ToString();
         }
-        
 
+        string genAssign(Token[] tokes) {
+            List<Token> tokestmp = tokes.ToList();
+           
+            StringBuilder res = new StringBuilder(tokes[0].stringval);
+            res.Append("=");
+            // res.Append(tokes[tokes.Length - 1]);
+            tokes = tokestmp.Skip(2).ToArray();
+            res.Append(genExpression(tokes));
+            res.Append(";");
+            return res.ToString();
+        }
         //should accept tokens from var token to first begin token. sets a static varible 
         public string genVar(Token[] tokes) {
             return "hello";

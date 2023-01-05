@@ -116,7 +116,7 @@ namespace Eso_Lang
              Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res);
             //Console.WriteLine(pascal_tokens_2);
 
-            Pascal2C p2c = new Pascal2C(pascal_tokens_4);
+            Pascal2C p2c = new Pascal2C(pascal_tokens_12);
             string c_source = p2c.genProgram();
             //string c_src = p2c.generate();
             //Console.WriteLine(c_src);
