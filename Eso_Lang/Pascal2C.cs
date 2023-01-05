@@ -639,17 +639,35 @@ namespace Eso_Lang
 
                 }
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_ELSE ) {
-                    
-                    List<Token> ifBlock = new List<Token>();
-                    while (Tokens[i].id != (int)TOKENSPASCAL.T_END)
+                    if (Tokens[i + 1].id == (int)TOKENSPASCAL.T_IF)
                     {
-                        //parse expression; pass statements
-                        ifBlock.Add(Tokens[i]);
+                        List<Token> ifBlock = new List<Token>();
+                        while (Tokens[i].id != (int)TOKENSPASCAL.T_END)
+                        {
+                            //parse expression; pass statements
+                            ifBlock.Add(Tokens[i]);
 
-                        i++;
+                            i++;
 
+                        }
+                        cstring.Append(" else ");
+                        cstring.Append(genIf(ifBlock.ToArray()));
                     }
-                    cstring.Append(genElse(ifBlock.ToArray()));
+                    else
+                    {
+                        List<Token> ifBlock = new List<Token>();
+
+                        while (Tokens[i].id != (int)TOKENSPASCAL.T_END)
+                        {
+                            //parse expression; pass statements
+                            ifBlock.Add(Tokens[i]);
+
+                            i++;
+
+                        }
+                        cstring.Append(genElse(ifBlock.ToArray()));
+                    }
+                    
                 }
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_PERIOD) { cstring.Append("\n}"); }
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_ASSIGN) {
