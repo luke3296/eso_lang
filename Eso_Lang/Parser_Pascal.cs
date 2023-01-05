@@ -268,7 +268,6 @@ namespace Eso_Lang
                             {
                                 currentToken = Statement_List(++currentToken);
                                 Console.WriteLine("passed else statements");
-                                currentToken = advance(++currentToken);
                             }
                         }
 
@@ -283,7 +282,7 @@ namespace Eso_Lang
             {
                 // handle antoher statement
                 Console.WriteLine("Statement() foud a else after an if");
-                currentToken = currentToken + 1;
+                currentToken = Statement_List(++currentToken);
             }
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_THEN)
             {

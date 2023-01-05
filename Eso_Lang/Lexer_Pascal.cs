@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 /*
  issues 
-identifier names that contain reserved words are matched as reserved words not identifiers : fixed make regex's account for start of string and end of string 
- 
+identifiers can't contain numbers
+pascal comments not done
+doubles not done
  */
 namespace Eso_Lang
 {
@@ -40,8 +41,8 @@ namespace Eso_Lang
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INTMOD, "Modulous", @"^mod$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_VAR, "VarBlock", @"^var$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "ConstBlock", @"^const$"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "Int type", @"^integer$"));
-            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_CONST, "string type", @"^string$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_INT_TYPE, "Int type", @"^integer$"));
+            tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_STRING_TYPE, "string type", @"^string$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_TRUE, "true bool type", @"^true$"));
             tokensRegexPascal.Add(new Token((int)TOKENSPASCAL.T_FALSE, "false bool type", @"^false$"));
 

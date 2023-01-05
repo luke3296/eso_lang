@@ -42,9 +42,10 @@ namespace Eso_Lang
 
 
             string pascal_test_string   = "program donothing; begin end.";
-            string pascal_test_string_2 = "program writealine ; begin writeln('Hello World') end.";
+            string pascal_test_string_2 = "program writealine  \n ; var \n a : integer ; \n  begin writeln('Hello World' , a, 23); \n end.";
             string pascal_test_string_3 = "program writeManyLines ; \n begin  writeln('abc'); \n writeln('def'); \n end.";
-            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 < 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
+            // when the witeln's are ended with a ; it doesnt parse
+            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 + 10 - 10 < 10 ) then \n begin \n  writeln('a is less than 20' )   \n end \n else  \n begin writeln('an error occured' )  \n end \n end.";
             string pascal_test_string_5 = "program test ; begin if( 10 > 20 ) then writeln('oof') end .";
             string pascal_test_string_6 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
             string pascal_test_string_7 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
@@ -54,11 +55,11 @@ namespace Eso_Lang
             string pascal_test_string_11 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n" +
                 "begin \n writeln('a is less than 20' ) \n end \n else begin \n writeln('an error occured' ); \n end \n end.";
             string pascal_test_string_12 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while a < 10  do \n begin \n a := a + 1; \n end \n end .";
-
+            string pascal_test_string_13 = "program ifladder ; \n begin  \n if(10 > 2) then \n begin \n writeln('yo'); \n end \n else if(10 > 3) then \n begin \n writeln('oof'); \n end \n else if(10 > 4) then  \n begin \n writeln('hm'); \n end \n else  \n begin \n writeln('oof'); \n end \n end.";
             //string eso_lang_test_string = " Meats Put with Goats ";
 
             //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
-            
+
             List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string);
             List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
             List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
@@ -70,10 +71,10 @@ namespace Eso_Lang
             List<Token> pascal_tokens_9 = Pascal_lexer.LexPascal(pascal_test_string_9);
             List<Token> pascal_tokens_10 = Pascal_lexer.LexPascal(pascal_test_string_10);
             List<Token> pascal_tokens_11 = Pascal_lexer.LexPascal(pascal_test_string_11);
-            
             List<Token> pascal_tokens_12 = Pascal_lexer.LexPascal(pascal_test_string_12);
+            List<Token> pascal_tokens_13 = Pascal_lexer.LexPascal(pascal_test_string_13);
             Console.Write("\n");
-            foreach (Token t in pascal_tokens_12) {
+            foreach (Token t in pascal_tokens_4) {
                 Console.Write(" " + t.name + " ");
             }
             Console.Write("\n");
@@ -92,9 +93,10 @@ namespace Eso_Lang
             Parser_Pascal p11 = new Parser_Pascal(pascal_tokens_11);
             
             Parser_Pascal p12 = new Parser_Pascal(pascal_tokens_12);
+            Parser_Pascal p13 = new Parser_Pascal(pascal_tokens_13);
 
             //Pascal_parser_with_tree ppwt = new Pascal_parser_with_tree(pascal_tokens_2);
-            
+
             var p1res = p1.Parse();
             var p2res = p2.Parse();
             var p3res = p3.Parse();
@@ -108,16 +110,18 @@ namespace Eso_Lang
             var p11res = p11.Parse();
             
             var p12res = p12.Parse();
+            var p13res = p13.Parse();
 
-            Console.WriteLine(p12res);
-            Console.WriteLine("1:" +p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res  +" 8: " + p8res  +" 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res);
-            //if (p1res == 0 && p2res == 0 && p3res == 0 && p4res == 0 && p5res == 0 ) {
-            //    Console.WriteLine("parsed sucsessfully");
+            Console.WriteLine(p4res);
+             Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res);
+            //Console.WriteLine(pascal_tokens_2);
 
-            //}
-
-            //Pascal2C p2c = new Pascal2C(pascal_tokens_1);
-            //string c_source = p2c.generate();
+            Pascal2C p2c = new Pascal2C(pascal_tokens_4);
+            string c_source = p2c.genProgram();
+            //string c_src = p2c.generate();
+            //Console.WriteLine(c_src);
+            Console.WriteLine();
+            Console.WriteLine(c_source);
             //string path = p2c.Write_file();
 
             //from https://stackoverflow.com/questions/1469764/run-command-prompt-commands
