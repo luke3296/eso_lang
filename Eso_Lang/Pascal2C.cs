@@ -454,13 +454,23 @@ namespace Eso_Lang
 
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_VAR)
                 {
+                    //The first begin will appear after the var definiton block
                     while (Tokens[i].id != (int)TOKENSPASCAL.T_BEGIN)
                     {
+                        // int_var : interger 
                         if (Tokens[i].id == (int)TOKENSPASCAL.T_COLON)
                         {
+                            //get the type for the id list thats just been iterated over
                             var type = Tokens[i + 1].id;
-                            for (int j = i; Tokens[j].id != (int)TOKENSPASCAL.T_VAR; j--)
+                            //itterate backwards from the colon to the var block 
+                            for (int j = i - 1; Tokens[j].id != (int)TOKENSPASCAL.T_VAR && Tokens[j].id != (int)TOKENSPASCAL.T_COLON; j--)
                             {
+                                //if theres another : redefine the typy
+                                if (Tokens[j].id == (int)TOKENSPASCAL.T_COLON)
+                                {
+                                    type = Tokens[j + 1].id;
+                                }
+                                //if any tokens are identifiers add them to a global list of program vars that are strings
                                 if (Tokens[j].id == (int)TOKENSPASCAL.T_IDENT)
                                 {
                                     vars.Add((Tokens[j].stringval, type));
@@ -469,6 +479,8 @@ namespace Eso_Lang
                         }
                         i++;
                     }
+                    Console.WriteLine(" vars are ");
+                    foreach ((string, int) item in vars) { Console.WriteLine(item.Item1); }
                     this.programVars = vars;
                     foreach ((string, int) t in vars)
                     {
@@ -488,6 +500,7 @@ namespace Eso_Lang
                                 var flg = false;
                                 foreach (Token tok in Tokens)
                                 {
+
                                     if (tok.stringval == t.Item1)
                                     {
                                         if (Tokens[idx + 1].id == (int)TOKENSPASCAL.T_ASSIGN)
@@ -500,6 +513,20 @@ namespace Eso_Lang
                                                 flg = true;
                                             }
                                         }
+                                        else
+                                        {
+
+
+                                            /*   if (t.Item2 == (int)TOKENSPASCAL.T_STRING_TYPE)
+                                               {
+                                                   var str3 = "char " + t.Item1 + "[]" + ";\n";
+                                                   cstring.Append(str3);
+                                               }
+
+                                           break;
+                                            */
+                                        }
+
                                     }
                                     idx += 1;
                                 }
@@ -521,11 +548,11 @@ namespace Eso_Lang
                     //append main
                     //cstring.Append("void main()");
                 }
-               // if (Tokens[i].id == (int)TOKENSPASCAL.T_BEGIN) { cstring.Append("{"); }
+                // if (Tokens[i].id == (int)TOKENSPASCAL.T_BEGIN) { cstring.Append("{"); }
                 //if (Tokens[i].id == (int)TOKENSPASCAL.T_END) { cstring.Append("}"); }
-               // if (Tokens[i].id == (int)TOKENSPASCAL.T_SCOLON) { cstring.Append(";"); }
-               // if (Tokens[i].id == (int)TOKENSPASCAL.T_LPAR) { cstring.Append("("); }
-               //if (Tokens[i].id == (int)TOKENSPASCAL.T_RPAR) { cstring.Append(")"); }
+                // if (Tokens[i].id == (int)TOKENSPASCAL.T_SCOLON) { cstring.Append(";"); }
+                // if (Tokens[i].id == (int)TOKENSPASCAL.T_LPAR) { cstring.Append("("); }
+                //if (Tokens[i].id == (int)TOKENSPASCAL.T_RPAR) { cstring.Append(")"); }
                 if (Tokens[i].id == (int)TOKENSPASCAL.T_WRITELINE) {
                     prependSTDIO = true;
                     
