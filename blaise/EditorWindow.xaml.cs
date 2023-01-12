@@ -107,9 +107,11 @@ namespace blaise
 
                 // run the Pascal -> C transpiler, returns the C code as a string
                 string text = codeEditor.Text.Replace(System.Environment.NewLine, " ");
+                
                 Lexer_Pascal lexer = new Lexer_Pascal();
                 List<Token> tokens = lexer.LexPascal(text);
                 Parser_Pascal parser = new Parser_Pascal(tokens);
+
                 System.Diagnostics.Debug.WriteLine(" input str " + text);
           
                 if (parser.Parse() == 1) 

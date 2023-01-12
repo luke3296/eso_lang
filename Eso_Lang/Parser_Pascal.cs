@@ -22,6 +22,9 @@ namespace Eso_Lang
         }
         public int Parse()
         {
+            if (tokens.Count == 0) {
+                return 1;
+            }
             int ret = 1;
            
             ret = Program(0);
