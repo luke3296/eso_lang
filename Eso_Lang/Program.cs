@@ -71,25 +71,28 @@ namespace Eso_Lang
             string pascal_test_string_13 = "program ifladder ; \n begin  \n if(10 > 2) then \n begin \n writeln('yo'); \n end \n else if(10 > 3) then \n begin \n writeln('oof'); \n end \n else if(10 > 4) then  \n begin \n writeln('hm'); \n end \n else  \n begin \n writeln('oof'); \n end \n end.";
             string test_error_string = " gfnskvskd.nvs nmlkmvs vmsldlk  4j '34;5 ";
             string pascal_test_string_14 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while ( a < 10 )  do \n begin \n a := a + 1; \n end \n end .";
-
+            string pascal_test_string_15 = "program test; var a : interger; begin a := 3 * (4 + 3); end.";
+            string pascal_test_string_16 = "program test; var a : interger; begin a := 3 * (4 + 3 + ( 3 + 4 ) ); end.";
             //string eso_lang_test_string = " Meats Put with Goats ";
 
             //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
 
-            List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string_1);
-            List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
-            List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
-            List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
-            List<Token> pascal_tokens_5 = Pascal_lexer.LexPascal(pascal_test_string_5);
-            List<Token> pascal_tokens_6 = Pascal_lexer.LexPascal(pascal_test_string_6);
-            List<Token> pascal_tokens_7 = Pascal_lexer.LexPascal(pascal_test_string_7);
+          List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string_1);
+          List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
+          List<Token> pascal_tokens_3 = Pascal_lexer.LexPascal(pascal_test_string_3);
+          List<Token> pascal_tokens_4 = Pascal_lexer.LexPascal(pascal_test_string_4);
+           List<Token> pascal_tokens_5 = Pascal_lexer.LexPascal(pascal_test_string_5);
+           List<Token> pascal_tokens_6 = Pascal_lexer.LexPascal(pascal_test_string_6);
+          List<Token> pascal_tokens_7 = Pascal_lexer.LexPascal(pascal_test_string_7);
             List<Token> pascal_tokens_8 = Pascal_lexer.LexPascal(pascal_test_string_8);
-            List<Token> pascal_tokens_9 = Pascal_lexer.LexPascal(pascal_test_string_9);
+           List<Token> pascal_tokens_9 = Pascal_lexer.LexPascal(pascal_test_string_9);
             List<Token> pascal_tokens_10 = Pascal_lexer.LexPascal(pascal_test_string_10);
             List<Token> pascal_tokens_11 = Pascal_lexer.LexPascal(pascal_test_string_11);
             List<Token> pascal_tokens_12 = Pascal_lexer.LexPascal(pascal_test_string_12);
             List<Token> pascal_tokens_13 = Pascal_lexer.LexPascal(pascal_test_string_13);
             List<Token> pascal_tokens_14 = Pascal_lexer.LexPascal(pascal_test_string_14);
+            List<Token> pascal_tokens_15 = Pascal_lexer.LexPascal(pascal_test_string_15);
+            List<Token> pascal_tokens_16 = Pascal_lexer.LexPascal(pascal_test_string_16);
 
             List<Token> test_error_string_toks = Pascal_lexer.LexPascal(test_error_string);
 
@@ -98,7 +101,7 @@ namespace Eso_Lang
             Pascal2C pc2 = new Pascal2C(test_error_string_toks);
             pc2.genProgram();
             Console.WriteLine(ptest.Parse());
-            foreach (Token t in pascal_tokens_4) {
+            foreach (Token t in pascal_tokens_16) {
                 Console.Write(" " + t.name + " ");
             }
             Console.Write("\n");
@@ -119,6 +122,8 @@ namespace Eso_Lang
             Parser_Pascal p12 = new Parser_Pascal(pascal_tokens_12);
             Parser_Pascal p13 = new Parser_Pascal(pascal_tokens_13);
             Parser_Pascal p14 = new Parser_Pascal(pascal_tokens_14);
+           Parser_Pascal p15 = new Parser_Pascal(pascal_tokens_15);
+            Parser_Pascal p16 = new Parser_Pascal(pascal_tokens_16);
 
 
             //Pascal_parser_with_tree ppwt = new Pascal_parser_with_tree(pascal_tokens_2);
@@ -139,8 +144,10 @@ namespace Eso_Lang
             var p13res = p13.Parse();
 
             var p14res = p14.Parse();
-            Console.WriteLine(p14res);
-            Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res);
+            var p15res = p15.Parse();
+            var p16res = p16.Parse();
+            Console.WriteLine(p16res);
+           // Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res + " 15: " + p15res + " 16: " + p16res);
 
            // printCodeGen(pascal_test_string_1, pascal_tokens_1);
            // printCodeGen(pascal_test_string_2, pascal_tokens_2);

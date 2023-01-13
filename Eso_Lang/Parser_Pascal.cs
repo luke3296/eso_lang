@@ -373,8 +373,21 @@ namespace Eso_Lang
         int Term(int currentToken)
         {
             Console.WriteLine("Term() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR)
+            {
+                currentToken = advance(++currentToken);
+                currentToken = SimpleExpression(currentToken);
+                currentToken = Expression_p(currentToken);
+                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR)
+                {
+                    advance(++currentToken);
+                    return currentToken;
+                }
+            }
+            else { 
             // calling term here as the bnf states casues a left recursion issue
             currentToken = Factor(currentToken);
+                }
             //not calling factor prime, shhould check to * / div mod tokens to choose between Factor and Factor_p
             return currentToken;
         }
@@ -394,6 +407,16 @@ namespace Eso_Lang
             {
                 Console.WriteLine("factor is ident");
                 currentToken = Id(currentToken);
+            } else if ((tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR)) {
+                currentToken = advance(++currentToken);
+                 currentToken = SimpleExpression(currentToken);
+                currentToken = Expression_p(currentToken);
+               // currentToken = Expression(currentToken);
+                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR)
+                {
+                    advance(++currentToken);
+                    return currentToken;
+                } 
             }
             else {
                 Console.WriteLine("No factor found returning without increment");
@@ -502,7 +525,19 @@ namespace Eso_Lang
                 //not incmrementing becuase Simeple_Expression_P doesnt handle numbers 
                 currentToken = Term(currentToken);
                 //currentToken = SimpleExpression_p(++currentToken);
-            } else {
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR) {
+                
+                currentToken = advance(++currentToken);
+                currentToken = SimpleExpression(currentToken);
+                currentToken = Expression_p(currentToken);
+                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR)
+                {
+                    advance(++currentToken);
+                    return currentToken;
+                }
+                
+            }
+            else {
                 Console.WriteLine("no SimpleExpression returned w/o incremnting");
             }
                 return currentToken;
@@ -515,16 +550,24 @@ namespace Eso_Lang
         int UnsignedConstant(int currentToken) {
             Console.WriteLine("UnsignedConstant() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
 
-            if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR) {
+            if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR)
+            {
                 //dont increment cos we want to pass the number to unsinged int
                 currentToken = UnsignedInterger(currentToken);
-            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING) {
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_STRING)
+            {
                 currentToken = CharacterString(currentToken);
-            }else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT) {
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT)
+            {
                 //increment here because we have passed an ident
                 Console.WriteLine("unsingedConstat saw an ID");
                 ++currentToken;
-            }else {
+            }
+            
+            else
+            {
                 Console.WriteLine("no unsinged constant found");
             }
             return currentToken;
