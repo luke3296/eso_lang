@@ -409,18 +409,26 @@ namespace Eso_Lang
 
         int  Expression(int currentToken) {
             Console.WriteLine("Expression() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
-            if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_LPAR) {
+            if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_LPAR)
+            {
+                Console.WriteLine("Expression : parsing expresion in brackets current token is " + Tokens[currentToken]);
                 currentToken = advance(++currentToken);
-                Expression(currentToken);
-                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR) {
+                currentToken = SimpleExpression(currentToken);
+                currentToken = Expression_p(currentToken);
+                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR)
+                {
                     advance(++currentToken);
                     return currentToken;
                 }
             }
-            //not rncrementing becuase we with to pass the number to SimpleExpression
-            currentToken = SimpleExpression(currentToken);
-            currentToken = Expression_p(currentToken);
+            else
+            {
+                //not rncrementing becuase we with to pass the number to SimpleExpression
+                currentToken = SimpleExpression(currentToken);
+                currentToken = Expression_p(currentToken);
 
+                return currentToken;
+            }
             return currentToken;
         }
 

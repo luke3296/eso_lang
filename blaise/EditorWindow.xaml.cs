@@ -150,6 +150,8 @@ namespace blaise
 
                 String compilerOutput = "";
 
+             
+                p.Start();
                 p.OutputDataReceived += (sender, args) =>
                 {
                     compilerOutput += args.Data;
@@ -160,7 +162,6 @@ namespace blaise
                     compilerOutput += args.Data;
                     Debug.Print(args.Data);
                 };
-                p.Start();
                 p.BeginOutputReadLine();
                 await p.WaitForExitAsync();
                 p.WaitForExit();
