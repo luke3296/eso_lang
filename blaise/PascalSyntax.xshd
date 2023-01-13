@@ -20,6 +20,7 @@
 			<Word>if</Word> <Word>IF</Word>
 			<Word>then</Word> <Word>THEN</Word>
 			<Word>else</Word> <Word>ELSE</Word>
+			<Word>while</Word> <Word>WHILE</Word>
 		</Keywords>
 
 		<Rule color="Number">
