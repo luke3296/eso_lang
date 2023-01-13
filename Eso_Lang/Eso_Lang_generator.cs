@@ -54,8 +54,7 @@ namespace Eso_Lang {
                else {Console.WriteLine("error");}
             
               Output_String= Match_numbers(result[i+3]) + Output_String ;
-          }
-         
+          }   
         }
         
         return Output_String;
@@ -69,7 +68,6 @@ namespace Eso_Lang {
           if (token=="Boots"){
             return "1";
           }
-
            if (token=="Goats"){
             return "2";
           }

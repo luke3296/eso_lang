@@ -344,6 +344,12 @@ namespace Eso_Lang
                             case ":=":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_ASSIGN, "assign", @":="));
                                 break;
+                            case "*":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_MULTIPLY, "multiply", @"\*"));
+                                break;
+                            case "/":
+                                tokens.Add(new Token((int)TOKENSPASCAL.T_INTDIV, "divide", @"/"));
+                                break;
                             default:
                                 Console.WriteLine("can't match " + fragment_str);
                                 if(letter.IsMatch(fragment_str)){

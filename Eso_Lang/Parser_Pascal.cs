@@ -26,8 +26,13 @@ namespace Eso_Lang
                 return 1;
             }
             int ret = 1;
-           
-            ret = Program(0);
+            try
+            {
+                ret = Program(0);
+            }
+            catch (Exception e) {
+                Console.WriteLine("Parse error " +e.ToString());
+            }
             return ret;
         }
         // when calling tokens[currentToken] the tokens look up will be done at index 0 and
@@ -404,7 +409,14 @@ namespace Eso_Lang
 
         int  Expression(int currentToken) {
             Console.WriteLine("Expression() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
-
+            if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_LPAR) {
+                currentToken = advance(++currentToken);
+                Expression(currentToken);
+                if (Tokens[currentToken].id == (int)TOKENSPASCAL.T_RPAR) {
+                    advance(++currentToken);
+                    return currentToken;
+                }
+            }
             //not rncrementing becuase we with to pass the number to SimpleExpression
             currentToken = SimpleExpression(currentToken);
             currentToken = Expression_p(currentToken);
@@ -462,23 +474,29 @@ namespace Eso_Lang
         int SimpleExpression_p(int currentToken) {
             Console.WriteLine("SimpleExpression_p() Current token index " + currentToken + " , token id " + tokens[currentToken] +"  is "+Tokens[currentToken].name );
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_PLUS)
-                {
-                    currentToken = Term(++currentToken);
-                    currentToken = SimpleExpression_p(++currentToken);
-                }
-                else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MINUS)
-                {
-                    currentToken = Term(++currentToken);
-                    currentToken = SimpleExpression_p(++currentToken);
-                }
-                else if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR)
-                {
+            {
+                currentToken = Term(++currentToken);
+                currentToken = SimpleExpression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MINUS)
+            {
+                currentToken = Term(++currentToken);
+                currentToken = SimpleExpression_p(++currentToken);
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MULTIPLY) {
+                currentToken = Term(++currentToken);
+                currentToken = SimpleExpression_p(++currentToken);
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_INTDIV) {
+                currentToken = Term(++currentToken);
+                currentToken = SimpleExpression_p(++currentToken);
+            }
+            else if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR)
+            {
                 //not incmrementing becuase Simeple_Expression_P doesnt handle numbers 
                 currentToken = Term(currentToken);
                 //currentToken = SimpleExpression_p(++currentToken);
-                }else{
-                    Console.WriteLine("no SimpleExpression returned w/o incremnting");
-                }
+            } else {
+                Console.WriteLine("no SimpleExpression returned w/o incremnting");
+            }
                 return currentToken;
             }
 
