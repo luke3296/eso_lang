@@ -71,8 +71,8 @@ namespace Eso_Lang
             string pascal_test_string_13 = "program ifladder ; \n begin  \n if(10 > 2) then \n begin \n writeln('yo'); \n end \n else if(10 > 3) then \n begin \n writeln('oof'); \n end \n else if(10 > 4) then  \n begin \n writeln('hm'); \n end \n else  \n begin \n writeln('oof'); \n end \n end.";
             string test_error_string = " gfnskvskd.nvs nmlkmvs vmsldlk  4j '34;5 ";
             string pascal_test_string_14 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while ( a < 10 )  do \n begin \n a := a + 1; \n end \n end .";
-            string pascal_test_string_15 = "program test; var a : interger; begin a := 3 * (4 + 3); end.";
-            string pascal_test_string_16 = "program test; var a : interger; begin a := 3 * (4 + 3 + ( 3 + 4 ) ); end.";
+            string pascal_test_string_15 = "program test; var a : integer; begin a := 3 * (4 + 3); end.";
+            string pascal_test_string_16 = "program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / 4 ) ); end.";
             //string eso_lang_test_string = " Meats Put with Goats ";
 
             //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
@@ -147,21 +147,24 @@ namespace Eso_Lang
             var p15res = p15.Parse();
             var p16res = p16.Parse();
             Console.WriteLine(p16res);
-           // Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res + " 15: " + p15res + " 16: " + p16res);
+            Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res + " 15: " + p15res + " 16: " + p16res);
 
-           // printCodeGen(pascal_test_string_1, pascal_tokens_1);
-           // printCodeGen(pascal_test_string_2, pascal_tokens_2);
-           // printCodeGen(pascal_test_string_3, pascal_tokens_3);
-           // printCodeGen(pascal_test_string_4, pascal_tokens_4);
-           // printCodeGen(pascal_test_string_5, pascal_tokens_5);
-           // printCodeGen(pascal_test_string_6, pascal_tokens_6);
-           // printCodeGen(pascal_test_string_7, pascal_tokens_7);
-           // printCodeGen(pascal_test_string_8, pascal_tokens_8);
-           // printCodeGen(pascal_test_string_9, pascal_tokens_9);
-           // printCodeGen(pascal_test_string_10, pascal_tokens_10);
-           // printCodeGen(pascal_test_string_11, pascal_tokens_11);
-           // printCodeGen(pascal_test_string_12, pascal_tokens_12);
-           // printCodeGen(pascal_test_string_13, pascal_tokens_13);
+            printCodeGen(pascal_test_string_1, pascal_tokens_1);
+            printCodeGen(pascal_test_string_2, pascal_tokens_2);
+            printCodeGen(pascal_test_string_3, pascal_tokens_3);
+            printCodeGen(pascal_test_string_4, pascal_tokens_4);
+            printCodeGen(pascal_test_string_5, pascal_tokens_5);
+            printCodeGen(pascal_test_string_6, pascal_tokens_6);
+            printCodeGen(pascal_test_string_7, pascal_tokens_7);
+            printCodeGen(pascal_test_string_8, pascal_tokens_8);
+            printCodeGen(pascal_test_string_9, pascal_tokens_9);
+            printCodeGen(pascal_test_string_10, pascal_tokens_10);
+            printCodeGen(pascal_test_string_11, pascal_tokens_11);
+            printCodeGen(pascal_test_string_12, pascal_tokens_12);
+            printCodeGen(pascal_test_string_13, pascal_tokens_13);
+            printCodeGen(pascal_test_string_14, pascal_tokens_14);
+            printCodeGen(pascal_test_string_15, pascal_tokens_15);
+            printCodeGen(pascal_test_string_16, pascal_tokens_16);
 
 
             //string path = p2c.Write_file();
