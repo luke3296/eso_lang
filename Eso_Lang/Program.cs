@@ -64,7 +64,7 @@ namespace Eso_Lang
             string pascal_test_string_7 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n begin \n writeln('a is less than 20' ) \n end\n else \n begin \n writeln('an error occured' ); \nend \n end.";
             string pascal_test_string_8 = "program assign; \n var \n a : integer; \n begin \n a := 100; \n if( a < 20 ) then \n begin \n writeln('a is less than 20' ); \n writeln(' a second msg'); \n end \n else \nbegin\n writeln('a' ); \n writeln(' ', a); \n end\n end.";
             string pascal_test_string_9 = "program whiledo ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
-            string pascal_test_string_10 = "program writealine ; begin writeln('Hello World', anid) end.";
+            string pascal_test_string_10 = "program writealine ; var anid : integer ; begin writeln('Hello World', anid) end.";
             string pascal_test_string_11 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n" +
                 "begin \n writeln('a is less than 20' ) \n end \n else begin \n writeln('an error occured' ); \n end \n end.";
             string pascal_test_string_12 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while a < 10  do \n begin \n a := a + 1; \n end \n end .";
@@ -74,6 +74,7 @@ namespace Eso_Lang
             string pascal_test_string_15 = "program test; var a : integer; begin a := 3 * (4 + 3); end.";
             string pascal_test_string_16 = "program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / 4 ) ); end.";
             string pascal_test_string_17 = "program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / ( 3 + 2) +3 ) ); end.";
+            // note nested if's and whiles need to be ; terminted if there not the only statement in a block
             string pascal_test_string_18 = "program test; var  a : integer; begin a := 0; if (a < 10 ) then begin while a > 4 do begin  writeln('oof'); if( a > 2 ) then begin writeln('oof') end ; writeln('oof'); end  end end.";
             //string eso_lang_test_string = " Meats Put with Goats ";
 
