@@ -1,0 +1,303 @@
+##1 works
+program donothing; begin end.
+
+void main(){
+
+}
+
+##2 works
+program writealine ;
+  begin writeln( ' Hello World ' );
+ end.
+
+#include <stdio.h>
+void main(){
+printf("%s"," Hello World ");
+
+}
+
+##3 works
+program writeManyLines ;
+ begin  writeln( ' abc ' );
+ writeln( ' def ' );
+ end.
+
+#include <stdio.h>
+void main(){
+printf("%s"," abc ");
+printf("%s"," def ");
+
+}
+
+##4 works
+program simpleIfElse ; begin
+ if( 10 * 10 / 10 < 10 ) then
+ begin
+  writeln( 'a is less than 20' )
+ end
+ else
+ begin writeln( 'an error occured' )
+ end
+ end.
+
+#include <stdio.h>
+void main(){
+if((1010/10<10)){printf("%s","a is less than 20");
+}else{printf("%s","an error occured");
+}
+}
+
+##5 works 
+program test ; begin if( 10 > 20 ) then writeln( 'oof' ) end .
+
+#include <stdio.h>
+void main(){
+if((10>20)){printf("%s","oof");
+}
+}
+
+##6 doesnt work else gen bug / writeline overcunsumption
+program simplevar ; var
+ firstint, secondInt, theirdInt : integer ; begin
+ if( 10 + 10 - 10 ) then
+ writeln( 'a is less than 20' )
+ else writeln( 'an error occured' );
+ end.
+
+#include <stdio.h>
+void main(){
+int theirdInt;
+int secondInt;
+int firstint;
+if((10+10-10)){printf("%s%s","a is less than 20","an error occured");
+}
+}
+
+##7 works-ish and worksround issue in #6. code generator deosnt check length of string for initalisation in c source
+program simplevar ; var
+ firstint, secondInt, theirdInt : integer ;
+ str2, str2 : string ;  begin
+ if( 10 + 10 - 10 ) then
+ begin
+ writeln( 'a is less than 20' )
+ end
+ else
+ begin
+ writeln( 'an error occured' );
+end
+ end.
+
+#include <stdio.h>
+void main(){
+int theirdInt;
+int secondInt;
+int firstint;
+char str[];
+char str[];
+if((10+10-10)){printf("%s","a is less than 20");
+}else{printf("%s","an error occured");
+}
+}
+
+##8 deost work writeline issue
+program assign;
+ var
+ a : integer;
+ begin
+ a := 100;
+ if( a < 20 ) then
+ begin
+ writeln( 'a is less than 20' );
+ writeln( ' a second msg');
+ end
+ else
+begin
+ writeln( 'a' );
+ writeln( ' ' , a);
+ end
+ end.
+
+#include <stdio.h>
+void main(){
+int a;
+a=100;if((a<20)){printf("%s%s","a is less than 20"," a second msg");
+}else{printf("%s%s%d","a"," ",a);
+}
+}
+
+##9 doesnt work writeline issue
+program whiledo ; var
+ firstint, secondInt, theirdInt : integer ;
+ str2, str2 : string ;  begin
+ if( 10 + 10 - 10 ) then
+ writeln( 'a is less than 20' )
+ else writeln( 'an error occured' );
+ end.
+
+#include <stdio.h>
+void main(){
+int theirdInt;
+int secondInt;
+int firstint;
+char str[];
+char str[];
+if((10+10-10)){printf("%s%s","a is less than 20","an error occured");
+}
+}
+
+##10 works
+program writealine ; var anid : integer ; begin writeln( 'Hello World' , anid) end.
+
+#include <stdio.h>
+void main(){
+int anid;
+printf("%s%d","Hello World",anid);
+
+}
+
+##11 works, worksaorunds writeln issue
+program simplevar ; var
+ firstint, secondInt, theirdInt : integer ; begin
+ if( 10 + 10 - 10 ) then
+begin
+ writeln( 'a is less than 20' )
+ end
+ else begin
+ writeln( 'an error occured' );
+ end
+ end.
+
+#include <stdio.h>
+void main(){
+int theirdInt;
+int secondInt;
+int firstint;
+if((10+10-10)){printf("%s","a is less than 20");
+}else{printf("%s","an error occured");
+}
+}
+
+##12 works
+program testwhile ;
+ var
+ a : integer ;
+ begin
+ a := 0 ;
+ while a < 10  do
+ begin
+ a := a + 1;
+ end
+ end .
+
+void main(){
+int a;
+a=0;while(a<10){a=a+1;
+}
+
+##13 works
+program ifladder ;
+ begin
+ if(10 > 2) then
+ begin
+ writeln( 'yo' );
+ end
+ else if(10 > 3) then
+ begin
+ writeln( 'oof' );
+ end
+ else if(10 > 4) then
+ begin
+ writeln( 'hm' );
+ end
+ else
+ begin
+ writeln( 'oof' );
+ end
+ end.
+
+#include <stdio.h>
+void main(){
+if((10>2)){printf("%s","yo");
+} else if((10>3)){printf("%s","oof");
+} else if((10>4)){printf("%s","hm");
+}else{printf("%s","oof");
+}
+}
+
+##14 works
+program testwhile ;
+ var
+ a : integer ;
+ begin
+ a := 0 ;
+ while ( a < 10 )  do
+ begin
+ a := a + 1;
+ end
+ end .
+
+void main(){
+int a;
+a=0;while((a<10)){a=a+1;
+}
+
+##15 works
+program test; var a : integer; begin a := 3 * (4 + 3); end.
+
+void main(){
+int a;
+a=3(4+3);
+}
+
+##16 works
+program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / 4 ) ); end.
+
+
+void main(){
+int a;
+a=3(4+3(3/4));
+}
+
+##17 works
+program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / ( 3 + 2) +3 ) ); end.
+
+void main(){
+int a;
+a=3(4+3(3/(3+2)+3));
+}
+
+##18 doesnt work is the lexer matching ') 
+program test; var  a : integer; begin a := 0; if (a < 10 ) then begin while a > 4 do begin  writeln( 'oof'); if( a > 2 ) then begin writeln( 'oof') end ; writeln( 'oof'); end  end end.
+
+
+#include <stdio.h>
+void main(){
+int a;
+a=0;if((a<10)){while(a>4){printf("%s%d%d%s","oof",a,2,"oof");
+}printf("%s","oof");
+
+}
+
+##19 works
+program expressions; var a,b,c,d,e,f : integer; begin  a := 2+4; b := 3*6; c := 4/2; d := 6-2; e := 6 * (3+4); f := 6 * ( 2 + ( 1 + 2 ) );  writeln( ' aaaa ' , a , ' bbbbb ' , b , ' c ' , c , ' d ' , d , ' e ' , e , ' f ' , f );  end.
+
+#include <stdio.h>
+void main(){
+int f;
+int e;
+int d;
+int c;
+int b;
+int a;
+a=2+4;b=36;c=4/2;d=6-2;e=6(3+4);f=6(2+(1+2));printf("%s%d%s%d%s%d%s%d%s%d%s%d"," aaaa ",a," bbbbb ",b," c ",c," d ",d," e ",e," f ",f);
+
+}
+##20 works
+program nestedifassign; var a : integer ;  begin if( 2 > 1 ) then begin if( 2 < 3 ) then begin a := 3; end end end.
+
+void main(){
+int a;
+if((2>1)){if((2<3)){a=3;}}
+}
+
+15/20
