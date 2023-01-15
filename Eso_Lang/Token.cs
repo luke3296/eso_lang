@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author:  Luke A
+// Purpouse: This file contains the Token class for representing a Token in the language
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

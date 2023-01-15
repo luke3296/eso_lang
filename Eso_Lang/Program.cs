@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author:  Luke A
+// Purpouse: This file contains the main tests for the Lexer/Parser/CodeGenerator
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

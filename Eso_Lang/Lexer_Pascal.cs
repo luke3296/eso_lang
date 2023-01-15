@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author:  Luke A
+// Purpouse: This file contains the Lexer code for pascal symbols.
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

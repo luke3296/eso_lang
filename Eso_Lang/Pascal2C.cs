@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author:  Luke A
+// Purpouse: This file contains the CodeGeneration code
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -441,6 +443,7 @@ namespace Eso_Lang
             return (path + fname_);
         }
 
+        //the entry point fucntion, recusivly calls the other methods do build up the c source string 
         public string genProgram()
         {
             StringBuilder cstring = new StringBuilder("");

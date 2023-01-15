@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author:  Luke A
+// Purpouse: This file contains the Parser code for pascal. Based off the BNF in LRpascal_bnf.txt
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,6 +22,7 @@ namespace Eso_Lang
             this.tokens = pascal_ints;
 
         }
+        
         public int Parse()
         {
             if (tokens.Count == 0) {
