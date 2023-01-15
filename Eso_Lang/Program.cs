@@ -54,31 +54,35 @@ namespace Eso_Lang
 
 
             string pascal_test_string_1   = "program donothing; begin end.";
-            string pascal_test_string_2 = "program writealine ; \n  begin writeln('Hello World' ); \n end.";
-            string pascal_test_string_3 = "program writeManyLines ; \n begin  writeln('abc'); \n writeln('def'); \n end.";
-            // when the writeln's are ended with a ; it doesnt parse
-            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 * 10 / 10 < 10 ) then \n begin \n  writeln('a is less than 20' )   \n end \n else  \n begin writeln('an error occured' )  \n end \n end.";
-            string pascal_test_string_5 = "program test ; begin if( 10 > 20 ) then writeln('oof') end .";
-            string pascal_test_string_6 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
+            string pascal_test_string_2 = "program writealine ; \n  begin writeln( ' Hello World ' ); \n end.";
+            //updated lexer, avoid ') and (' use ' ) and ( ' instead
+            string pascal_test_string_3 = "program writeManyLines ; \n begin  writeln( ' abc ' ); \n writeln( ' def ' ); \n end.";
+            // when the writeln's are ended with a ; it doesnt , lexer breaks in infinte loop at ('
+            string pascal_test_string_4 = "program simpleIfElse ; begin  \n if( 10 * 10 / 10 < 10 ) then \n begin \n  writeln( 'a is less than 20' )   \n end \n else  \n begin writeln( 'an error occured' )  \n end \n end.";
+            string pascal_test_string_5 = "program test ; begin if( 10 > 20 ) then writeln( 'oof' ) end .";
+            string pascal_test_string_6 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n writeln( 'a is less than 20' ); \n else writeln( 'an error occured' ); \n end.";
             //note the code generator needs the statments section of aan if block to be between begin and end
-            string pascal_test_string_7 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n begin \n writeln('a is less than 20' ) \n end\n else \n begin \n writeln('an error occured' ); \nend \n end.";
-            string pascal_test_string_8 = "program assign; \n var \n a : integer; \n begin \n a := 100; \n if( a < 20 ) then \n begin \n writeln('a is less than 20' ); \n writeln(' a second msg'); \n end \n else \nbegin\n writeln('a' ); \n writeln(' ', a); \n end\n end.";
-            string pascal_test_string_9 = "program whiledo ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n writeln('a is less than 20' ) \n else writeln('an error occured' ); \n end.";
-            string pascal_test_string_10 = "program writealine ; var anid : integer ; begin writeln('Hello World', anid) end.";
+            string pascal_test_string_7 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n begin \n writeln( 'a is less than 20' ) \n end\n else \n begin \n writeln( 'an error occured' ); \nend \n end.";
+            string pascal_test_string_8 = "program assign; \n var \n a : integer; \n begin \n a := 100; \n if( a < 20 ) then \n begin \n writeln( 'a is less than 20' ); \n writeln( ' a second msg'); \n end \n else \nbegin\n writeln( 'a' ); \n writeln( ' ' , a); \n end\n end.";
+            string pascal_test_string_9 = "program whiledo ; var \n firstint, secondInt, theirdInt : integer ; \n str2, str2 : string ;  begin  \n if( 10 + 10 - 10 ) then \n writeln( 'a is less than 20' ) \n else writeln( 'an error occured' ); \n end.";
+            string pascal_test_string_10 = "program writealine ; var anid : integer ; begin writeln( 'Hello World' , anid) end.";
             string pascal_test_string_11 = "program simplevar ; var \n firstint, secondInt, theirdInt : integer ; begin  \n if( 10 + 10 - 10 ) then \n" +
-                "begin \n writeln('a is less than 20' ) \n end \n else begin \n writeln('an error occured' ); \n end \n end.";
+                "begin \n writeln( 'a is less than 20' ) \n end \n else begin \n writeln( 'an error occured' ); \n end \n end.";
             string pascal_test_string_12 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while a < 10  do \n begin \n a := a + 1; \n end \n end .";
-            string pascal_test_string_13 = "program ifladder ; \n begin  \n if(10 > 2) then \n begin \n writeln('yo'); \n end \n else if(10 > 3) then \n begin \n writeln('oof'); \n end \n else if(10 > 4) then  \n begin \n writeln('hm'); \n end \n else  \n begin \n writeln('oof'); \n end \n end.";
+            string pascal_test_string_13 = "program ifladder ; \n begin  \n if(10 > 2) then \n begin \n writeln( 'yo' ); \n end \n else if(10 > 3) then \n begin \n writeln( 'oof' ); \n end \n else if(10 > 4) then  \n begin \n writeln( 'hm' ); \n end \n else  \n begin \n writeln( 'oof' ); \n end \n end.";
             string test_error_string = " gfnskvskd.nvs nmlkmvs vmsldlk  4j '34;5 ";
             string pascal_test_string_14 = "program testwhile ; \n var \n a : integer ; \n begin \n a := 0 ; \n while ( a < 10 )  do \n begin \n a := a + 1; \n end \n end .";
             string pascal_test_string_15 = "program test; var a : integer; begin a := 3 * (4 + 3); end.";
             string pascal_test_string_16 = "program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / 4 ) ); end.";
             string pascal_test_string_17 = "program test; var a : integer; begin a := 3 * (4 + 3 * ( 3 / ( 3 + 2) +3 ) ); end.";
             // note nested if's and whiles need to be ; terminted if there not the only statement in a block
-            string pascal_test_string_18 = "program test; var  a : integer; begin a := 0; if (a < 10 ) then begin while a > 4 do begin  writeln('oof'); if( a > 2 ) then begin writeln('oof') end ; writeln('oof'); end  end end.";
-            //string eso_lang_test_string = " Meats Put with Goats ";
+            //code gen doent work for string 18
+            string pascal_test_string_18 = "program test; var  a : integer; begin a := 0; if (a < 10 ) then begin while a > 4 do begin  writeln( 'oof'); if( a > 2 ) then begin writeln( 'oof') end ; writeln( 'oof'); end  end end.";
+            //bug in the lexer )) not acounted for . space seperating them fixes it
+            //code gen doent work for string 19. printf's wrong
+            string pascal_test_string_19 = "program expressions; var a,b,c,d,e,f : integer; begin  a := 2+4; b := 3*6; c := 4/2; d := 6-2; e := 6 * (3+4); f := 6 * ( 2 + ( 1 + 2 ) );  writeln( ' aaaa ' , a , ' bbbbb ' , b , ' c ' , c , ' d ' , d , ' e ' , e , ' f ' , f );  end.";
+            string pascal_test_string_20 = "program nestedifassign; var a : integer ;  begin if( 2 > 1 ) then begin if( 2 < 3 ) then begin while a<3 do begin a := a+1; end end end end.";
 
-            //List<Token> eso_tokens = Eso_lang_lexer.Lex(eso_lang_test_string);
 
             List<Token> pascal_tokens_1 = Pascal_lexer.LexPascal(pascal_test_string_1);
             List<Token> pascal_tokens_2 = Pascal_lexer.LexPascal(pascal_test_string_2);
@@ -98,19 +102,20 @@ namespace Eso_Lang
             List<Token> pascal_tokens_16 = Pascal_lexer.LexPascal(pascal_test_string_16);
             List<Token> pascal_tokens_17 = Pascal_lexer.LexPascal(pascal_test_string_17);
             List<Token> pascal_tokens_18 = Pascal_lexer.LexPascal(pascal_test_string_18);
+            List<Token> pascal_tokens_19 = Pascal_lexer.LexPascal(pascal_test_string_19);
+            List<Token> pascal_tokens_20 = Pascal_lexer.LexPascal(pascal_test_string_20);
+
             List<Token> test_error_string_toks = Pascal_lexer.LexPascal(test_error_string);
 
-            Console.Write(test_error_string_toks.Count);
-            Parser_Pascal ptest = new Parser_Pascal(test_error_string_toks);
-            Pascal2C pc2 = new Pascal2C(test_error_string_toks);
-            pc2.genProgram();
-            Console.WriteLine(ptest.Parse());
-            foreach (Token t in pascal_tokens_16) {
-                Console.Write(" " + t.name + " ");
-            }
+           // Console.Write(test_error_string_toks.Count);
+           // Parser_Pascal ptest = new Parser_Pascal(test_error_string_toks);
+          //  Pascal2C pc2 = new Pascal2C(test_error_string_toks);
+          //  pc2.genProgram();
+            //Console.WriteLine(ptest.Parse());
+           
             Console.Write("\n");
 
-            
+           
             Parser_Pascal p1 = new Parser_Pascal(pascal_tokens_1);
             Parser_Pascal p2 = new Parser_Pascal(pascal_tokens_2);
             Parser_Pascal p3 = new Parser_Pascal(pascal_tokens_3);
@@ -129,7 +134,9 @@ namespace Eso_Lang
             Parser_Pascal p16 = new Parser_Pascal(pascal_tokens_16);
             Parser_Pascal p17 = new Parser_Pascal(pascal_tokens_17);
             Parser_Pascal p18 = new Parser_Pascal(pascal_tokens_18);
-
+          
+            Parser_Pascal p19 = new Parser_Pascal(pascal_tokens_19);
+            Parser_Pascal p20 = new Parser_Pascal(pascal_tokens_20);
 
             //Pascal_parser_with_tree ppwt = new Pascal_parser_with_tree(pascal_tokens_2);
 
@@ -151,28 +158,38 @@ namespace Eso_Lang
             var p16res = p16.Parse();
             var p17res = p17.Parse();
             var p18res = p18.Parse();
-            Console.WriteLine(p16res);
-            Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res + " 15: " + p15res + " 16: " + p16res + " 17: " + p17res + " 18: " + p18res);
-            /*
-            printCodeGen(pascal_test_string_1, pascal_tokens_1);
-            printCodeGen(pascal_test_string_2, pascal_tokens_2);
-            printCodeGen(pascal_test_string_3, pascal_tokens_3);
-            printCodeGen(pascal_test_string_4, pascal_tokens_4);
-            printCodeGen(pascal_test_string_5, pascal_tokens_5);
-            printCodeGen(pascal_test_string_6, pascal_tokens_6);
-            printCodeGen(pascal_test_string_7, pascal_tokens_7);
-            printCodeGen(pascal_test_string_8, pascal_tokens_8);
-            printCodeGen(pascal_test_string_9, pascal_tokens_9);
-            printCodeGen(pascal_test_string_10, pascal_tokens_10);
-            printCodeGen(pascal_test_string_11, pascal_tokens_11);
-            printCodeGen(pascal_test_string_12, pascal_tokens_12);
-            printCodeGen(pascal_test_string_13, pascal_tokens_13);
-            printCodeGen(pascal_test_string_14, pascal_tokens_14);
-            printCodeGen(pascal_test_string_15, pascal_tokens_15);
-            printCodeGen(pascal_test_string_16, pascal_tokens_16);
-            printCodeGen(pascal_test_string_17, pascal_tokens_17);
-            */
 
+            var p19res = p19.Parse();
+            var p20res = p20.Parse();
+          //  Console.WriteLine(p19res);
+            Console.WriteLine("1:" + p1res + " 2:" + p2res + " 3:" + p3res + " 4:" + p4res + " 5:" + p5res + " 6: " + p6res + " 7: " + p7res + " 8: " + p8res + " 9: " + p9res + " 10: " + p10res + " 11: " + p11res + " 12: " + p12res + " 13: " + p13res + " 14: " + p14res + " 15: " + p15res + " 16: " + p16res + " 17: " + p17res + " 18: " + p18res + " 19: " + p19res + " 20: " + p20res);
+           
+            for (int i = 0; i < pascal_tokens_20.Count; i++) {
+                Console.Write("  " + pascal_tokens_20[i].name);
+            }
+            /*  
+                      printCodeGen(pascal_test_string_1, pascal_tokens_1);
+                      printCodeGen(pascal_test_string_2, pascal_tokens_2);
+                      printCodeGen(pascal_test_string_3, pascal_tokens_3);
+                      printCodeGen(pascal_test_string_4, pascal_tokens_4);
+                      printCodeGen(pascal_test_string_5, pascal_tokens_5);
+                      printCodeGen(pascal_test_string_6, pascal_tokens_6);
+                      printCodeGen(pascal_test_string_7, pascal_tokens_7);
+                      printCodeGen(pascal_test_string_8, pascal_tokens_8);
+                      printCodeGen(pascal_test_string_9, pascal_tokens_9);
+                      printCodeGen(pascal_test_string_10, pascal_tokens_10);
+                      printCodeGen(pascal_test_string_11, pascal_tokens_11);
+                      printCodeGen(pascal_test_string_12, pascal_tokens_12);
+                      printCodeGen(pascal_test_string_13, pascal_tokens_13);
+                      printCodeGen(pascal_test_string_14, pascal_tokens_14);
+                      printCodeGen(pascal_test_string_15, pascal_tokens_15);
+                      printCodeGen(pascal_test_string_16, pascal_tokens_16);
+                      printCodeGen(pascal_test_string_17, pascal_tokens_17);
+                      printCodeGen(pascal_test_string_18, pascal_tokens_18);
+
+                      printCodeGen(pascal_test_string_19, pascal_tokens_19);
+                     */
+                        printCodeGen(pascal_test_string_6, pascal_tokens_6);
 
             //string path = p2c.Write_file();
 

@@ -139,18 +139,57 @@ namespace Eso_Lang
                     lines += 1;
                     currentChar++;
                 }
-                else if (c == ';'){
+                else if (c == ';')
+                {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_SCOLON, "Block-Delimiter", @";"));
                     currentChar++;
-                } else if (c == '=') {
+                } 
+                else if (c == '=') 
+                {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_EQUAL, "is-equal", @"="));
                     currentChar++;
-                } else if (c == ',') {
+                }
+                else if (c == ',')
+                {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_COMMA, "COMMA", @"\,"));
                     currentChar++;
-                } else if (c == '\'') {
-                    tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "\'"));
+                }
+                else if (c == '\'') 
+                {
+                    Console.WriteLine("saw a aostrophe");
+                    fragment.Clear();
+                    tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "Apostrophe", @"\,"));
+                    c = source[++currentChar];
+                    fragment.Add(c);
+                    Console.WriteLine("c is " + c);
+                    var count = 0;
+                    while (c != '\'') {
+                        count++;
+                        if (count > source.Length) { break; }
+                        Console.WriteLine("LOOKING FOR STRING CHAR IN " +  c);
+                       
+                        if (currentChar < source.Length-1)
+                        {
+                            c = source[++currentChar];
+                        }
+                        fragment.Add(c);
+
+                    }
+
+                    if (fragment.Count != 0)
+                    {
+                        Token t = new Token((int)TOKENSPASCAL.T_STRING, "character String", @"[a-zA-Z\s]");
+                        string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
+                        t.stringval = string.Join("", fragment).Remove(string.Join("", fragment).Length - 1, 1);
+                        tokens.Add(t);
+                    }
+                    else {
+                        Console.WriteLine("NO FRAGMENT FOUND");
+                    }
+                    tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "Apostrophe", @"\'"));
                     currentChar++;
+                    fragment.Clear();
+                    
                 } else if (c == '+') {
                     tokens.Add(new Token((int)TOKENSPASCAL.T_PLUS, "plus", @"\+"));
                     currentChar++;
@@ -269,7 +308,7 @@ namespace Eso_Lang
                             case ":":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_COLON, "COLON", @":"));
                                 break;
-                            case "('":
+                          /*  case "('":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_LPAR, "LPAR", @"\("));
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "'"));
                                 // read characters untill next '
@@ -305,11 +344,11 @@ namespace Eso_Lang
 
 
                                 Console.WriteLine("character string was " + string.Join("", fragment));
-                                break;
+                               break;
                             case "')":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_APOSTROPHE, "APOSTROPHE", "'"));
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\("));
-                                break;
+                                break; */
                             case ")":
                                 tokens.Add(new Token((int)TOKENSPASCAL.T_RPAR, "RPAR", @"\)"));
                                 break;

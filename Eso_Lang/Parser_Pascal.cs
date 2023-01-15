@@ -313,7 +313,9 @@ namespace Eso_Lang
                 {
                     
                     currentToken = advance(++currentToken);
-                    currentToken = Expression(++currentToken);
+                    currentToken = advance(++currentToken);
+                    currentToken = SimpleExpression(currentToken);
+                    currentToken = Expression_p(currentToken);
 
                 }
                 //else its a function or procedure name 
@@ -365,6 +367,8 @@ namespace Eso_Lang
             else
             {
                 // Id(currentToken);
+                Console.WriteLine("Statement_List() passed a statement  token index " + currentToken + " , token id " + tokens[currentToken] + "  is " + Tokens[currentToken].name);
+
             }
             return currentToken;
         }
@@ -507,26 +511,29 @@ namespace Eso_Lang
             if (tokens[currentToken] == (int)TOKENSPASCAL.T_PLUS)
             {
                 currentToken = Term(++currentToken);
-                currentToken = SimpleExpression_p(++currentToken);
+                currentToken = SimpleExpression_p(currentToken);
             }
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MINUS)
             {
                 currentToken = Term(++currentToken);
-                currentToken = SimpleExpression_p(++currentToken);
+                currentToken = SimpleExpression_p(currentToken);
             } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_MULTIPLY) {
                 currentToken = Term(++currentToken);
-                currentToken = SimpleExpression_p(++currentToken);
+                currentToken = SimpleExpression_p(currentToken);
             } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_INTDIV) {
                 currentToken = Term(++currentToken);
-                currentToken = SimpleExpression_p(++currentToken);
+                currentToken = SimpleExpression_p(currentToken);
             }
             else if (tokens[currentToken] == (int)TOKENSPASCAL.T_NR)
             {
                 //not incmrementing becuase Simeple_Expression_P doesnt handle numbers 
                 currentToken = Term(currentToken);
                 //currentToken = SimpleExpression_p(++currentToken);
+                //just added tho its an assign
+            } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_IDENT) {
+                currentToken = Id(currentToken);
             } else if (tokens[currentToken] == (int)TOKENSPASCAL.T_LPAR) {
-                
+
                 currentToken = advance(++currentToken);
                 currentToken = SimpleExpression(currentToken);
                 currentToken = Expression_p(currentToken);
@@ -535,7 +542,7 @@ namespace Eso_Lang
                     advance(++currentToken);
                     return currentToken;
                 }
-                
+
             }
             else {
                 Console.WriteLine("no SimpleExpression returned w/o incremnting");
@@ -563,7 +570,7 @@ namespace Eso_Lang
             {
                 //increment here because we have passed an ident
                 Console.WriteLine("unsingedConstat saw an ID");
-                ++currentToken;
+                //currentToken;
             }
             
             else

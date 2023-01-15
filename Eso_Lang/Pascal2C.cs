@@ -9,6 +9,7 @@ using System.Linq;
 
 /*
  issues :
+doesnt generate test string 18 or 19 correctly. 
 
  */
 namespace Eso_Lang
@@ -30,6 +31,7 @@ namespace Eso_Lang
         }
         //pass the tokens if( .. here ..)
 
+        //unused
         public string generate() {
             bool done = false;
             
@@ -393,6 +395,7 @@ namespace Eso_Lang
                 i++;
             }
             cstring.Append(genBlock(blockToks.ToArray()));
+            cstring.Append("}");
             return cstring.ToString();
         }
 
@@ -734,6 +737,9 @@ namespace Eso_Lang
                         break;
                     case (int)TOKENSPASCAL.T_PLUS:
                         cstring.Append('+');
+                        break;
+                    case (int)TOKENSPASCAL.T_MULTIPLY:
+                        cstring.Append('*');
                         break;
                     case (int)TOKENSPASCAL.T_MINUS:
                         cstring.Append("-");
