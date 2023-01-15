@@ -189,7 +189,7 @@ namespace Eso_Lang
 
                       printCodeGen(pascal_test_string_19, pascal_tokens_19);
                      */
-                        printCodeGen(pascal_test_string_6, pascal_tokens_6);
+                        printCodeGen(pascal_test_string_19, pascal_tokens_19);
 
             //string path = p2c.Write_file();
 
