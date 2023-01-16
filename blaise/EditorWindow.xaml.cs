@@ -106,7 +106,8 @@ namespace blaise
                 }
 
                 // run the Pascal -> C transpiler, returns the C code as a string
-                string text = codeEditor.Text.Replace(System.Environment.NewLine, " ");
+                //replace newlines with spaces and leave a space at the end, this avoids some bugs in the lexer
+                string text = codeEditor.Text.Replace(System.Environment.NewLine, " ") + " ";
                 
                 Lexer_Pascal lexer = new Lexer_Pascal();
                 List<Token> tokens = lexer.LexPascal(text);
